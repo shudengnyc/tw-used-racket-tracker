@@ -2,11 +2,14 @@ name: Check used racquets
 
 on:
   schedule:
-    # Hourly. One scrape is ~62 requests to Tennis Warehouse, so this is about
-    # 1.5k/day -- frequent enough that the page is never far behind, without
-    # hammering them. GitHub runs scheduled jobs best-effort and may delay
-    # them under load, so treat this as a floor, not a guarantee.
-    - cron: "7 * * * *"
+    # Six times a day, every 3 hours from 6am to 9pm Pacific -- nothing
+    # overnight. Cron is always UTC and has no notion of DST, so these are
+    # Pacific Daylight (UTC-7); from November to March they land an hour
+    # earlier, 5am-8pm. Close enough not to chase.
+    #   13:00 UTC = 6am    22:00 UTC = 3pm
+    #   16:00 UTC = 9am    01:00 UTC = 6pm
+    #   19:00 UTC = 12pm   04:00 UTC = 9pm
+    - cron: "0 13,16,19,22,1,4 * * *"
   workflow_dispatch:        # the "Run workflow" button -- replaces the Shortcut
 
 # Least privilege: write the data files back, and publish the report to Pages.
@@ -30,10 +33,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      # No pip install: tw_used.py is pure standard library.
+      # No setup-python and no pip install: the runner already ships a python3
+      # and tw_used.py is pure standard library. Skipping the action saves a
+      # couple of seconds on every run.
 
       - name: Scrape Tennis Warehouse and rebuild the report
         # Runners are UTC; without this the report is stamped in UTC and the

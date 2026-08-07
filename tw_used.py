@@ -485,19 +485,27 @@ def trigger_github_run():
               file=sys.stderr)
         return False
 
-    # The run needs a moment to exist before it can be watched.
-    time.sleep(6)
-    rid = _run(["gh", "run", "list", "--workflow", "check-racquets.yml",
-                "--limit", "1", "--json", "databaseId",
-                "--jq", ".[0].databaseId"], capture_output=True).stdout.strip()
+    # The run needs a moment to exist before it can be found.
+    rid = ""
+    for _ in range(10):
+        time.sleep(2)
+        rid = _run(["gh", "run", "list", "--workflow", "check-racquets.yml",
+                    "--limit", "1", "--json", "databaseId",
+                    "--jq", ".[0].databaseId"], capture_output=True).stdout.strip()
+        if rid:
+            break
     if not rid:
         print("Started, but couldn't find the run to watch.", file=sys.stderr)
         return False
 
-    print(f"Waiting for run {rid} (about a minute)...", file=sys.stderr)
-    if _run(["gh", "run", "watch", rid, "--exit-status", "--interval", "10"],
+    # Watch the job rather than the whole run: the data is committed partway
+    # through, and the Pages deploy that follows takes another ~8s that this
+    # machine doesn't need to wait for. Poll fast -- the job is ~18s total, so
+    # gh's default interval would spend longer waiting than working.
+    print(f"Waiting for run {rid}...", file=sys.stderr)
+    if _run(["gh", "run", "watch", rid, "--exit-status", "--interval", "2"],
             capture_output=True).returncode:
-        print("The run failed. See:  gh run view " + rid + " --log-failed",
+        print(f"The run failed. See:  gh run view {rid} --log-failed",
               file=sys.stderr)
         return False
     return True
