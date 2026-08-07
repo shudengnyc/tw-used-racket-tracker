@@ -1153,11 +1153,18 @@ def load_series(hist_path):
 #   local    -- opened from disk on the Mac; the Shortcut can refresh it
 #   pages    -- GitHub Pages; refreshes itself every 6h, no Shortcut available
 #   artifact -- a published Claude artifact; frozen, and wrapped in its own head
+# A static page can't start the workflow itself -- that needs a token, and this
+# repo is public, so embedding one would publish it. Linking to the Actions page
+# gives the same result in two taps and keeps the credential on GitHub's side.
+RUN_URL = ("https://github.com/shudengnyc/tw-used-racket-tracker"
+           "/actions/workflows/check-racquets.yml")
+
 STALE_MSG = {
     "local": "These prices are ${age()} old. "
              "Run the <b>Check Racquets</b> shortcut to refresh.",
-    "pages": "These prices are ${age()} old — the scheduled refresh may have "
-             "failed. Check the live listing before buying.",
+    "pages": "These prices are ${age()} old — the 6-hourly refresh may have "
+             "failed. Use <b>Fetch new data</b> above, and check the live "
+             "listing before buying.",
     "artifact": "Snapshot taken ${age()} ago. This page shows prices as they "
                 "were then — it does not update on its own, so check the live "
                 "listing before buying.",
@@ -1240,11 +1247,17 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None):
     page = (("" if web else LOCAL_HEAD) + TMPL
             .replace("__FONTS__", FONT_CSS)
             .replace("__WEB__", "true" if web else "false")
-            # The Shortcut only exists on the Mac, so the button is local-only.
-            .replace("__REFRESHBTN__", '' if mode != "local" else
+            # The Shortcut exists only on the Mac; the web build points at the
+            # workflow instead, which is the thing that actually scrapes now.
+            .replace("__REFRESHBTN__",
                      '<a class="btn" id="refresh" '
                      'href="shortcuts://run-shortcut?name=Check%20Racquets" '
-                     'title="Re-scrape Tennis Warehouse">↻ Fetch new data</a>')
+                     'title="Re-scrape Tennis Warehouse">↻ Fetch new data</a>'
+                     if mode == "local" else
+                     f'<a class="btn" id="runongh" href="{RUN_URL}" target="_blank" '
+                     'rel="noopener" title="Opens GitHub; press Run workflow, '
+                     'then reload here in a minute">↻ Fetch new data ↗</a>'
+                     if mode == "pages" else '')
             .replace("__STALE__", STALE_MSG[mode])
             .replace("__REFRESHJS__", REFRESH_JS if mode == "local" else "")
             .replace("__SUB__", sub)
