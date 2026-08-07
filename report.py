@@ -1062,8 +1062,7 @@ if (cb) {
       weekday: 'short', hour: 'numeric', minute: '2-digit' });
     $('staleness').innerHTML = Number(was) === SCRAPED.getTime()
       ? `<div class="stale">No change — these are the latest published prices
-         (${stamp}). A fresh scrape runs every hour; use <b>Force a scrape</b>
-         to run one now.</div>`
+         (${stamp}). A fresh scrape runs every 3 hours through the day.</div>`
       : `<div class="stale ok">Updated — new prices from ${stamp}.</div>`;
   }
 }
@@ -1193,16 +1192,15 @@ def load_series(hist_path):
 #   local    -- opened from disk on the Mac; the Shortcut can refresh it
 #   pages    -- GitHub Pages; refreshes itself every 6h, no Shortcut available
 #   artifact -- a published Claude artifact; frozen, and wrapped in its own head
-# A static page can't start the workflow itself -- that needs a token, and this
-# repo is public, so embedding one would publish it. Linking to the Actions page
-# gives the same result in two taps and keeps the credential on GitHub's side.
-RUN_URL = ("https://github.com/shudengnyc/tw-used-racket-tracker"
-           "/actions/workflows/check-racquets.yml")
-
+# There is deliberately no "scrape now" button here. A static page can't start
+# the workflow itself -- that needs a token with actions:write, and this repo is
+# public, so embedding one would publish a credential anyone could write with.
+# Adding it would mean running a service to hold the token; the 6x/day schedule
+# was judged good enough instead.
 STALE_MSG = {
     "local": "These prices are ${age()} old. "
              "Run the <b>Check Racquets</b> shortcut to refresh.",
-    "pages": "These prices are ${age()} old — the hourly scrape may have "
+    "pages": "These prices are ${age()} old — the scheduled scrape may have "
              "stopped. Try <b>Check for new prices</b> above, and check the "
              "live listing before buying.",
     "artifact": "Snapshot taken ${age()} ago. This page shows prices as they "
@@ -1297,10 +1295,6 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None):
                      '<button class="btn" id="checkbtn" '
                      'title="Fetch the latest published prices">'
                      '↻ Check for new prices</button>'
-                     f'<a class="btn ghost" id="runongh" href="{RUN_URL}" '
-                     'target="_blank" rel="noopener" title="Force a scrape now: '
-                     'press Run workflow on GitHub, then check back in a minute">'
-                     'Force a scrape ↗</a>'
                      if mode == "pages" else '')
             .replace("__STALE__", STALE_MSG[mode])
             .replace("__REFRESHJS__", {"local": REFRESH_JS,
