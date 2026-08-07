@@ -58,6 +58,9 @@ jobs:
           cp report.html site/index.html
           cp -r thumbs_large site/thumbs_large
 
+      # Pages is already enabled on the repo with build_type=workflow, so this
+      # just reads that config. Don't add `enablement: true` -- it needs an
+      # admin token the workflow's GITHUB_TOKEN doesn't have.
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
