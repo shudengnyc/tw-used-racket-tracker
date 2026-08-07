@@ -42,9 +42,9 @@ jobs:
         # "as of" time reads hours off.
         env:
           TZ: America/Los_Angeles
-        # --scrape is the real fetch. This job is the only place it runs, so
-        # the repo stays the single copy of the price history.
-        run: python3 tw_used.py --scrape --no-sync --html-mode pages
+        # --no-push because the commit step below does it; --no-sync because
+        # checkout already put us on the latest commit.
+        run: python3 tw_used.py --no-sync --no-push --html-mode pages
 
       - name: Commit price history
         run: |

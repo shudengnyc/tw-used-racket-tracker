@@ -467,6 +467,90 @@ def sync_from_github():
         print("Couldn't sync from GitHub -- showing the local copy.\n"
               f"  {(r.stderr or '').strip()}", file=sys.stderr)
         return False
+    dedupe_history()      # a union merge can bring the same rows in twice
+    return True
+
+
+DATA_FILES = ["used_prices.csv", "history.csv", "seen.json", "snapshot.json",
+              "thumbs", "thumbs_large"]
+
+
+def dedupe_history():
+    """Drop repeated rows and put the file back in date order.
+
+    A union merge keeps every line from both sides, so a scrape here and a
+    scheduled one on the same day can each contribute the same row. Identical
+    rows carry no information, so collapsing them is safe -- and it keeps the
+    file's own "one row per price per day" shape intact.
+    """
+    if not os.path.exists(HIST_PATH):
+        return 0
+    with open(HIST_PATH, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+
+    seen, keep = set(), []
+    for r in rows:
+        k = tuple(r.get(c, "") for c in HIST_FIELDS)
+        if k not in seen:
+            seen.add(k)
+            keep.append(r)
+    dropped = len(rows) - len(keep)
+    if not dropped:
+        return 0
+
+    keep.sort(key=lambda r: (r["date"], r["racquet"], r["grade"], r["grip"]))
+    with open(HIST_PATH, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=HIST_FIELDS)
+        w.writeheader()
+        w.writerows(keep)
+    return dropped
+
+
+def push_to_github():
+    """Send this scrape's results up, so both copies share one history.
+
+    Best effort on purpose: the report on this machine is already written and
+    correct by the time this runs, so a network or auth problem is worth a
+    warning, never a failure.
+    """
+    if _run(["git", "rev-parse", "--git-dir"], capture_output=True).returncode:
+        return False                       # not a clone; nothing to push to
+
+    _run(["git", "add", "--"] + DATA_FILES, capture_output=True)
+    if not _run(["git", "diff", "--cached", "--quiet"],
+                capture_output=True).returncode:
+        return True                        # nothing changed; already in sync
+
+    stamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
+    _run(["git", "commit", "-q", "-m", f"Prices from this Mac, {stamp}"],
+         capture_output=True)
+
+    # The scheduled run may have pushed while we were scraping. history.csv is
+    # set to union-merge in .gitattributes, so rebasing brings both sets of
+    # rows together rather than conflicting; anything left over is a derived
+    # snapshot where ours is simply the newer one.
+    if _run(["git", "pull", "--rebase", "--quiet"], capture_output=True).returncode:
+        _run(["git", "checkout", "--ours", "--"] + DATA_FILES, capture_output=True)
+        _run(["git", "add", "--"] + DATA_FILES, capture_output=True)
+        if _run(["git", "rebase", "--continue"],
+                env={**os.environ, "GIT_EDITOR": "true"},
+                capture_output=True).returncode:
+            _run(["git", "rebase", "--abort"], capture_output=True)
+            print("Couldn't merge with GitHub's copy; left this scrape "
+                  "committed locally. Resolve with:  git pull --rebase",
+                  file=sys.stderr)
+            return False
+
+    if dedupe_history():
+        _run(["git", "add", "--", "history.csv"], capture_output=True)
+        _run(["git", "commit", "-q", "--amend", "--no-edit"], capture_output=True)
+
+    r = _run(["git", "push", "--quiet"], capture_output=True)
+    if r.returncode:
+        print("Scraped fine, but couldn't push to GitHub -- the published "
+              f"page will catch up on its own.\n  {(r.stderr or '').strip()}",
+              file=sys.stderr)
+        return False
     return True
 
 
@@ -545,14 +629,15 @@ def main():
     ap.add_argument("--open", action="store_true",
                     help="open the HTML report in the browser when done")
     ap.add_argument("--workers", type=int, default=12)
+    ap.add_argument("--pull", action="store_true",
+                    help="don't scrape; show the last results the scheduled "
+                         "GitHub run gathered")
     ap.add_argument("--refresh", action="store_true",
-                    help="make GitHub scrape now and wait for it (~1 min), "
-                         "instead of showing the last scheduled result")
-    ap.add_argument("--scrape", action="store_true",
-                    help="scrape Tennis Warehouse from this machine. This is "
-                         "what the GitHub job runs; locally it's a fallback "
-                         "and its results won't reach the published report "
-                         "unless you commit and push them")
+                    help="make GitHub scrape now and wait for it (~20s), "
+                         "then show that. Slower than scraping here; useful "
+                         "when you want the published page updated too")
+    ap.add_argument("--no-push", action="store_true",
+                    help="don't send this scrape's results back to GitHub")
     ap.add_argument("--no-sync", action="store_true",
                     help="skip the git pull and use the local copy as-is")
     ap.add_argument("--html-mode", choices=("local", "pages", "artifact"),
@@ -561,22 +646,23 @@ def main():
                          "Mac-only Shortcut refresh button (default: local)")
     args = ap.parse_args()
 
-    # One fetch path: GitHub scrapes, everything else reads what it produced.
-    if not args.scrape:
-        if args.refresh:
-            trigger_github_run()          # carry on with the old data if it fails
-        if not args.no_sync:
-            sync_from_github()
+    # Scraping here is the fast path (~5s vs ~20s through GitHub), so it is the
+    # default. --pull and --refresh read what the scheduled run gathered.
+    scraping = not (args.pull or args.refresh)
+
+    if args.refresh:
+        trigger_github_run()              # carry on with the old data if it fails
+    if not args.no_sync:
+        sync_from_github()                # always start from the shared history
 
     if args.trend:
         show_trend(args.trend)
         return
 
-    if not args.scrape:
+    if not scraping:
         listings = load_snapshot()
         if listings is None:
-            print("No snapshot yet. Get one with:  ./racket --refresh\n"
-                  "  (or scrape from this machine with:  ./racket --scrape)",
+            print("Nothing downloaded yet. Scrape now with:  ./racket",
                   file=sys.stderr)
             return 1
         finish(listings, args)
@@ -627,7 +713,11 @@ def main():
     with open(SNAP_PATH, "w", encoding="utf-8") as f:
         json.dump(listings, f)
 
+    # Report first, then sync: the page is already correct by this point, so
+    # nothing here should keep it waiting on the network.
     finish(listings, args)
+    if not args.no_push:
+        push_to_github()
 
 
 def load_snapshot():

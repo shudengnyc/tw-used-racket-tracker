@@ -1,7 +1,8 @@
 #!/bin/sh
 # Convenience wrapper: run from anywhere, all args pass through to tw_used.py.
-#   racket              -> sync the latest GitHub results and show them
-#   racket --refresh    -> make GitHub scrape now, wait, then show
+#   racket              -> scrape now from this Mac (~5s), then sync to GitHub
+#   racket --pull       -> skip scraping, show what the scheduled run gathered
+#   racket --refresh    -> make GitHub scrape now and wait (~20s)
 #   racket --deals      -> only new listings / historically low prices
 #   racket --trend Blade
 PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; export PATH

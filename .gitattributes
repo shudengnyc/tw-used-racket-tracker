@@ -1,0 +1,5 @@
+# history.csv is append-only and now has two writers -- this Mac and the
+# scheduled GitHub run. "union" merges both sides by keeping every line instead
+# of raising a conflict, which is exactly right for a log. It can leave
+# duplicate rows, so tw_used.py de-dupes the file after any merge.
+history.csv merge=union
