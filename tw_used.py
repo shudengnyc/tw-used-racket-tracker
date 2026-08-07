@@ -54,6 +54,8 @@ STATE_PATH = os.path.join(HERE, "seen.json")         # for new-listing detection
 # stores specs/nspec as Python dict reprs, so it can't be loaded back without
 # guessing types. This is the exact round-trip copy the local rebuild reads.
 SNAP_PATH = os.path.join(HERE, "snapshot.json")
+
+REPO = "shudengnyc/tw-used-racket-tracker"   # where the scrape actually runs
 HTML_PATH = os.path.join(HERE, "report.html")        # standalone clickable report
 THUMB_DIR = os.path.join(HERE, "thumbs")             # small, embedded in the page
 LARGE_DIR = os.path.join(HERE, "thumbs_large")       # full size, for the lightbox
@@ -498,17 +500,30 @@ def trigger_github_run():
         print("Started, but couldn't find the run to watch.", file=sys.stderr)
         return False
 
-    # Watch the job rather than the whole run: the data is committed partway
-    # through, and the Pages deploy that follows takes another ~8s that this
-    # machine doesn't need to wait for. Poll fast -- the job is ~18s total, so
-    # gh's default interval would spend longer waiting than working.
+    # Stop as soon as the data is committed rather than waiting for the whole
+    # run. Publishing to Pages happens afterwards and takes another 6-16s
+    # (GitHub's side, and the most variable part of the job) -- but this
+    # machine pulls from git, so none of that matters here.
     print(f"Waiting for run {rid}...", file=sys.stderr)
-    if _run(["gh", "run", "watch", rid, "--exit-status", "--interval", "2"],
-            capture_output=True).returncode:
-        print(f"The run failed. See:  gh run view {rid} --log-failed",
-              file=sys.stderr)
-        return False
-    return True
+    step = "Commit price history"
+    for _ in range(90):                       # ~3 min ceiling, then give up
+        r = _run(["gh", "api",
+                  f"repos/{REPO}/actions/runs/{rid}/jobs",
+                  "--jq", f'.jobs[0] | (.steps[] | select(.name=="{step}") '
+                          '| .conclusion) // .conclusion // "running"'],
+                 capture_output=True)
+        state = (r.stdout or "").strip().strip('"')
+        if state == "success":
+            return True
+        if state in ("failure", "cancelled", "skipped", "timed_out"):
+            print(f"The run failed. See:  gh run view {rid} --log-failed",
+                  file=sys.stderr)
+            return False
+        time.sleep(2)
+
+    print("Timed out waiting for the run; showing the last data instead.",
+          file=sys.stderr)
+    return False
 
 
 def main():
