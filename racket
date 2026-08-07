@@ -1,6 +1,8 @@
 #!/bin/sh
 # Convenience wrapper: run from anywhere, all args pass through to tw_used.py.
-#   racket              -> full report
+#   racket              -> sync the latest GitHub results and show them
+#   racket --refresh    -> make GitHub scrape now, wait, then show
 #   racket --deals      -> only new listings / historically low prices
 #   racket --trend Blade
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; export PATH
 exec python3 "$(dirname "$0")/tw_used.py" "$@"

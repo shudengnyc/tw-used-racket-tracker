@@ -50,6 +50,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "used_prices.csv")     # latest snapshot
 HIST_PATH = os.path.join(HERE, "history.csv")        # append-only, all runs
 STATE_PATH = os.path.join(HERE, "seen.json")         # for new-listing detection
+# used_prices.csv is for reading in a spreadsheet: it stringifies everything and
+# stores specs/nspec as Python dict reprs, so it can't be loaded back without
+# guessing types. This is the exact round-trip copy the local rebuild reads.
+SNAP_PATH = os.path.join(HERE, "snapshot.json")
 HTML_PATH = os.path.join(HERE, "report.html")        # standalone clickable report
 THUMB_DIR = os.path.join(HERE, "thumbs")             # small, embedded in the page
 LARGE_DIR = os.path.join(HERE, "thumbs_large")       # full size, for the lightbox
@@ -444,8 +448,66 @@ def show_trend(pattern):
                   (f"  ({len(day)} listed)" if len(day) > 1 else ""))
 
 
+def _run(cmd, **kw):
+    import subprocess
+    return subprocess.run(cmd, cwd=HERE, text=True, **kw)
+
+
+def sync_from_github():
+    """Pull down whatever the scheduled run last gathered.
+
+    The scrape happens in CI and nowhere else, so the repo is the single copy
+    of history.csv -- this is how it reaches the Mac.
+    """
+    r = _run(["git", "pull", "--rebase", "--autostash", "--quiet"],
+             capture_output=True)
+    if r.returncode:
+        print("Couldn't sync from GitHub -- showing the local copy.\n"
+              f"  {(r.stderr or '').strip()}", file=sys.stderr)
+        return False
+    return True
+
+
+def trigger_github_run():
+    """Kick off the workflow and wait for it, so --refresh means fresh data."""
+    import shutil
+    if not shutil.which("gh"):
+        print("The gh CLI isn't installed, so I can't start a run.\n"
+              "  Install it with:  brew install gh\n"
+              "  Or trigger the run from the Actions tab on GitHub.",
+              file=sys.stderr)
+        return False
+
+    print("Starting a scrape on GitHub...", file=sys.stderr)
+    if _run(["gh", "workflow", "run", "check-racquets.yml"],
+            capture_output=True).returncode:
+        print("Couldn't start the run -- is gh logged in? (gh auth status)",
+              file=sys.stderr)
+        return False
+
+    # The run needs a moment to exist before it can be watched.
+    time.sleep(6)
+    rid = _run(["gh", "run", "list", "--workflow", "check-racquets.yml",
+                "--limit", "1", "--json", "databaseId",
+                "--jq", ".[0].databaseId"], capture_output=True).stdout.strip()
+    if not rid:
+        print("Started, but couldn't find the run to watch.", file=sys.stderr)
+        return False
+
+    print(f"Waiting for run {rid} (about a minute)...", file=sys.stderr)
+    if _run(["gh", "run", "watch", rid, "--exit-status", "--interval", "10"],
+            capture_output=True).returncode:
+        print("The run failed. See:  gh run view " + rid + " --log-failed",
+              file=sys.stderr)
+        return False
+    return True
+
+
 def main():
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(
+        description="Used racquet prices from Tennis Warehouse. The scrape "
+                    "runs on GitHub every 6 hours; by default this just syncs "
+                    "the latest results down and shows them.")
     ap.add_argument("--brands", nargs="+", default=TARGET_BRANDS)
     ap.add_argument("--all-brands", action="store_true")
     ap.add_argument("--max-price", type=float)
@@ -460,14 +522,41 @@ def main():
     ap.add_argument("--open", action="store_true",
                     help="open the HTML report in the browser when done")
     ap.add_argument("--workers", type=int, default=12)
+    ap.add_argument("--refresh", action="store_true",
+                    help="make GitHub scrape now and wait for it (~1 min), "
+                         "instead of showing the last scheduled result")
+    ap.add_argument("--scrape", action="store_true",
+                    help="scrape Tennis Warehouse from this machine. This is "
+                         "what the GitHub job runs; locally it's a fallback "
+                         "and its results won't reach the published report "
+                         "unless you commit and push them")
+    ap.add_argument("--no-sync", action="store_true",
+                    help="skip the git pull and use the local copy as-is")
     ap.add_argument("--html-mode", choices=("local", "pages", "artifact"),
                     default="local",
                     help="who the report is built for; 'pages' drops the "
                          "Mac-only Shortcut refresh button (default: local)")
     args = ap.parse_args()
 
+    # One fetch path: GitHub scrapes, everything else reads what it produced.
+    if not args.scrape:
+        if args.refresh:
+            trigger_github_run()          # carry on with the old data if it fails
+        if not args.no_sync:
+            sync_from_github()
+
     if args.trend:
         show_trend(args.trend)
+        return
+
+    if not args.scrape:
+        listings = load_snapshot()
+        if listings is None:
+            print("No snapshot yet. Get one with:  ./racket --refresh\n"
+                  "  (or scrape from this machine with:  ./racket --scrape)",
+                  file=sys.stderr)
+            return 1
+        finish(listings, args)
         return
 
     catalog = get_catalog()
@@ -512,7 +601,30 @@ def main():
         w.writeheader()
         w.writerows(listings)
 
+    with open(SNAP_PATH, "w", encoding="utf-8") as f:
+        json.dump(listings, f)
+
+    finish(listings, args)
+
+
+def load_snapshot():
+    """The listing rows exactly as the last scrape produced them, or None."""
+    if not os.path.exists(SNAP_PATH):
+        return None
+    with open(SNAP_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def finish(listings, args):
+    """Filter, write the HTML report, and print -- shared by both paths.
+
+    Filters narrow the printed table only. The HTML report always covers
+    everything, since it has its own brand/grade/grip controls built in.
+    """
     shown = listings
+    if not args.all_brands:
+        wanted = {b.lower() for b in args.brands}
+        shown = [r for r in shown if r["brand"].lower() in wanted]
     if args.deals:
         shown = [r for r in shown if not r["new_cheaper"]
                  and (r["is_new"] or r["verdict"] in ("LOWEST EVER", "BELOW USUAL"))]

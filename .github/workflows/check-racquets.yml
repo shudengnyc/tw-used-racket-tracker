@@ -37,13 +37,15 @@ jobs:
         # "as of" time reads hours off.
         env:
           TZ: America/Los_Angeles
-        run: python3 tw_used.py --html-mode pages
+        # --scrape is the real fetch. This job is the only place it runs, so
+        # the repo stays the single copy of the price history.
+        run: python3 tw_used.py --scrape --no-sync --html-mode pages
 
       - name: Commit price history
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add used_prices.csv history.csv seen.json thumbs thumbs_large
+          git add used_prices.csv history.csv seen.json snapshot.json thumbs thumbs_large
           # Nothing changed on a quiet run -- that is a success, not a failure.
           if git diff --cached --quiet; then
             echo "No price changes this run."
