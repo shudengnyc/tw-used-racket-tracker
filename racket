@@ -1,0 +1,6 @@
+#!/bin/sh
+# Convenience wrapper: run from anywhere, all args pass through to tw_used.py.
+#   racket              -> full report
+#   racket --deals      -> only new listings / historically low prices
+#   racket --trend Blade
+exec python3 "$(dirname "$0")/tw_used.py" "$@"

@@ -1,0 +1,66 @@
+name: Check used racquets
+
+on:
+  schedule:
+    # Every 6 hours. Cron here is always UTC.
+    - cron: "0 */6 * * *"
+  workflow_dispatch:        # the "Run workflow" button -- replaces the Shortcut
+
+# Least privilege: write the data files back, and publish the report to Pages.
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Never let two runs race on the same commit history.
+concurrency:
+  group: check-racquets
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # No pip install: tw_used.py is pure standard library.
+
+      - name: Scrape Tennis Warehouse and rebuild the report
+        run: python3 tw_used.py
+
+      - name: Commit price history
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add used_prices.csv history.csv seen.json thumbs thumbs_large
+          # Nothing changed on a quiet run -- that is a success, not a failure.
+          if git diff --cached --quiet; then
+            echo "No price changes this run."
+          else
+            git commit -m "Prices as of $(date -u '+%Y-%m-%d %H:%M UTC')"
+            # Another run may have pushed while we were scraping.
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - name: Assemble the Pages site
+        run: |
+          mkdir -p site
+          # report.html links the lightbox images by relative path, so
+          # thumbs_large has to ship alongside it.
+          cp report.html site/index.html
+          cp -r thumbs_large site/thumbs_large
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

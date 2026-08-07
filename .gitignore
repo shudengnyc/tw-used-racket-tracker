@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Regenerated from the CSVs on every run, and 500KB+ each time -- committing it
+# would bloat the repo fast. The scheduled run publishes it to GitHub Pages
+# instead; local runs still write it here for you to open.
+report.html
