@@ -383,6 +383,9 @@ tr.det > td{background:color-mix(in srgb,var(--ink) 3%,transparent);
  font:400 13.5px/1.65 var(--sans)}
 .stale{background:var(--warn-soft);color:var(--warn-ink);
  border:1px solid color-mix(in srgb,var(--warn-ink) 24%,transparent)}
+/* same banner, but for "that worked" rather than "careful" */
+.stale.ok{background:var(--good-soft);color:var(--good);
+ border-color:color-mix(in srgb,var(--good) 24%,transparent)}
 .howto{background:var(--surface);border:1px solid var(--line)}
 .howto b{font-weight:600}
 .howto ol{margin:9px 0 11px 19px;padding:0}
@@ -1029,6 +1032,43 @@ render();
 </script>
 """
 
+# Emitted only for the published build.
+PAGES_JS = r"""
+/* --- check for new prices -----------------------------------------------
+   The scrape runs on GitHub hourly, so the newest data is simply whatever is
+   published -- "checking" is a reload. Two wrinkles worth the code:
+
+   GitHub Pages serves the report with Cache-Control: max-age=600, so a plain
+   reload inside 10 minutes would re-show the cached copy and the button would
+   appear to do nothing. The cache-busting query param forces a real fetch.
+
+   And a reload that returns identical data is indistinguishable from a broken
+   button, so carry the old timestamp across and say plainly what happened. */
+const cb = $('checkbtn');
+if (cb) {
+  cb.addEventListener('click', () => {
+    cb.textContent = 'Checking…';
+    cb.disabled = true;
+    sessionStorage.setItem('tw_was', String(SCRAPED.getTime()));
+    const u = new URL(location.href);
+    u.searchParams.set('t', Date.now());
+    location.replace(u);
+  });
+
+  const was = sessionStorage.getItem('tw_was');
+  if (was) {
+    sessionStorage.removeItem('tw_was');
+    const stamp = new Date(SCRAPED).toLocaleString([], {
+      weekday: 'short', hour: 'numeric', minute: '2-digit' });
+    $('staleness').innerHTML = Number(was) === SCRAPED.getTime()
+      ? `<div class="stale">No change — these are the latest published prices
+         (${stamp}). A fresh scrape runs every hour; use <b>Force a scrape</b>
+         to run one now.</div>`
+      : `<div class="stale ok">Updated — new prices from ${stamp}.</div>`;
+  }
+}
+"""
+
 # Everything below is emitted only for the local build -- it drives the Shortcut
 # refresh button, which exists nowhere else. Kept out of the published page so
 # it carries no dead shortcuts:// code.
@@ -1162,9 +1202,9 @@ RUN_URL = ("https://github.com/shudengnyc/tw-used-racket-tracker"
 STALE_MSG = {
     "local": "These prices are ${age()} old. "
              "Run the <b>Check Racquets</b> shortcut to refresh.",
-    "pages": "These prices are ${age()} old — the 6-hourly refresh may have "
-             "failed. Use <b>Fetch new data</b> above, and check the live "
-             "listing before buying.",
+    "pages": "These prices are ${age()} old — the hourly scrape may have "
+             "stopped. Try <b>Check for new prices</b> above, and check the "
+             "live listing before buying.",
     "artifact": "Snapshot taken ${age()} ago. This page shows prices as they "
                 "were then — it does not update on its own, so check the live "
                 "listing before buying.",
@@ -1254,12 +1294,17 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None):
                      'href="shortcuts://run-shortcut?name=Check%20Racquets" '
                      'title="Re-scrape Tennis Warehouse">↻ Fetch new data</a>'
                      if mode == "local" else
-                     f'<a class="btn" id="runongh" href="{RUN_URL}" target="_blank" '
-                     'rel="noopener" title="Opens GitHub; press Run workflow, '
-                     'then reload here in a minute">↻ Fetch new data ↗</a>'
+                     '<button class="btn" id="checkbtn" '
+                     'title="Fetch the latest published prices">'
+                     '↻ Check for new prices</button>'
+                     f'<a class="btn ghost" id="runongh" href="{RUN_URL}" '
+                     'target="_blank" rel="noopener" title="Force a scrape now: '
+                     'press Run workflow on GitHub, then check back in a minute">'
+                     'Force a scrape ↗</a>'
                      if mode == "pages" else '')
             .replace("__STALE__", STALE_MSG[mode])
-            .replace("__REFRESHJS__", REFRESH_JS if mode == "local" else "")
+            .replace("__REFRESHJS__", {"local": REFRESH_JS,
+                                       "pages": PAGES_JS}.get(mode, ""))
             .replace("__SUB__", sub)
             .replace("__TILES__", board)
             .replace("__NTRAP__", str(n_trap))

@@ -2,8 +2,11 @@ name: Check used racquets
 
 on:
   schedule:
-    # Every 6 hours. Cron here is always UTC.
-    - cron: "0 */6 * * *"
+    # Hourly. One scrape is ~62 requests to Tennis Warehouse, so this is about
+    # 1.5k/day -- frequent enough that the page is never far behind, without
+    # hammering them. GitHub runs scheduled jobs best-effort and may delay
+    # them under load, so treat this as a floor, not a guarantee.
+    - cron: "7 * * * *"
   workflow_dispatch:        # the "Run workflow" button -- replaces the Shortcut
 
 # Least privilege: write the data files back, and publish the report to Pages.
