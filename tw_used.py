@@ -460,6 +460,10 @@ def main():
     ap.add_argument("--open", action="store_true",
                     help="open the HTML report in the browser when done")
     ap.add_argument("--workers", type=int, default=12)
+    ap.add_argument("--html-mode", choices=("local", "pages", "artifact"),
+                    default="local",
+                    help="who the report is built for; 'pages' drops the "
+                         "Mac-only Shortcut refresh button (default: local)")
     args = ap.parse_args()
 
     if args.trend:
@@ -520,7 +524,8 @@ def main():
         shown = [r for r in shown if args.grip in r["grip"]]
 
     days = len(set(_history_dates()))
-    write_html(listings, HTML_PATH, days, HIST_PATH, thumb_dir=THUMB_DIR)
+    write_html(listings, HTML_PATH, days, HIST_PATH, mode=args.html_mode,
+               thumb_dir=THUMB_DIR)
 
     if args.open:
         import subprocess

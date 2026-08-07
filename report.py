@@ -1018,6 +1018,21 @@ addEventListener('keydown', e => {
   }
 });
 
+const SCRAPED = new Date(__SCRAPED_ISO__);
+__REFRESHJS__
+const hrs = (Date.now() - SCRAPED) / 3.6e6;
+const age = () => hrs < 48 ? Math.round(hrs)+' hours' : Math.round(hrs/24)+' days';
+if (hrs > 12) $('staleness').innerHTML = `<div class="stale">__STALE__</div>`;
+
+buildBrands();
+render();
+</script>
+"""
+
+# Everything below is emitted only for the local build -- it drives the Shortcut
+# refresh button, which exists nowhere else. Kept out of the published page so
+# it carries no dead shortcuts:// code.
+REFRESH_JS = r"""
 /* --- fetch new data -----------------------------------------------------
    Chrome follows the shortcuts:// link and runs the scrape. Safari refuses
    custom schemes from file:// pages and fails silently, so detect that (we
@@ -1073,7 +1088,6 @@ if (refresh) {
    The countdown is tuned to a normal run. If the scrape was slow and this page
    is still the old build, wait a beat and reload once more instead of leaving
    stale numbers on screen. */
-const SCRAPED = new Date(__SCRAPED_ISO__);
 (function checkRefresh(){
   const asked = Number(sessionStorage.getItem('tw_refresh_at') || 0);
   if (!asked) return;
@@ -1094,20 +1108,6 @@ const SCRAPED = new Date(__SCRAPED_ISO__);
   $('staleness').innerHTML = '<div class="stale">Still fetching — reloading…</div>';
   setTimeout(() => location.reload(), 3000);
 })();
-const hrs = (Date.now() - SCRAPED) / 3.6e6;
-const age = () => hrs < 48 ? Math.round(hrs)+' hours' : Math.round(hrs/24)+' days';
-if (WEB) {
-  if (hrs > 12) $('staleness').innerHTML = `<div class="stale">Snapshot taken ${age()} ago.
-    This page shows prices as they were then — it does not update on its own, so check
-    the live listing before buying.</div>`;
-} else if (hrs > 12) {
-  $('staleness').innerHTML = `<div class="stale">These prices are ${age()} old.
-    Run the <b>Check Racquets</b> shortcut to refresh.</div>`;
-}
-
-buildBrands();
-render();
-</script>
 """
 
 
@@ -1147,7 +1147,27 @@ def load_series(hist_path):
     return {k: [[d, v[d]] for d in sorted(v)] for k, v in by_day.items()}
 
 
-def write_html(listings, path, days, hist_path, web=False, thumb_dir=None):
+# How the page will be served, which decides three things: whether it carries
+# its own doctype, whether it offers the Shortcut refresh button, and what the
+# staleness banner tells you to do about old prices.
+#   local    -- opened from disk on the Mac; the Shortcut can refresh it
+#   pages    -- GitHub Pages; refreshes itself every 6h, no Shortcut available
+#   artifact -- a published Claude artifact; frozen, and wrapped in its own head
+STALE_MSG = {
+    "local": "These prices are ${age()} old. "
+             "Run the <b>Check Racquets</b> shortcut to refresh.",
+    "pages": "These prices are ${age()} old — the scheduled refresh may have "
+             "failed. Check the live listing before buying.",
+    "artifact": "Snapshot taken ${age()} ago. This page shows prices as they "
+                "were then — it does not update on its own, so check the live "
+                "listing before buying.",
+}
+
+
+def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None):
+    # Only a published artifact is wrapped in someone else's <head> and has no
+    # thumbs_large/ beside it; Pages serves a plain file and ships the folder.
+    web = mode == "artifact"
     now = dt.datetime.now()
     stamp = now.strftime("%a %b %-d at %-I:%M %p")
     n_new = sum(bool(r.get("is_new")) for r in listings)
@@ -1220,10 +1240,13 @@ def write_html(listings, path, days, hist_path, web=False, thumb_dir=None):
     page = (("" if web else LOCAL_HEAD) + TMPL
             .replace("__FONTS__", FONT_CSS)
             .replace("__WEB__", "true" if web else "false")
-            .replace("__REFRESHBTN__", "" if web else
+            # The Shortcut only exists on the Mac, so the button is local-only.
+            .replace("__REFRESHBTN__", '' if mode != "local" else
                      '<a class="btn" id="refresh" '
                      'href="shortcuts://run-shortcut?name=Check%20Racquets" '
                      'title="Re-scrape Tennis Warehouse">↻ Fetch new data</a>')
+            .replace("__STALE__", STALE_MSG[mode])
+            .replace("__REFRESHJS__", REFRESH_JS if mode == "local" else "")
             .replace("__SUB__", sub)
             .replace("__TILES__", board)
             .replace("__NTRAP__", str(n_trap))

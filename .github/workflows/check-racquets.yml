@@ -33,7 +33,11 @@ jobs:
       # No pip install: tw_used.py is pure standard library.
 
       - name: Scrape Tennis Warehouse and rebuild the report
-        run: python3 tw_used.py
+        # Runners are UTC; without this the report is stamped in UTC and the
+        # "as of" time reads hours off.
+        env:
+          TZ: America/New_York
+        run: python3 tw_used.py --html-mode pages
 
       - name: Commit price history
         run: |
