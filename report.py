@@ -1209,11 +1209,15 @@ STALE_MSG = {
 }
 
 
-def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None):
+def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
+               scraped_at=None):
     # Only a published artifact is wrapped in someone else's <head> and has no
     # thumbs_large/ beside it; Pages serves a plain file and ships the folder.
     web = mode == "artifact"
-    now = dt.datetime.now()
+    # When the prices were actually gathered -- not when this file was built.
+    # A republish rebuilds from a saved snapshot minutes later, and stamping it
+    # "now" would claim the data is fresher than it is.
+    now = scraped_at or dt.datetime.now()
     stamp = now.strftime("%a %b %-d at %-I:%M %p")
     n_new = sum(bool(r.get("is_new")) for r in listings)
     n_trap = sum(bool(r.get("new_cheaper")) for r in listings)

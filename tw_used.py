@@ -660,12 +660,12 @@ def main():
         return
 
     if not scraping:
-        listings = load_snapshot()
+        listings, scraped_at = load_snapshot()
         if listings is None:
             print("Nothing downloaded yet. Scrape now with:  ./racket",
                   file=sys.stderr)
             return 1
-        finish(listings, args)
+        finish(listings, args, scraped_at)
         return
 
     catalog = get_catalog()
@@ -710,25 +710,32 @@ def main():
         w.writeheader()
         w.writerows(listings)
 
+    # The timestamp is what makes this file change even when no price moved,
+    # which is what lets a quiet scrape still publish "checked just now"
+    # instead of leaving the page showing an older time.
+    scraped_at = dt.datetime.now()
     with open(SNAP_PATH, "w", encoding="utf-8") as f:
-        json.dump(listings, f)
+        json.dump({"scraped": scraped_at.isoformat(), "listings": listings}, f)
 
     # Report first, then sync: the page is already correct by this point, so
     # nothing here should keep it waiting on the network.
-    finish(listings, args)
+    finish(listings, args, scraped_at)
     if not args.no_push:
         push_to_github()
 
 
 def load_snapshot():
-    """The listing rows exactly as the last scrape produced them, or None."""
+    """(rows, when they were scraped) from the last scrape, or (None, None)."""
     if not os.path.exists(SNAP_PATH):
-        return None
+        return None, None
     with open(SNAP_PATH, encoding="utf-8") as f:
-        return json.load(f)
+        snap = json.load(f)
+    if isinstance(snap, list):        # written before the timestamp was added
+        return snap, None
+    return snap["listings"], dt.datetime.fromisoformat(snap["scraped"])
 
 
-def finish(listings, args):
+def finish(listings, args, scraped_at=None):
     """Filter, write the HTML report, and print -- shared by both paths.
 
     Filters narrow the printed table only. The HTML report always covers
@@ -750,7 +757,7 @@ def finish(listings, args):
 
     days = len(set(_history_dates()))
     write_html(listings, HTML_PATH, days, HIST_PATH, mode=args.html_mode,
-               thumb_dir=THUMB_DIR)
+               thumb_dir=THUMB_DIR, scraped_at=scraped_at)
 
     if args.open:
         import subprocess
