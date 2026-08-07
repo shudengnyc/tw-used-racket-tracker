@@ -36,7 +36,7 @@ jobs:
         # Runners are UTC; without this the report is stamped in UTC and the
         # "as of" time reads hours off.
         env:
-          TZ: America/New_York
+          TZ: America/Los_Angeles
         run: python3 tw_used.py --html-mode pages
 
       - name: Commit price history
