@@ -1247,7 +1247,7 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
 
     board = (
         _cell("Listings", len(listings), f"across {racquets} racquets") +
-        _cell("New or repriced", n_new, "since your last check") +
+        _cell("New or repriced", n_new, "in the last 24 hours") +
         (_cell("Best discount", f"{best['discount_pct']}%",
                html.escape(tidy(best["racquet"])), "win") if best else
          _cell("Best discount", "—", "no data")) +

@@ -50,6 +50,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "used_prices.csv")     # latest snapshot
 HIST_PATH = os.path.join(HERE, "history.csv")        # append-only, all runs
 STATE_PATH = os.path.join(HERE, "seen.json")         # for new-listing detection
+
+# How long a listing stays "new". The state file records when each price was
+# first seen rather than just which prices the last run saw: with up to eight
+# scrapes a day, "changed since the previous run" was a two-hour window that
+# had almost always closed again before anyone loaded the page.
+NEW_FOR = dt.timedelta(hours=24)
 # used_prices.csv is for reading in a spreadsheet: it stringifies everything and
 # stores specs/nspec as Python dict reprs, so it can't be loaded back without
 # guessing types. This is the exact round-trip copy the local rebuild reads.
@@ -479,6 +485,34 @@ DATA_FILES = ["used_prices.csv", "history.csv", "seen.json", "snapshot.json",
               "thumbs", "thumbs_large"]
 
 
+def load_first_seen():
+    """When each `sku|price` was first observed, as datetimes.
+
+    The file used to be a plain list of the keys the previous run saw. Those
+    keys were on the site before this change, so they are read back as already
+    old rather than as a burst of 100-odd fake arrivals on the next scrape.
+    """
+    if not os.path.exists(STATE_PATH):
+        return {}
+    try:
+        with open(STATE_PATH, encoding="utf-8") as f:
+            state = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return {}                          # a truncated file is not worth dying over
+
+    stale = dt.datetime.now() - NEW_FOR
+    if isinstance(state, list):
+        return {k: stale for k in state}
+
+    out = {}
+    for k, ts in state.items():
+        try:
+            out[k] = dt.datetime.fromisoformat(ts)
+        except (TypeError, ValueError):
+            out[k] = stale
+    return out
+
+
 def dedupe_history():
     """Drop repeated rows and put the file back in date order.
 
@@ -696,16 +730,20 @@ def main():
     hist = load_history(before=today)
     append_history(listings, today)
 
-    previous = set()
-    if os.path.exists(STATE_PATH):
-        with open(STATE_PATH, encoding="utf-8") as f:
-            previous = set(json.load(f))
     key = lambda r: f"{r['sku']}|{r['used_price']}"
+    now = dt.datetime.now()
+    first_seen = load_first_seen()
+    fresh = {}
     for r in listings:
-        r["is_new"] = key(r) not in previous
+        k = key(r)
+        # Carry the original sighting forward; only a key never seen before --
+        # a new listing, or an old one at a new price -- starts its clock now.
+        since = first_seen.get(k, now)
+        fresh[k] = since.isoformat(timespec="seconds")
+        r["is_new"] = now - since < NEW_FOR
         r["verdict"], r["median"] = judge(r, hist)
     with open(STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump(sorted(key(r) for r in listings), f)
+        json.dump(dict(sorted(fresh.items())), f, indent=0)
 
     listings.sort(key=lambda r: (-(r["discount_pct"] or 0), r["used_price"]))
 
@@ -776,7 +814,7 @@ def finish(listings, args, scraped_at=None):
         print("\nNothing matched.")
 
     print(f"\n{len(listings)} used listings; {sum(r['is_new'] for r in listings)} "
-          f"new or repriced since last run; {days} days of history recorded.",
+          f"new or repriced in the last 24h; {days} days of history recorded.",
           file=sys.stderr)
 
 
