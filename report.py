@@ -85,6 +85,18 @@ body{margin:0;padding:0;background:var(--plane);color:var(--ink);
  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 .eyebrow .ball{width:8px;height:8px;border-radius:50%;background:var(--ball);
  box-shadow:0 0 0 3px color-mix(in srgb,var(--ball) 22%,transparent)}
+/* Marks the copy built on this Mac. The published page carries no tag, so the
+   presence of one is the signal -- worth having when both are open in tabs and
+   the numbers disagree. Court teal rather than a warning colour: this is a
+   statement of origin, not a problem. The mark is a small diamond so it reads
+   as deliberately different from the eyebrow's tennis ball. */
+.eyebrow .tag{display:inline-flex;align-items:center;gap:5px;
+ padding:3px 8px 2px;border-radius:999px;font:600 9.5px/1 var(--mono);
+ letter-spacing:.14em;color:var(--accent);
+ background:color-mix(in srgb,var(--accent) 9%,transparent);
+ border:1px solid color-mix(in srgb,var(--accent) 26%,transparent)}
+.eyebrow .tag::before{content:"";width:3.5px;height:3.5px;
+ background:currentColor;transform:rotate(45deg)}
 h1{font:400 clamp(38px,6vw,58px)/1 var(--display);letter-spacing:-.01em;
  margin:0 0 12px;text-wrap:balance}
 .meta{font:400 13px/1.6 var(--mono);color:var(--ink2);letter-spacing:-.01em}
@@ -425,7 +437,7 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
 </style>
 
 <div class="wrap">
-  <div class="eyebrow"><span class="ball"></span>Tennis Warehouse · used market</div>
+  <div class="eyebrow"><span class="ball"></span>Tennis Warehouse · used market__LOCALTAG__</div>
   <h1>Used Racquets</h1>
   <div class="meta">__SUB__</div>
   <div class="baseline"></div>
@@ -1301,6 +1313,10 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
                      '↻ Check for new prices</button>'
                      if mode == "pages" else '')
             .replace("__STALE__", STALE_MSG[mode])
+            .replace("__LOCALTAG__", '' if mode != "local" else
+                     '<span class="tag" title="Built on this Mac by the Check '
+                     'Racquets shortcut. The published page has no tag.">'
+                     'Local</span>')
             .replace("__REFRESHJS__", {"local": REFRESH_JS,
                                        "pages": PAGES_JS}.get(mode, ""))
             .replace("__SUB__", sub)
