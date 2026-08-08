@@ -2,7 +2,9 @@ __pycache__/
 *.pyc
 .DS_Store
 
-# Regenerated from the CSVs on every run, and 500KB+ each time -- committing it
-# would bloat the repo fast. The scheduled run publishes it to GitHub Pages
-# instead; local runs still write it here for you to open.
+# Both HTML reports are regenerated from snapshot.json on every run and are
+# 500KB+ each, so committing them would bloat the repo for no gain.
+# report.html is the local build you open from disk; site/ is the published
+# build, which CI uploads straight to Pages without committing it.
 report.html
+site/

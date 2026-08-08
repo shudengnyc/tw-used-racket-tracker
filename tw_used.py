@@ -57,6 +57,10 @@ SNAP_PATH = os.path.join(HERE, "snapshot.json")
 
 REPO = "shudengnyc/tw-used-racket-tracker"   # where the scrape actually runs
 HTML_PATH = os.path.join(HERE, "report.html")        # standalone clickable report
+# The published build goes somewhere else on purpose: it differs from the local
+# one (no Shortcut button, no "Local" tag), so sharing a filename meant either
+# build could silently overwrite the other.
+WEB_HTML = os.path.join(HERE, "site", "index.html")  # what GitHub Pages serves
 THUMB_DIR = os.path.join(HERE, "thumbs")             # small, embedded in the page
 LARGE_DIR = os.path.join(HERE, "thumbs_large")       # full size, for the lightbox
 
@@ -756,12 +760,14 @@ def finish(listings, args, scraped_at=None):
         shown = [r for r in shown if args.grip in r["grip"]]
 
     days = len(set(_history_dates()))
-    write_html(listings, HTML_PATH, days, HIST_PATH, mode=args.html_mode,
+    out = WEB_HTML if args.html_mode == "pages" else HTML_PATH
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    write_html(listings, out, days, HIST_PATH, mode=args.html_mode,
                thumb_dir=THUMB_DIR, scraped_at=scraped_at)
 
     if args.open:
         import subprocess
-        subprocess.run(["open", HTML_PATH], check=False)
+        subprocess.run(["open", out], check=False)
         return
 
     if shown:

@@ -81,12 +81,10 @@ jobs:
           fi
 
       - name: Assemble the Pages site
-        run: |
-          mkdir -p site
-          # report.html links the lightbox images by relative path, so
-          # thumbs_large has to ship alongside it.
-          cp report.html site/index.html
-          cp -r thumbs_large site/thumbs_large
+        # --html-mode pages already wrote site/index.html. Only the lightbox
+        # images are missing: the page links them by relative path, so
+        # thumbs_large has to ship alongside it.
+        run: cp -r thumbs_large site/thumbs_large
 
       # Pages is already enabled on the repo with build_type=workflow, so this
       # just reads that config. Don't add `enablement: true` -- it needs an
