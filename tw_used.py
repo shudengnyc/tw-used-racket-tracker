@@ -397,6 +397,37 @@ def load_history(before=None):
     return hist
 
 
+def load_sku_prices():
+    """{sku: [(date, price), ...]} -- every price each exact listing has carried."""
+    out = {}
+    if not os.path.exists(HIST_PATH):
+        return out
+    with open(HIST_PATH, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            try:
+                price = float(row["used_price"])
+            except ValueError:
+                continue
+            out.setdefault(row["sku"], []).append((row["date"], price))
+    return out
+
+
+def marked_down_from(row, sku_hist):
+    """The higher price this exact listing carried before its current one.
+
+    Used racquets sit for weeks at one price (median five weeks so far), so a
+    racquet+grade's history is mostly the same listing repeating itself and
+    judge() reads a 40% markdown as "typical". The SKU's own trail is the
+    honest signal: a lower price than it carried last time is a markdown, and
+    the previous figure is worth showing. None when it never cost more.
+    """
+    trail = sorted(sku_hist.get(row["sku"], []))
+    for _date, price in reversed(trail):
+        if price != row["used_price"]:
+            return price if price > row["used_price"] else None
+    return None
+
+
 def judge(row, hist):
     """Rate a listing against its own racquet+grade history."""
     past = hist.get((row["racquet"], row["grade"]), [])
@@ -429,6 +460,8 @@ def print_table(rows):
         tag = r.get("verdict") or ("NEW LISTING" if r.get("is_new") else "")
         if r.get("median") and tag in ("LOWEST EVER", "BELOW USUAL", "high"):
             tag = f"{tag} (~${r['median']:.0f})"
+        if r.get("was_price") and r.get("verdict") != "LOWEST EVER":
+            tag = f"WAS ${r['was_price']:.0f}"
         print(f"${r['used_price']:>7.2f} {new:>7} {off:>4}  "
               f"{r['grade'] or '-':<8} {r['grip'] or '-':<7} {tag:<13} {r['racquet']}")
 
@@ -651,15 +684,16 @@ def trigger_github_run():
 def main():
     ap = argparse.ArgumentParser(
         description="Used racquet prices from Tennis Warehouse. The scrape "
-                    "runs on GitHub every 6 hours; by default this just syncs "
-                    "the latest results down and shows them.")
+                    "also runs on GitHub every 3 hours through the day; by "
+                    "default this scrapes here and shares the results back.")
     ap.add_argument("--brands", nargs="+", default=TARGET_BRANDS)
     ap.add_argument("--all-brands", action="store_true")
     ap.add_argument("--max-price", type=float)
     ap.add_argument("--min-discount", type=float, default=0)
     ap.add_argument("--grip", help='e.g. "4 3/8"')
     ap.add_argument("--deals", action="store_true",
-                    help="only new listings and historically notable prices")
+                    help="only new listings, markdowns and historically "
+                         "notable prices")
     ap.add_argument("--trend", metavar="RACQUET",
                     help="show recorded price history and exit")
     ap.add_argument("--quiet-if-empty", action="store_true",
@@ -729,6 +763,7 @@ def main():
     # Judge against history from BEFORE today, then record today's prices.
     hist = load_history(before=today)
     append_history(listings, today)
+    sku_hist = load_sku_prices()          # after the append, so today counts
 
     key = lambda r: f"{r['sku']}|{r['used_price']}"
     now = dt.datetime.now()
@@ -742,6 +777,7 @@ def main():
         fresh[k] = since.isoformat(timespec="seconds")
         r["is_new"] = now - since < NEW_FOR
         r["verdict"], r["median"] = judge(r, hist)
+        r["was_price"] = marked_down_from(r, sku_hist)
     with open(STATE_PATH, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(fresh.items())), f, indent=0)
 
@@ -755,7 +791,9 @@ def main():
     # The timestamp is what makes this file change even when no price moved,
     # which is what lets a quiet scrape still publish "checked just now"
     # instead of leaving the page showing an older time.
-    scraped_at = dt.datetime.now()
+    # Zone-aware, so the page can tell how old the data is wherever it is read;
+    # a bare local time would be re-read in the viewer's zone.
+    scraped_at = dt.datetime.now().astimezone()
     with open(SNAP_PATH, "w", encoding="utf-8") as f:
         json.dump({"scraped": scraped_at.isoformat(), "listings": listings}, f)
 
@@ -789,7 +827,8 @@ def finish(listings, args, scraped_at=None):
         shown = [r for r in shown if r["brand"].lower() in wanted]
     if args.deals:
         shown = [r for r in shown if not r["new_cheaper"]
-                 and (r["is_new"] or r["verdict"] in ("LOWEST EVER", "BELOW USUAL"))]
+                 and (r["is_new"] or r.get("was_price")
+                      or r["verdict"] in ("LOWEST EVER", "BELOW USUAL"))]
     if args.max_price:
         shown = [r for r in shown if r["used_price"] <= args.max_price]
     if args.min_discount:

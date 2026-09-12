@@ -545,9 +545,12 @@ const THUMBS = JSON.parse(document.getElementById('thumbs').textContent);
 const WEB = __WEB__;
 if (!Object.keys(SERIES).length) document.body.classList.add('nospark');
 
-const RANK = {'LOWEST EVER':0,'BELOW USUAL':1,'':3,'typical':3,'high':4};
+const RANK = {'LOWEST EVER':0,'BELOW USUAL':2,'':4,'typical':4,'high':5};
 ROWS.forEach(r => {
-  r.rank = r.new_cheaper ? 9 : (r.verdict ? RANK[r.verdict] : (r.is_new ? 2 : 3));
+  r.rank = r.new_cheaper ? 9
+         : r.verdict === 'LOWEST EVER' ? 0
+         : r.was_price ? 1                       // marked down since we first saw it
+         : r.verdict ? RANK[r.verdict] : (r.is_new ? 3 : 4);
   r.key = r.racquet + '||' + r.grade;
   Object.assign(r, r.nspec || {});
 });
@@ -557,7 +560,7 @@ const $ = id => document.getElementById(id);
 // name is what history.csv and the grouping key are built from.
 // Word-split rather than a word-boundary regex: this template is a plain
 // Python string, so a backslash-b would arrive here as a backspace character.
-const tidy = s => s.split(/\s+/).filter(w => !/^racquets?$/i.test(w)).join(' ');
+const tidy = s => s.split(/\\s+/).filter(w => !/^racquets?$/i.test(w)).join(' ');
 let sortKey = 'discount_pct', sortDir = -1, view = 'all';
 // Balance runs head-light (negative) to head-heavy, so ascending reads naturally.
 const ASC = new Set(['used_price','stiffness','balance_pts']);
@@ -755,7 +758,7 @@ function saveCurrent(){
    The list is rebuilt from whatever brands are selected, so it stays short and
    only ever offers lines that actually have stock. */
 function familyOf(name){
-  const w = name.split(/\s+/);
+  const w = name.split(/\\s+/);
   return w.length > 1 ? w[1] : '';
 }
 
@@ -764,7 +767,7 @@ function buildFamilies(){
   const counts = {};
   pool.forEach(r => {
     const f = familyOf(r.racquet);
-    if (f && !/^\d/.test(f)) counts[f] = (counts[f] || 0) + 1;
+    if (f && !/^\\d/.test(f)) counts[f] = (counts[f] || 0) + 1;
   });
   const top = Object.entries(counts)
     .filter(([, n]) => n >= 2)
@@ -797,6 +800,9 @@ function priceSub(r){
 function signal(r){
   if (r.new_cheaper) return '<span class="tag t-trap">⚠ buy new</span>';
   if (r.verdict==='LOWEST EVER') return '<span class="tag t-low">▼ lowest ever</span>';
+  // This exact listing used to cost more. Outranks the racquet-level verdicts:
+  // a $229 frame now $139 is a markdown whatever its siblings have sold for.
+  if (r.was_price) return `<span class="tag t-below">▼ was $${r.was_price.toFixed(0)}</span>`;
   if (r.verdict==='BELOW USUAL') return '<span class="tag t-below">▼ below usual</span>';
   if (r.is_new) return '<span class="tag t-new">● new</span>';
   if (r.verdict==='high') return '<span class="quiet">above usual</span>';
@@ -829,7 +835,7 @@ function render(){
     (view!=='trap' ? true : r.new_cheaper) &&
     (view!=='cheap' || (r.used_price<=150 && !r.new_cheaper)) &&
     (view!=='deals' || (!r.new_cheaper &&
-      (r.is_new || r.verdict==='LOWEST EVER' || r.verdict==='BELOW USUAL'))));
+      (r.is_new || r.was_price || r.verdict==='LOWEST EVER' || r.verdict==='BELOW USUAL'))));
 
   const nf = id => { const v = parseFloat($(id).value); return isNaN(v) ? null : v; };
   const band = (val, lo, hi) =>
@@ -876,7 +882,7 @@ function render(){
   // The Signal column is dead until price history exists -- hide it rather than
   // showing a column of em-dashes.
   document.body.classList.toggle('nosignal',
-    !rows.some(r => r.verdict || r.is_new));
+    !rows.some(r => r.verdict || r.is_new || r.was_price));
 
   buildFamilies();
   buildSaved();
@@ -1047,8 +1053,8 @@ render();
 # Emitted only for the published build.
 PAGES_JS = r"""
 /* --- check for new prices -----------------------------------------------
-   The scrape runs on GitHub hourly, so the newest data is simply whatever is
-   published -- "checking" is a reload. Two wrinkles worth the code:
+   The scrape runs on GitHub every 3 hours, so the newest data is simply
+   whatever is published -- "checking" is a reload. Two wrinkles worth the code:
 
    GitHub Pages serves the report with Cache-Control: max-age=600, so a plain
    reload inside 10 minutes would re-show the cached copy and the button would
@@ -1229,9 +1235,12 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     # When the prices were actually gathered -- not when this file was built.
     # A republish rebuilds from a saved snapshot minutes later, and stamping it
     # "now" would claim the data is fresher than it is.
-    now = scraped_at or dt.datetime.now()
+    # Zone-aware so the page's age check holds wherever it is opened; an older
+    # snapshot's bare local time is taken as this machine's zone, as before.
+    now = (scraped_at or dt.datetime.now()).astimezone()
     stamp = now.strftime("%a %b %-d at %-I:%M %p")
     n_new = sum(bool(r.get("is_new")) for r in listings)
+    n_down = sum(bool(r.get("was_price")) for r in listings)
     n_trap = sum(bool(r.get("new_cheaper")) for r in listings)
     racquets = len({r["racquet"] for r in listings})
 
@@ -1267,7 +1276,9 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
         notes.append("<p>Signals compare each listing against that same racquet and "
                      "grade's own past prices, not a fixed threshold. <b>~$</b> is its "
                      "typical price so far; hover a trend line for low, typical and "
-                     "high.</p>")
+                     "high. <b>was $</b> means that exact racquet has been marked down "
+                     "since it was first seen"
+                     + (f" — {n_down} right now" if n_down else "") + ".</p>")
     notes.append("<p><b>Off %</b> is measured against Tennis Warehouse's current price, "
                  "which is often already marked down — so the real saving against list "
                  "price is usually bigger.</p>")
@@ -1290,11 +1301,13 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     keys = {f"{r['racquet']}||{r['grade']}" for r in listings}
     series = {k: v for k, v in series.items() if k in keys and len(v) >= 2}
 
+    # .get, not [], so a snapshot written before a field existed still renders.
     payload = json.dumps([
-        {k: r[k] for k in ("brand", "racquet", "grade", "grip", "used_price",
-                           "new_price", "discount_pct", "in_stock", "url",
-                           "is_new", "verdict", "median", "new_cheaper", "code",
-                           "list_price", "rating", "reviews", "specs", "nspec")}
+        {k: r.get(k) for k in ("brand", "racquet", "grade", "grip", "used_price",
+                               "new_price", "discount_pct", "in_stock", "url",
+                               "is_new", "verdict", "median", "was_price",
+                               "new_cheaper", "code", "list_price", "rating",
+                               "reviews", "specs", "nspec")}
         for r in listings
     ]).replace("<", "\\u003c")
 

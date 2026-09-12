@@ -11,7 +11,9 @@ the racquet list, then one page per racquet — about 62 requests, five seconds.
 
 Every run appends to `history.csv`. Once a few weeks have accumulated, each
 listing is judged against *that racquet and grade's own past prices* rather than
-one blunt threshold, so "cheap" means cheap for that frame.
+one blunt threshold, so "cheap" means cheap for that frame. Each listing is also
+checked against its own earlier prices: a used racquet typically sits for weeks,
+and a cut from what *that* frame cost last month is flagged as **was $…**.
 
 Brands tracked: Wilson, Yonex, Tecnifibre, Head, Prince, Solinco.
 
@@ -20,7 +22,7 @@ Brands tracked: Wilson, Yonex, Tecnifibre, Head, Prince, Solinco.
 ```sh
 ./racket                  # scrape now (~8s), rebuild the report, sync to GitHub
 ./racket --open           # ...and open it in the browser
-./racket --deals          # only new listings and historically notable prices
+./racket --deals          # only new listings, markdowns and historically notable prices
 ./racket --trend "Blade"  # price history for one racquet
 ./racket --max-price 150 --grip "4 3/8"
 ```
