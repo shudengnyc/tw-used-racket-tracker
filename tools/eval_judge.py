@@ -6,7 +6,8 @@ tally the verdicts. Run from the repo root:
 
     python3 tools/eval_judge.py [--since YYYY-MM-DD]
 
-Add a method to METHODS to compare a new approach (Option B/C in PLAN.md).
+Add a function to METHODS to compare a new approach; results so far are in
+ROADMAP.md.
 """
 import argparse
 import collections
@@ -37,14 +38,14 @@ def rows_by_day(path):
 def own_grade_only(day):
     """Option A alone: distinct (sku, price), this racquet+grade only."""
     hist = tw_used.load_history(before=day)
-    return lambda r: tw_used._rate(r["used_price"], hist[(r["racquet"], r["grade"])])[0] \
+    return lambda r: tw_used.rate_price(r["used_price"], hist[(r["racquet"], r["grade"])])[0] \
         if len(hist.get((r["racquet"], r["grade"]), [])) >= tw_used.MIN_OBS else ""
 
 
 def every_row(day):
     """The original: every daily row counts."""
     hist = tw_used.load_history(before=day, distinct=False)
-    return lambda r: tw_used._rate(r["used_price"], hist[(r["racquet"], r["grade"])])[0] \
+    return lambda r: tw_used.rate_price(r["used_price"], hist[(r["racquet"], r["grade"])])[0] \
         if len(hist.get((r["racquet"], r["grade"]), [])) >= tw_used.MIN_OBS else ""
 
 

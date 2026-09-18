@@ -1225,7 +1225,7 @@ def load_series(hist_path):
 # its own doctype, whether it offers the Shortcut refresh button, and what the
 # staleness banner tells you to do about old prices.
 #   local    -- opened from disk on the Mac; the Shortcut can refresh it
-#   pages    -- GitHub Pages; refreshes itself every 6h, no Shortcut available
+#   pages    -- GitHub Pages; rebuilt by each scheduled run, no Shortcut
 #   artifact -- a published Claude artifact; frozen, and wrapped in its own head
 # There is deliberately no "scrape now" button here. A static page can't start
 # the workflow itself -- that needs a token with actions:write, and this repo is

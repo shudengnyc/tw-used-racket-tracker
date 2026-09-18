@@ -2,8 +2,8 @@ __pycache__/
 *.pyc
 .DS_Store
 
-# Both HTML reports are regenerated from snapshot.json on every run and are
-# 500KB+ each, so committing them would bloat the repo for no gain.
+# Both HTML reports are regenerated from snapshot.json on every run (the local
+# one is ~500KB), so committing them would bloat the repo for no gain.
 # report.html is the local build you open from disk; site/ is the published
 # build, which CI uploads straight to Pages without committing it.
 report.html

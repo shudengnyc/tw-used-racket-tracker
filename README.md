@@ -9,11 +9,9 @@ The used catalog page only shows *new* prices; the real used prices live on each
 racquet's own `orderusedproduct.html` page. So a run fetches the catalog once for
 the racquet list, then one page per racquet — about 62 requests, five seconds.
 
-Every run appends to `history.csv`. Once a few weeks have accumulated, each
-listing is judged against *that racquet and grade's own past prices* rather than
-one blunt threshold, so "cheap" means cheap for that frame. Each listing is also
-checked against its own earlier prices: a used racquet typically sits for weeks,
-and a cut from what *that* frame cost last month is flagged as **was $…**.
+Every run appends to `history.csv`, and each listing is judged against *that
+racquet's own past prices* rather than one blunt threshold, so "cheap" means
+cheap for that frame. See [How listings are judged](#how-listings-are-judged).
 
 Brands tracked: Wilson, Yonex, Tecnifibre, Head, Prince, Solinco.
 
@@ -84,15 +82,45 @@ That button cache-busts on purpose: Pages serves the report with
 `Cache-Control: max-age=600`, so a plain reload inside ten minutes would quietly
 re-show the cached copy and look broken.
 
+## How listings are judged
+
+The Signal column, in priority order:
+
+| Signal | Meaning |
+|---|---|
+| **buy new** | The new racquet costs the same or less (a clearance). Sinks to the bottom. |
+| **lowest ever** | Cheaper than any past price it is compared against. |
+| **was $…** | This exact racquet (same SKU) carried a higher price before — a markdown. |
+| **below usual** | At or under 90% of the typical past price. |
+| **new** | This listing, at this price, first appeared in the last 24 hours. |
+| above usual / typical | At or over 110% of typical / in between. |
+| — | Not enough history to say. |
+
+"Past prices" counts each listing **once per price it carried**, not once per
+day it sat there. A used racquet often sits unchanged for weeks, and counting
+days let that one listing outvote everything else, so nearly every row read
+"typical".
+
+A listing is compared with its own racquet and grade when that has at least 3
+distinct past prices. Otherwise every grade of the same racquet is pooled in,
+each price rescaled by the usual gap between grades (learned from the data each
+run: A runs ~4-5% above B, C ~8% below), and that pool needs at least 4.
+Hovering a signal shows which comparison it used. Thresholds live at the top of
+`tw_used.py`; `tools/eval_judge.py` shows what a change would have done to past
+data. The measured trade-offs, and a rejected alternative, are in
+[ROADMAP.md](ROADMAP.md).
+
 ## Files
 
 | | |
 |---|---|
-| `tw_used.py` | Scraping, history, judging, CLI |
+| `tw_used.py` | Scraping, history, judging, git sync, CLI (settings at the top) |
 | `report.py` | Builds the HTML report (local build self-contained; Pages build links fonts and thumbnails) |
 | `histfile.py` | The one reader for `history.csv` |
-| `tests/` | Parser and judging tests against saved pages: `python3 -m unittest` |
+| `tests/` | Parser and judging tests against saved pages |
 | `tools/eval_judge.py` | Replays history to compare judging methods |
+| `DATA.md` | Field-by-field schemas of the data files |
+| `ROADMAP.md` | Follow-ups, parked ideas, and why things are the way they are |
 | `racket` | CLI wrapper — run it from anywhere |
 | `Check Racquets.command` | Double-clickable Finder entry point |
 | `snapshot.json` | Exact round-trip of the last scrape's rows; what a rebuild reads |
@@ -101,8 +129,6 @@ re-show the cached copy and look broken.
 | `seen.json` | Previous listings, for "new or repriced" detection |
 | `thumbs/`, `thumbs_large/` | Cached images — 56px thumbnails, 400px for the lightbox |
 | `fonts.css` | Fonts as base64, so the page renders identically offline |
-
-Field-by-field schemas for the data files are in [DATA.md](DATA.md).
 
 `report.html` (local build) and `site/` (published build) are generated and
 gitignored. They differ — the local one carries a **Local** tag and the Shortcut
@@ -131,6 +157,43 @@ Two things worth knowing:
 - The repo grows ~50–70 MB/year, since each run rewrites `snapshot.json` and
   `used_prices.csv`. Fine for years; if it ever matters, `used_prices.csv` is
   derivable from `snapshot.json` and could stop being tracked.
+
+## Making changes
+
+Run the tests before pushing — CI runs them before every scrape, and a failure
+stops the run before anything is recorded:
+
+```sh
+python3 -m unittest -v
+```
+
+Common changes:
+
+- **Add a brand.** Append it to `TARGET_BRANDS` in `tw_used.py`. If its model
+  lines are two words ("Pure Drive"), add them to `TWO_WORD` in `report.py` so
+  the Lines filter groups them.
+- **Tune the signals.** Edit `MIN_OBS`, `MIN_OBS_POOL`, `BELOW_USUAL` or `HIGH`
+  at the top of `tw_used.py`, then `python3 tools/eval_judge.py` to compare with
+  the old verdict counts over all recorded days. To try a new method, add a
+  function to `METHODS` in that script first.
+- **Tennis Warehouse changed its page layout.** The scheduled run fails: exit 2
+  (no listings parsed) or 3 (many pages failed to load), and GitHub emails you.
+  Nothing is recorded, and the page keeps the last good data. Save fresh copies
+  of the pages over `tests/fixtures/*.html.gz`, fix the regexes in `tw_used.py`
+  until `python3 -m unittest` passes, and update the expected values in
+  `tests/test_parse.py`.
+- **Change the page.** It is one template string in `report.py` (HTML, CSS
+  and JS). Anything from Tennis Warehouse must go through `esc()` before it
+  reaches `innerHTML`. Preview with `./racket --pull --open`, which rebuilds
+  from the last snapshot without scraping.
+- **Add a field to listings.** Add it in `parse_listings` (or `main()` for
+  derived fields), to the `payload` key list in `write_html`, and to
+  [DATA.md](DATA.md). Old snapshots lack it, so read it with `.get()`.
+
+Pushing `tw_used.py`, `report.py`, `histfile.py` or `snapshot.json` republishes
+the page from the current snapshot without re-scraping. New verdict logic only
+shows up after the next scrape, or run the workflow by hand:
+`gh workflow run check-racquets.yml`.
 
 ## Setup elsewhere
 

@@ -6,9 +6,13 @@ racquet's /orderusedproduct.html page. Both are plain server-rendered HTML, so
 we fetch the catalog once for the racquet list, then one page per racquet for
 its individual used listings (grade, grip size, price, stock).
 
-Every run appends to history.csv. Once a few weeks of data exist, each listing
-is judged against that racquet+grade's OWN past prices rather than one blunt
-threshold -- so "cheap" means cheap for that frame, not cheap in the abstract.
+Every run appends to history.csv. Each listing is judged against that
+racquet's OWN past prices rather than one blunt threshold -- so "cheap" means
+cheap for that frame, not cheap in the abstract. See judge() and the README.
+
+Layout of this file, top to bottom: settings, fetching, catalog parsing,
+product-page parsing, thumbnails, price history, judging, terminal output,
+git sync, CLI.
 
 Usage:
     python3 tw_used.py                     # full report
@@ -44,14 +48,22 @@ CATALOG = f"{BASE}/usedcatpage.html?ccode=RACSBYMAKER"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
 
+# --- settings: the knobs worth turning -------------------------------------
+# Change these, then run tools/eval_judge.py to see the effect on past data.
+
 TARGET_BRANDS = ["Wilson", "Yonex", "Tecnifibre", "Head", "Prince", "Solinco"]
 
-# How many past observations before history-based judgements are trustworthy.
-# A racquet's own grade needs MIN_OBS distinct past prices; when it has fewer,
-# the racquet's other grades are pooled in (rescaled by the typical gap between
-# grades), and that wider, noisier pool has to reach MIN_OBS_POOL.
+# How many distinct past prices before a verdict is trustworthy. A racquet's
+# own grade needs MIN_OBS; when it has fewer, the racquet's other grades are
+# pooled in (rescaled by the typical gap between grades), and that wider,
+# noisier pool has to reach MIN_OBS_POOL.
 MIN_OBS = 3
-MIN_OBS_POOL = 4      # 4 lifts today's coverage 32 -> 55 of 95 (5 gives 36)
+MIN_OBS_POOL = 4
+
+# A price at or under BELOW_USUAL x the typical price is "below usual"; at or
+# over HIGH x typical is "high". Anything under the lowest seen is "lowest ever".
+BELOW_USUAL = 0.9
+HIGH = 1.1
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "used_prices.csv")     # latest snapshot
@@ -423,6 +435,8 @@ def load_sku_prices():
     return out
 
 
+# --- judging -----------------------------------------------------------------
+
 def marked_down_from(row, sku_hist):
     """The higher price this exact listing carried before its current one.
 
@@ -459,13 +473,14 @@ def grade_factors(hist):
     return {g: statistics.median(r) for g, r in ratios.items()}
 
 
-def _rate(price, past):
+def rate_price(price, past):
+    """(verdict, typical price) for one price against a list of past prices."""
     low, mid = min(past), statistics.median(past)
     if price < low:
         return "LOWEST EVER", mid
-    if price <= mid * 0.9:
+    if price <= mid * BELOW_USUAL:
         return "BELOW USUAL", mid
-    if price >= mid * 1.1:
+    if price >= mid * HIGH:
         return "high", mid
     return "typical", mid
 
@@ -480,7 +495,7 @@ def judge(row, hist, factors=None):
     """
     own = hist.get((row["racquet"], row["grade"]), [])
     if len(own) >= MIN_OBS:
-        return (*_rate(row["used_price"], own),
+        return (*rate_price(row["used_price"], own),
                 f"{len(own)} past prices, this grade")
     if factors is None:
         factors = grade_factors(hist)
@@ -489,12 +504,12 @@ def judge(row, hist, factors=None):
             for (racquet, g), prices in hist.items() if racquet == row["racquet"]
             for p in prices]
     if len(pool) >= MIN_OBS_POOL:
-        return (*_rate(row["used_price"], pool),
+        return (*rate_price(row["used_price"], pool),
                 f"{len(pool)} past prices across grades, adjusted to {row['grade']}")
     return "", None, ""
 
 
-# --- reporting ---------------------------------------------------------------
+# --- terminal output -----------------------------------------------------------
 
 def print_table(rows):
     print(f"\n{'USED':>8} {'NEW':>7} {'OFF':>4}  {'GRADE':<8} {'GRIP':<7} "
@@ -540,6 +555,8 @@ def show_trend(pattern):
                   (f"  ({len(day)} listed)" if len(day) > 1 else ""))
 
 
+# --- git sync: the Mac and the scheduled run share one history ----------------
+
 def _run(cmd, **kw):
     import subprocess
     return subprocess.run(cmd, cwd=HERE, text=True, **kw)
@@ -548,8 +565,8 @@ def _run(cmd, **kw):
 def sync_from_github():
     """Pull down whatever the scheduled run last gathered.
 
-    The scrape happens in CI and nowhere else, so the repo is the single copy
-    of history.csv -- this is how it reaches the Mac.
+    Both the Mac and the scheduled run scrape, and the repo is where their
+    history.csv copies meet -- this brings the scheduled run's rows down.
     """
     r = _run(["git", "pull", "--rebase", "--autostash", "--quiet"],
              capture_output=True)
@@ -726,6 +743,8 @@ def trigger_github_run():
           file=sys.stderr)
     return False
 
+
+# --- CLI -----------------------------------------------------------------------
 
 def main():
     ap = argparse.ArgumentParser(
