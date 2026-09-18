@@ -173,7 +173,11 @@ def _num(text):
 
 
 def get_catalog():
-    page = fetch(CATALOG)
+    return parse_catalog(fetch(CATALOG))
+
+
+def parse_catalog(page):
+    """The used-racquet catalog page -> one dict per racquet, first seen wins."""
     out, seen = [], set()
     cells = list(CELL_RE.finditer(page))
     for i, m in enumerate(cells):
@@ -275,7 +279,11 @@ def get_used_listings(item):
     except Exception as e:
         print(f"  ! {item['code']}: {e}", file=sys.stderr)
         return None
+    return parse_listings(page, item, url)
 
+
+def parse_listings(page, item, url):
+    """A racquet's used product page -> one row per used listing on it."""
     specs = parse_specs(page)
     nspec = numeric_specs(specs)
     rows = []

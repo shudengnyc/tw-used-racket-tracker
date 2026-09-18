@@ -266,7 +266,7 @@ Make the pill a plain `span`, give the label its own `<button>`, keep the
 
 ## Phase 4 — Maintainability
 
-### 4.1 Fixture tests for the scraper  `[ ]`
+### 4.1 Fixture tests for the scraper  `[x]`
 
 **Problem.** The scraper is five regexes with no test. A layout change is
 only caught in production (and, until 1.1 lands, silently).

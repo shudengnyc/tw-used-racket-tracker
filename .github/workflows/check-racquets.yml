@@ -50,6 +50,12 @@ jobs:
       # and tw_used.py is pure standard library. Skipping the action saves a
       # couple of seconds on every run.
 
+      # Parser tests against saved pages. A failure here means the code is
+      # broken; a layout change on Tennis Warehouse shows up in the scrape
+      # step instead (it exits 2 or 3).
+      - name: Run tests
+        run: python3 -m unittest -v
+
       - name: Build the report
         # Runners are UTC; without this the report is stamped in UTC and the
         # "as of" time reads hours off.
