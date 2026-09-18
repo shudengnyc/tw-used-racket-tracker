@@ -89,15 +89,20 @@ re-show the cached copy and look broken.
 | | |
 |---|---|
 | `tw_used.py` | Scraping, history, judging, CLI |
-| `report.py` | Builds the HTML report (self-contained: fonts and thumbnails inlined) |
+| `report.py` | Builds the HTML report (local build self-contained; Pages build links fonts and thumbnails) |
+| `histfile.py` | The one reader for `history.csv` |
+| `tests/` | Parser and judging tests against saved pages: `python3 -m unittest` |
+| `tools/eval_judge.py` | Replays history to compare judging methods |
 | `racket` | CLI wrapper — run it from anywhere |
 | `Check Racquets.command` | Double-clickable Finder entry point |
 | `snapshot.json` | Exact round-trip of the last scrape's rows; what a rebuild reads |
 | `used_prices.csv` | The same rows, for opening in a spreadsheet |
 | `history.csv` | Append-only price log, one row per racquet/grade/price/day |
 | `seen.json` | Previous listings, for "new or repriced" detection |
-| `thumbs/`, `thumbs_large/` | Cached images — 56px inlined into the page, 400px for the lightbox |
-| `fonts.css` | Fonts, inlined as base64 so the page renders identically offline |
+| `thumbs/`, `thumbs_large/` | Cached images — 56px thumbnails, 400px for the lightbox |
+| `fonts.css` | Fonts as base64, so the page renders identically offline |
+
+Field-by-field schemas for the data files are in [DATA.md](DATA.md).
 
 `report.html` (local build) and `site/` (published build) are generated and
 gitignored. They differ — the local one carries a **Local** tag and the Shortcut

@@ -314,7 +314,7 @@ a simplification so the five functions share one parser and one error path.
 `from report import write_html` sits at line 446 of `tw_used.py`. Move it to
 the import block at the top.
 
-### 4.4 Document the data contract  `[ ]`
+### 4.4 Document the data contract  `[x]`
 
 Add a short `DATA.md` (or a README section) listing each field in
 `snapshot.json` listings with type and meaning, and the `seen.json` and
