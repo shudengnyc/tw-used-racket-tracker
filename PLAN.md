@@ -125,11 +125,23 @@ next time a run and a Mac push overlap.
 
 ## Phase 2 — Signal quality (the substantive change)
 
-### 2.1 Decide what "history" means for `judge()`  `[~]`
+### 2.1 Decide what "history" means for `judge()`  `[x]`
 
-> **Status 2026-09-18:** Option A shipped (`load_history(distinct=True)`) with
-> `tools/eval_judge.py`. On the latest day: 32 typical, 63 none (was 93 / 1).
-> B and C are still to be evaluated once more history has built up.
+> **Done 2026-09-18.** A + B shipped; C evaluated and not shipped.
+> `tools/eval_judge.py`, latest day of 95 listings:
+>
+> | Method | typical | below | high | none |
+> |---|---|---|---|---|
+> | every row (old) | 93 | 0 | 1 | 1 |
+> | A: distinct (sku, price) | 32 | 0 | 0 | 63 |
+> | A + B: pool grades when own < 3, pool >= 4 | 54 | 0 | 1 | 40 |
+> | C: % off new vs usual (trial) | 50 | 1 | 44 | 0 |
+>
+> Grade factors are learned per run (today A ~ 1.045x B, C ~ 0.92x B).
+> `MIN_OBS_POOL = 4` rather than 5: 5 only reached 36 listings.
+> C rejected for now: 14 racquets had their *new* price cut ~$50, which
+> shrinks every used listing's discount and reads as "high" on half the page.
+> That is already visible via Off % and "buy new". Re-run the eval in a month.
 
 **Problem.** A racquet+grade's history is mostly one SKU sitting at one price
 for weeks. The median converges on the current price, so almost everything

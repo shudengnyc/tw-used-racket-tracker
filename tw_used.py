@@ -44,7 +44,11 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 TARGET_BRANDS = ["Wilson", "Yonex", "Tecnifibre", "Head", "Prince", "Solinco"]
 
 # How many past observations before history-based judgements are trustworthy.
+# A racquet's own grade needs MIN_OBS distinct past prices; when it has fewer,
+# the racquet's other grades are pooled in (rescaled by the typical gap between
+# grades), and that wider, noisier pool has to reach MIN_OBS_POOL.
 MIN_OBS = 3
+MIN_OBS_POOL = 4      # 4 lifts today's coverage 32 -> 55 of 95 (5 gives 36)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "used_prices.csv")     # latest snapshot
@@ -449,19 +453,59 @@ def marked_down_from(row, sku_hist):
     return None
 
 
-def judge(row, hist):
-    """Rate a listing against its own racquet+grade history."""
-    past = hist.get((row["racquet"], row["grade"]), [])
-    if len(past) < MIN_OBS:
-        return "", None
+def grade_factors(hist):
+    """{grade: price relative to Grade B}, learned from racquets sold in both.
+
+    For each grade, the median over racquets of (that grade's median price /
+    the same racquet's Grade B median). Grade B is the reference because it is
+    the most common. A grade never seen alongside B gets 1.0.
+    """
+    by = {}
+    for (racquet, grade), prices in hist.items():
+        by.setdefault(racquet, {})[grade] = statistics.median(prices)
+    ratios = {}
+    for grades in by.values():
+        base = grades.get("Grade B")
+        if not base:
+            continue
+        for grade, med in grades.items():
+            ratios.setdefault(grade, []).append(med / base)
+    return {g: statistics.median(r) for g, r in ratios.items()}
+
+
+def _rate(price, past):
     low, mid = min(past), statistics.median(past)
-    if row["used_price"] < low:
+    if price < low:
         return "LOWEST EVER", mid
-    if row["used_price"] <= mid * 0.9:
+    if price <= mid * 0.9:
         return "BELOW USUAL", mid
-    if row["used_price"] >= mid * 1.1:
+    if price >= mid * 1.1:
         return "high", mid
     return "typical", mid
+
+
+def judge(row, hist, factors=None):
+    """Rate a listing against history -> (verdict, typical price, basis).
+
+    Its own racquet+grade first. If that is too thin, every grade of the same
+    racquet, each price rescaled to this listing's grade. basis says which was
+    used and how many prices it rests on, for the page's tooltip; the verdict
+    is "" when neither pool is big enough.
+    """
+    own = hist.get((row["racquet"], row["grade"]), [])
+    if len(own) >= MIN_OBS:
+        return (*_rate(row["used_price"], own),
+                f"{len(own)} past prices, this grade")
+    if factors is None:
+        factors = grade_factors(hist)
+    mine = factors.get(row["grade"], 1.0)
+    pool = [p * mine / factors.get(g, 1.0)
+            for (racquet, g), prices in hist.items() if racquet == row["racquet"]
+            for p in prices]
+    if len(pool) >= MIN_OBS_POOL:
+        return (*_rate(row["used_price"], pool),
+                f"{len(pool)} past prices across grades, adjusted to {row['grade']}")
+    return "", None, ""
 
 
 from report import write_html
@@ -800,6 +844,7 @@ def main():
 
     # Judge against history from BEFORE today, then record today's prices.
     hist = load_history(before=today)
+    factors = grade_factors(hist)
     append_history(listings, today)
     sku_hist = load_sku_prices()          # after the append, so today counts
 
@@ -814,7 +859,7 @@ def main():
         since = first_seen.get(k, now)
         fresh[k] = since.isoformat(timespec="seconds")
         r["is_new"] = now - since < NEW_FOR
-        r["verdict"], r["median"] = judge(r, hist)
+        r["verdict"], r["median"], r["basis"] = judge(r, hist, factors)
         r["was_price"] = marked_down_from(r, sku_hist)
     with open(STATE_PATH, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(fresh.items())), f, indent=0)

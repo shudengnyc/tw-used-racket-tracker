@@ -112,6 +112,23 @@ class JudgeTest(unittest.TestCase):
         self.assertEqual(self.verdict(215, past), "typical")
         self.assertEqual(self.verdict(237, past), "high")
 
+    def test_pools_other_grades_when_own_is_thin(self):
+        hist = {("R", "Grade A"): [210, 210, 220, 230],   # median 215
+                ("R", "Grade B"): [200],
+                ("Q", "Grade A"): [110], ("Q", "Grade B"): [100]}
+        factors = tw_used.grade_factors(hist)
+        self.assertAlmostEqual(factors["Grade A"], 1.0875)  # median of 215/200, 110/100
+        v, mid, basis = tw_used.judge({**self.ROW, "used_price": 150}, hist, factors)
+        self.assertEqual(v, "LOWEST EVER")
+        self.assertIn("across grades", basis)
+        # A prices rescaled to B: 193.1, 193.1, 202.3, 211.5, plus B at 200
+        self.assertAlmostEqual(mid, 200)
+
+    def test_pool_too_small(self):
+        hist = {("R", "Grade A"): [210, 220], ("R", "Grade B"): [200]}
+        self.assertEqual(tw_used.judge({**self.ROW, "used_price": 150}, hist),
+                         ("", None, ""))
+
     def test_marked_down_from(self):
         hist = {"S1": [("2026-09-01", 229.0), ("2026-09-05", 189.0),
                        ("2026-09-06", 139.0)]}

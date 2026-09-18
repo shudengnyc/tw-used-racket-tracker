@@ -878,7 +878,7 @@ function render(){
       <span class="psub">${priceSub(r)}</span></td>
     <td><span class="chip">${esc((r.grade||'—').replace('Grade ',''))}</span></td>
     <td class="grip">${r.grip ? esc(r.grip) : '<span class="dash">—</span>'}</td>
-    <td class="col-signal">${signal(r)}${r.median?` <span class="med">~$${Math.round(r.median)}</span>`:''}</td>
+    <td class="col-signal" title="${esc(r.basis ? 'Compared with ' + r.basis : '')}">${signal(r)}${r.median?` <span class="med">~$${Math.round(r.median)}</span>`:''}</td>
     <td class="col-spark">${spark(r.key)}</td>
     <td class="col-qty r num">${r.units>1?r.units:(r.in_stock??'')}</td></tr>
     <tr class="det" data-i="${i}"><td colspan="${COLS}">${details(r)}</td></tr>`).join('');
@@ -1291,10 +1291,11 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     else:
         notes.append("<p>Signals compare each listing against that same racquet and "
                      "grade's own past prices, not a fixed threshold. Each listing counts "
-                     "once per price it has carried, however long it sat there, so a "
-                     "signal needs three distinct past prices and many rows show "
-                     "<b>—</b> until more listings have come and gone. <b>~$</b> is the "
-                     "typical price so far; hover a trend line for low, typical and "
+                     "once per price it has carried, however long it sat there. With "
+                     "fewer than three for its grade, the racquet's other grades are "
+                     "pooled in, adjusted for the usual price gap between grades; hover "
+                     "a signal to see which. Rows still show <b>—</b> until enough "
+                     "listings have come and gone. <b>~$</b> is the typical price so far; hover a trend line for low, typical and "
                      "high. <b>was $</b> means that exact racquet has been marked down "
                      "since it was first seen"
                      + (f" — {n_down} right now" if n_down else "") + ".</p>")
@@ -1333,7 +1334,7 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     payload = json.dumps([
         {k: r.get(k) for k in ("brand", "racquet", "grade", "grip", "used_price",
                                "new_price", "discount_pct", "in_stock", "url",
-                               "is_new", "verdict", "median", "was_price",
+                               "is_new", "verdict", "median", "basis", "was_price",
                                "new_cheaper", "code", "list_price", "rating",
                                "reviews", "specs", "nspec")}
         for r in listings
