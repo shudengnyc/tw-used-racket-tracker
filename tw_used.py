@@ -36,6 +36,9 @@ import time
 import urllib.parse
 import urllib.request
 
+import histfile
+from report import write_html
+
 BASE = "https://www.tennis-warehouse.com"
 CATALOG = f"{BASE}/usedcatpage.html?ccode=RACSBYMAKER"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -366,13 +369,10 @@ HIST_FIELDS = ["date", "brand", "racquet", "grade", "grip", "used_price",
 
 def append_history(listings, today):
     """Append today's listings, skipping anything already recorded today."""
-    already = set()
     exists = os.path.exists(HIST_PATH)
-    if exists:
-        with open(HIST_PATH, newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                if row["date"] == today:
-                    already.add((row["sku"], row["used_price"]))
+    already = {(row["sku"], row["used_price"])
+               for row in histfile.rows(HIST_PATH, priced=False)
+               if row["date"] == today}
 
     with open(HIST_PATH, "a", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=HIST_FIELDS)
@@ -403,37 +403,23 @@ def load_history(before=None, distinct=True, path=None):
     "typical". Distinct (sku, price) pairs are the independent observations.
     """
     hist, seen = {}, set()
-    path = path or HIST_PATH
-    if not os.path.exists(path):
-        return hist
-    with open(path, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if before and row["date"] >= before:
+    for row in histfile.rows(path or HIST_PATH):
+        if before and row["date"] >= before:
+            continue
+        price = row["price"]
+        if distinct:
+            if (row["sku"], price) in seen:
                 continue
-            try:
-                price = float(row["used_price"])
-            except ValueError:
-                continue
-            if distinct:
-                if (row["sku"], price) in seen:
-                    continue
-                seen.add((row["sku"], price))
-            hist.setdefault((row["racquet"], row["grade"]), []).append(price)
+            seen.add((row["sku"], price))
+        hist.setdefault((row["racquet"], row["grade"]), []).append(price)
     return hist
 
 
 def load_sku_prices():
     """{sku: [(date, price), ...]} -- every price each exact listing has carried."""
     out = {}
-    if not os.path.exists(HIST_PATH):
-        return out
-    with open(HIST_PATH, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            try:
-                price = float(row["used_price"])
-            except ValueError:
-                continue
-            out.setdefault(row["sku"], []).append((row["date"], price))
+    for row in histfile.rows(HIST_PATH):
+        out.setdefault(row["sku"], []).append((row["date"], row["price"]))
     return out
 
 
@@ -508,9 +494,6 @@ def judge(row, hist, factors=None):
     return "", None, ""
 
 
-from report import write_html
-
-
 # --- reporting ---------------------------------------------------------------
 
 def print_table(rows):
@@ -532,18 +515,17 @@ def print_table(rows):
 
 
 def show_trend(pattern):
-    if not os.path.exists(HIST_PATH):
+    history = histfile.rows(HIST_PATH)
+    if not history:
         print("No history yet -- run the scraper a few times first.")
         return
     pat = pattern.lower()
     series = {}
-    with open(HIST_PATH, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if pat not in row["racquet"].lower():
-                continue
-            key = (row["racquet"], row["grade"])
-            series.setdefault(key, {}).setdefault(row["date"], []).append(
-                float(row["used_price"]))
+    for row in history:
+        if pat not in row["racquet"].lower():
+            continue
+        key = (row["racquet"], row["grade"])
+        series.setdefault(key, {}).setdefault(row["date"], []).append(row["price"])
     if not series:
         print(f"No history matching {pattern!r}.")
         return
@@ -619,11 +601,7 @@ def dedupe_history():
     rows carry no information, so collapsing them is safe -- and it keeps the
     file's own "one row per price per day" shape intact.
     """
-    if not os.path.exists(HIST_PATH):
-        return 0
-    with open(HIST_PATH, newline="", encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
-
+    rows = histfile.rows(HIST_PATH, priced=False)
     seen, keep = set(), []
     for r in rows:
         k = tuple(r.get(c, "") for c in HIST_FIELDS)
@@ -941,10 +919,7 @@ def finish(listings, args, scraped_at=None):
 
 
 def _history_dates():
-    if not os.path.exists(HIST_PATH):
-        return []
-    with open(HIST_PATH, newline="", encoding="utf-8") as f:
-        return [row["date"] for row in csv.DictReader(f)]
+    return [row["date"] for row in histfile.rows(HIST_PATH, priced=False)]
 
 
 if __name__ == "__main__":

@@ -302,14 +302,14 @@ only caught in production (and, until 1.1 lands, silently).
 
 **Verify.** `python3 -m unittest -v` passes locally and in CI.
 
-### 4.2 Read `history.csv` once per run  `[ ]`
+### 4.2 Read `history.csv` once per run  `[x]`
 
 `load_history`, `load_sku_prices`, `_history_dates`, `dedupe_history` and
 `load_series` each re-read the file. Add `load_history_rows()` returning the
 list of dicts and pass it down (or memoise). Trivial at 370 KB today; mainly
 a simplification so the five functions share one parser and one error path.
 
-### 4.3 Tidy imports  `[ ]`
+### 4.3 Tidy imports  `[x]`
 
 `from report import write_html` sits at line 446 of `tw_used.py`. Move it to
 the import block at the top.

@@ -24,6 +24,7 @@ on:
       - snapshot.json       # a scrape landed
       - report.py           # or the report itself changed
       - tw_used.py
+      - histfile.py
 
 # Least privilege: write the data files back, and publish the report to Pages.
 permissions:

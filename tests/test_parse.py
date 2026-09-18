@@ -160,5 +160,22 @@ class DistinctHistoryTest(unittest.TestCase):
             os.unlink(f.name)
 
 
+
+class HistFileTest(unittest.TestCase):
+    def test_reread_after_write(self):
+        import tempfile
+        import histfile
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False) as f:
+            f.write("date,sku,used_price\n2026-09-01,S1,150\n2026-09-01,S2,n/a\n")
+        try:
+            self.assertEqual([r["price"] for r in histfile.rows(f.name)], [150.0])
+            self.assertEqual(len(histfile.rows(f.name, priced=False)), 2)
+            with open(f.name, "a") as g:
+                g.write("2026-09-02,S1,140\n")
+            self.assertEqual([r["price"] for r in histfile.rows(f.name)], [150.0, 140.0])
+        finally:
+            os.unlink(f.name)
+        self.assertEqual(histfile.rows(f.name), [])
+
 if __name__ == "__main__":
     unittest.main()

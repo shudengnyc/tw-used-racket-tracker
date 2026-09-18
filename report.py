@@ -10,11 +10,12 @@ offline and never silently falls back.
 """
 
 import base64
-import csv
 import datetime as dt
 import html
 import json
 import os
+
+import histfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -1212,17 +1213,11 @@ def load_thumbs(thumb_dir, codes, inline=True):
 def load_series(hist_path):
     """{racquet||grade: [[date, min price that day], ...]} for the sparklines."""
     by_day = {}
-    if not os.path.exists(hist_path):
-        return {}
-    with open(hist_path, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            try:
-                price = float(row["used_price"])
-            except (ValueError, KeyError):
-                continue
-            key = f"{row['racquet']}||{row['grade']}"
-            day = by_day.setdefault(key, {})
-            day[row["date"]] = min(day.get(row["date"], price), price)
+    for row in histfile.rows(hist_path):
+        price = row["price"]
+        key = f"{row['racquet']}||{row['grade']}"
+        day = by_day.setdefault(key, {})
+        day[row["date"]] = min(day.get(row["date"], price), price)
     return {k: [[d, v[d]] for d in sorted(v)] for k, v in by_day.items()}
 
 
