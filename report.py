@@ -156,16 +156,18 @@ h1{font:400 clamp(38px,6vw,58px)/1 var(--display);letter-spacing:-.01em;
  border:1px solid var(--accent);background:none;color:var(--accent);
  transition:background .14s,color .14s}
 .spill:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
-.spill[aria-pressed="true"]{background:var(--accent);color:var(--plane)}
+.spill.on{background:var(--accent);color:var(--plane)}
+.spill button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.spill button:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:4px}
 .spill .n{font:600 11px/1 var(--mono);padding:2px 5px;border-radius:10px;
  background:color-mix(in srgb,var(--accent) 15%,transparent)}
-.spill[aria-pressed="true"] .n{background:rgba(255,255,255,.22)}
+.spill.on .n{background:rgba(255,255,255,.22)}
 .spill.none{border-color:var(--line);color:var(--muted)}
 .spill.none .n{background:none;color:var(--muted)}
 .spill.none:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
 .spill .x{font-size:12px;opacity:.6;padding:0 1px}
 .spill .x:hover{opacity:1;color:var(--crit)}
-.spill[aria-pressed="true"] .x:hover{color:var(--ball)}
+.spill.on .x:hover{color:var(--ball)}
 .savebtn{font:500 11px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;
  background:none;border:1px dashed var(--accent);color:var(--accent);cursor:pointer;
  padding:6px 11px;border-radius:20px}
@@ -545,6 +547,11 @@ const THUMBS = JSON.parse(document.getElementById('thumbs').textContent);
 const WEB = __WEB__;
 if (!Object.keys(SERIES).length) document.body.classList.add('nospark');
 
+// Everything from Tennis Warehouse goes through this before it touches innerHTML
+// or an attribute. The JSON payload only escapes "<" to protect <script>.
+const esc = s => String(s ?? '').replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SPEC_IDS = ['head_min','head_max','wt_min','wt_max','sw_min','sw_max','st_min','st_max'];
 const RANK = {'LOWEST EVER':0,'BELOW USUAL':2,'':4,'typical':4,'high':5};
 ROWS.forEach(r => {
   r.rank = r.new_cheaper ? 9
@@ -580,7 +587,7 @@ function spark(key){
   const area = `${d} L${xy[xy.length-1][0].toFixed(1)} ${H} L${xy[0][0].toFixed(1)} ${H} Z`;
   const last = xy[xy.length-1];
   return `<svg class="spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"
-    data-key="${key.replace(/"/g,'&quot;')}" role="img"
+    data-key="${esc(key)}" role="img"
     aria-label="Price trend over ${pts.length} days, low $${lo}, high $${hi}">
     <path class="ar" d="${area}"/><path class="ln" d="${d}"/>
     <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.5"/></svg>`;
@@ -591,8 +598,8 @@ function spark(key){
 function thumb(r){
   const src = THUMBS[r.code];
   if (!src) return '<div class="pic empty-pic" aria-hidden="true"></div>';
-  return `<button class="picbtn" data-code="${r.code}" data-name="${r.racquet.replace(/"/g,'&quot;')}"
-    aria-label="Enlarge ${r.racquet.replace(/"/g,'&quot;')}"><img class="pic" src="${src}"
+  return `<button class="picbtn" data-code="${esc(r.code)}" data-name="${esc(r.racquet)}"
+    aria-label="Enlarge ${esc(tidy(r.racquet))}"><img class="pic" src="${esc(src)}"
     alt="" loading="lazy" decoding="async"></button>`;
 }
 
@@ -604,7 +611,7 @@ const SPEC_LABELS = {head:'Head size', weight:'Strung weight', balance:'Balance'
 function details(r){
   const sp = r.specs || {};
   const cells = Object.keys(SPEC_LABELS).filter(k => sp[k])
-    .map(k => `<div><dt>${SPEC_LABELS[k]}</dt><dd>${sp[k]}</dd></div>`);
+    .map(k => `<div><dt>${SPEC_LABELS[k]}</dt><dd>${esc(sp[k])}</dd></div>`);
   if (r.list_price && r.new_price && r.list_price > r.new_price)
     cells.unshift(`<div><dt>List price</dt><dd>$${r.list_price.toFixed(0)} ` +
       `<span style="color:var(--muted)">(new is $${r.new_price.toFixed(0)} today)</span></dd></div>`);
@@ -624,7 +631,7 @@ function buildBrands(){
   $('brands').innerHTML =
     `<button class="bpill" data-brand="" aria-pressed="true">All<span>${ROWS.length}</span></button>` +
     Object.keys(counts).sort().map(n =>
-      `<button class="bpill" data-brand="${n}" aria-pressed="false">${n}<span>${counts[n]}</span></button>`
+      `<button class="bpill" data-brand="${esc(n)}" aria-pressed="false">${esc(n)}<span>${counts[n]}</span></button>`
     ).join('');
 }
 
@@ -721,12 +728,12 @@ function buildSaved(){
   const now = currentState();
   $('saved').innerHTML = list.length
     ? '<span class="slab">Saved</span>' + list.map((st, i) =>
-        ((n) => `<span class="spill${n ? '' : ' none'}" role="button" tabindex="0"
-           data-i="${i}" aria-pressed="${sameState(st, now)}"
+        ((n, on) => `<span class="spill${n ? '' : ' none'}${on ? ' on' : ''}">` +
+        `<button data-i="${i}" aria-pressed="${on}"
            title="${n ? n + ' listing' + (n > 1 ? 's' : '') + ' right now' : 'Nothing in stock yet'}"
-           >${stateLabel(st)}<span class="n">${n || '—'}</span>` +
-        `<span class="x" data-del="${i}" role="button" aria-label="Remove">✕</span></span>`
-        )(countMatches(st))
+           >${esc(stateLabel(st))}<span class="n">${n || '—'}</span></button>` +
+        `<button class="x" data-del="${i}" aria-label="Remove ${esc(stateLabel(st))}">✕</button></span>`
+        )(countMatches(st), sameState(st, now))
       ).join('')
     : '';
 }
@@ -740,7 +747,7 @@ $('saved').addEventListener('click', e => {
     buildSaved();
     return;
   }
-  const pill = e.target.closest('.spill');
+  const pill = e.target.closest('button[data-i]');
   if (pill) applyState(loadSaved()[Number(pill.dataset.i)]);
 });
 
@@ -776,8 +783,8 @@ function buildFamilies(){
   const cur = $('q').value.trim().toLowerCase();
   $('families').innerHTML = top.length
     ? '<span class="flab">Lines</span>' + top.map(([f, n]) =>
-        `<button class="fpill" data-fam="${f}" aria-pressed="${cur === f.toLowerCase()}">` +
-        `${f} <span style="opacity:.55">${n}</span></button>`).join('')
+        `<button class="fpill" data-fam="${esc(f)}" aria-pressed="${cur === f.toLowerCase()}">` +
+        `${esc(f)} <span style="opacity:.55">${n}</span></button>`).join('')
     : '';
 }
 
@@ -862,15 +869,15 @@ function render(){
   $('tb').innerHTML = rows.map((r,i)=>`<tr class="row ${r.new_cheaper?'trap':''}"
     data-i="${i}" style="animation-delay:${Math.min(i*14,320)}ms">
     <td class="name"><div class="nw">${thumb(r)}<div>
-      <a href="${r.url}" target="_blank" rel="noopener">${tidy(r.racquet)}</a>
-      <span class="brand">${r.brand}${r.units>1?`<span class="units">${r.units} available</span>`:''}${
+      <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(tidy(r.racquet))}</a>
+      <span class="brand">${esc(r.brand)}${r.units>1?`<span class="units">${r.units} available</span>`:''}${
         r.rating?`<span class="rate"><b>${r.rating}</b>/5 · ${r.reviews}</span>`:''}</span>
       </div></div><span class="caret">▶</span></td>
     <td class="r pricecell">
       <span class="p">$${r.used_price.toFixed(0)}</span>
       <span class="psub">${priceSub(r)}</span></td>
-    <td><span class="chip">${(r.grade||'—').replace('Grade ','')}</span></td>
-    <td class="grip">${r.grip||'<span class="dash">—</span>'}</td>
+    <td><span class="chip">${esc((r.grade||'—').replace('Grade ',''))}</span></td>
+    <td class="grip">${r.grip ? esc(r.grip) : '<span class="dash">—</span>'}</td>
     <td class="col-signal">${signal(r)}${r.median?` <span class="med">~$${Math.round(r.median)}</span>`:''}</td>
     <td class="col-spark">${spark(r.key)}</td>
     <td class="col-qty r num">${r.units>1?r.units:(r.in_stock??'')}</td></tr>
@@ -949,7 +956,7 @@ function openLb(code, name){
   lastFocus = document.activeElement;
   $('lbimg').src = bigSrc(code);
   $('lbimg').alt = tidy(name);
-  $('lbcap').innerHTML = `${tidy(name)}<span>${code}</span>`;
+  $('lbcap').innerHTML = `${esc(tidy(name))}<span>${esc(code)}</span>`;
   $('lb').hidden = false;
   $('lbclose').focus();
 }
@@ -973,7 +980,9 @@ $('lb').addEventListener('click', e => { if (e.target === $('lb')) closeLb(); })
 // If the large file is missing, show the small one rather than a broken icon.
 $('lbimg').addEventListener('error', function(){
   const code = $('lbcap').querySelector('span').textContent;
-  if (THUMBS[code] && this.src !== THUMBS[code]) this.src = THUMBS[code];
+  // getAttribute, not .src: .src is always absolute, so a relative thumb path
+  // would never match and a missing thumb would retrigger this forever.
+  if (THUMBS[code] && this.getAttribute('src') !== THUMBS[code]) this.src = THUMBS[code];
 });
 
 /* hover layer for the sparklines */
@@ -1012,7 +1021,6 @@ document.querySelectorAll('.tabs button').forEach(btn => btn.onclick = () => {
   render();
 });
 
-const SPEC_IDS = ['head_min','head_max','wt_min','wt_max','sw_min','sw_max','st_min','st_max'];
 ['q','grade','grip','group'].concat(SPEC_IDS)
   .forEach(id => $(id).addEventListener('input', render));
 
@@ -1173,14 +1181,22 @@ def _cell(label, value, sub, cls=""):
             f'<span class="val">{value}</span><div class="sub">{sub}</div></div>')
 
 
-def load_thumbs(thumb_dir, codes):
-    """{code: data URI} for the cached racquet thumbnails we actually need."""
+def load_thumbs(thumb_dir, codes, inline=True):
+    """{code: image src} for the cached racquet thumbnails we actually need.
+
+    Inline gives data URIs, for a single self-contained file. Otherwise the
+    src is a relative thumbs/ path, which the Pages build ships beside the
+    page so browsers can cache the images across rebuilds.
+    """
     if not thumb_dir or not os.path.isdir(thumb_dir):
         return {}
     out = {}
     for code in codes:
         path = os.path.join(thumb_dir, f"{code}.jpg")
         if not os.path.exists(path):
+            continue
+        if not inline:
+            out[code] = f"thumbs/{code}.jpg"
             continue
         with open(path, "rb") as f:
             out[code] = "data:image/jpeg;base64," + base64.b64encode(f.read()).decode()
@@ -1298,7 +1314,16 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     notes.append("<p>Press <code>/</code> to search, <code>Esc</code> to clear. Click "
                  "any column heading to sort.</p>")
 
-    thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings if r.get("code")})
+    # Pages rebuilds every few hours; fonts and thumbnails that never change are
+    # served as separate files so they stay in the browser cache. The local and
+    # artifact builds stay one self-contained file.
+    split = mode == "pages"
+    thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings if r.get("code")},
+                         inline=not split)
+    if split and FONT_CSS:
+        with open(os.path.join(os.path.dirname(path), "fonts.css"), "w",
+                  encoding="utf-8") as f:
+            f.write(FONT_CSS)
 
     series = load_series(hist_path)
     keys = {f"{r['racquet']}||{r['grade']}" for r in listings}
@@ -1314,8 +1339,10 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
         for r in listings
     ]).replace("<", "\\u003c")
 
-    page = (("" if web else LOCAL_HEAD) + TMPL
-            .replace("__FONTS__", FONT_CSS)
+    page = (("" if web else LOCAL_HEAD)
+            + ('<link rel="stylesheet" href="fonts.css">\n' if split and FONT_CSS else "")
+            + TMPL
+            .replace("__FONTS__", "" if split else FONT_CSS)
             .replace("__WEB__", "true" if web else "false")
             # The Shortcut exists only on the Mac; the web build points at the
             # workflow instead, which is the thing that actually scrapes now.

@@ -199,7 +199,7 @@ small skip-list instead.
 
 ## Phase 3 — Page weight and robustness
 
-### 3.1 Slim the published build  `[ ]`
+### 3.1 Slim the published build  `[x]`
 
 **Problem.** 483 KB per load, and every 10-minute rebuild invalidates all of
 it because fonts and thumbnails are inlined into the HTML.
@@ -228,7 +228,7 @@ workflow "Assemble the Pages site" step.
 **Verify.** `ls -l site/index.html` before and after; open the published
 page with DevTools Network tab and confirm fonts return 304 on reload.
 
-### 3.2 Escape data going into the DOM  `[ ]`
+### 3.2 Escape data going into the DOM  `[x]`
 
 **Problem.** Racquet names, brands and spec strings are inserted with
 innerHTML and into `data-brand="…"` attributes unescaped. The JSON payload
@@ -250,13 +250,13 @@ template (`tidy(r.racquet)`, `r.brand`, `r.grade`, `r.grip`), `openLb`, and
 `Test "Quote" & <b>bold</b>` and run `--pull`; the name must render
 literally and the brand pill must still filter.
 
-### 3.3 Hoist `SPEC_IDS`  `[ ]`
+### 3.3 Hoist `SPEC_IDS`  `[x]`
 
 `SPEC_IDS` is a `const` declared near the bottom of the script but used by
 functions defined above it. It works only because nothing calls them before
 that line. Move the declaration up next to `RANK`.
 
-### 3.4 Fix nested buttons in saved-search pills  `[ ]`
+### 3.4 Fix nested buttons in saved-search pills  `[x]`
 
 `.spill` is `role="button"` and contains a `role="button"` remove icon.
 Make the pill a plain `span`, give the label its own `<button>`, keep the
