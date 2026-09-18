@@ -268,12 +268,13 @@ def parse_specs(page):
 
 
 def get_used_listings(item):
+    """The racquet's used rows, [] when it has none, or None if the fetch failed."""
     url = f"{BASE}/orderusedproduct.html?pcode={item['code']}"
     try:
         page = fetch(url)
     except Exception as e:
         print(f"  ! {item['code']}: {e}", file=sys.stderr)
-        return []
+        return None
 
     specs = parse_specs(page)
     nspec = numeric_specs(specs)
@@ -746,17 +747,31 @@ def main():
         catalog = [c for c in catalog if c["brand"].lower() in wanted]
 
     print(f"Checking {len(catalog)} racquets...", file=sys.stderr)
-    listings = []
+    listings, failed = [], 0
     with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
         for rows in ex.map(get_used_listings, catalog):
-            listings.extend(rows)
+            if rows is None:
+                failed += 1
+            else:
+                listings.extend(rows)
+
+    # A partial scrape must not be recorded: every missed listing would lose
+    # its first-seen date and come back as "new" next run. Show the last good
+    # snapshot instead and exit non-zero so the scheduled run fails loudly.
+    if failed > max(2, len(catalog) // 10):
+        print(f"{failed} of {len(catalog)} racquet pages failed to load -- "
+              "not recording this scrape.", file=sys.stderr)
+        old, old_at = load_snapshot()
+        if old is not None:
+            finish(old, args, old_at)
+        return 3
 
     fetch_thumbs(catalog, workers=args.workers)
 
     if not listings:
         print("No listings returned -- the page layout may have changed.",
               file=sys.stderr)
-        return
+        return 2
 
     today = dt.date.today().isoformat()
 
