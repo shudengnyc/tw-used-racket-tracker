@@ -125,7 +125,11 @@ next time a run and a Mac push overlap.
 
 ## Phase 2 — Signal quality (the substantive change)
 
-### 2.1 Decide what "history" means for `judge()`  `[ ]`
+### 2.1 Decide what "history" means for `judge()`  `[~]`
+
+> **Status 2026-09-18:** Option A shipped (`load_history(distinct=True)`) with
+> `tools/eval_judge.py`. On the latest day: 32 typical, 63 none (was 93 / 1).
+> B and C are still to be evaluated once more history has built up.
 
 **Problem.** A racquet+grade's history is mostly one SKU sitting at one price
 for weeks. The median converges on the current price, so almost everything

@@ -381,12 +381,20 @@ def append_history(listings, today):
             })
 
 
-def load_history(before=None):
-    """{(racquet, grade): [prices]} from all runs, optionally excluding today."""
-    hist = {}
-    if not os.path.exists(HIST_PATH):
+def load_history(before=None, distinct=True, path=None):
+    """{(racquet, grade): [prices]} from all runs, optionally excluding today.
+
+    With distinct (the default) each listing counts once per price it carried,
+    not once per day it sat there. A used racquet often sits unchanged for
+    weeks, so counting rows lets one listing outvote everything else and the
+    median converges on whatever is listed now -- nearly every row read
+    "typical". Distinct (sku, price) pairs are the independent observations.
+    """
+    hist, seen = {}, set()
+    path = path or HIST_PATH
+    if not os.path.exists(path):
         return hist
-    with open(HIST_PATH, newline="", encoding="utf-8") as f:
+    with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if before and row["date"] >= before:
                 continue
@@ -394,6 +402,10 @@ def load_history(before=None):
                 price = float(row["used_price"])
             except ValueError:
                 continue
+            if distinct:
+                if (row["sku"], price) in seen:
+                    continue
+                seen.add((row["sku"], price))
             hist.setdefault((row["racquet"], row["grade"]), []).append(price)
     return hist
 

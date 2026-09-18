@@ -1274,7 +1274,10 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
                      "Trend column appears once there are two days to compare.</p>")
     else:
         notes.append("<p>Signals compare each listing against that same racquet and "
-                     "grade's own past prices, not a fixed threshold. <b>~$</b> is its "
+                     "grade's own past prices, not a fixed threshold. Each listing counts "
+                     "once per price it has carried, however long it sat there, so a "
+                     "signal needs three distinct past prices and many rows show "
+                     "<b>—</b> until more listings have come and gone. <b>~$</b> is the "
                      "typical price so far; hover a trend line for low, typical and "
                      "high. <b>was $</b> means that exact racquet has been marked down "
                      "since it was first seen"
