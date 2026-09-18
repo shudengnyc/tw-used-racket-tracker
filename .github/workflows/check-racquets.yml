@@ -77,8 +77,20 @@ jobs:
             echo "No price changes this run."
           else
             git commit -m "Prices as of $(date -u '+%Y-%m-%d %H:%M UTC')"
-            # Another run may have pushed while we were scraping.
-            git pull --rebase --autostash
+            # The Mac may have pushed while we were scraping. history.csv
+            # union-merges; the derived files conflict, and this scrape is the
+            # newer one. During a rebase "--theirs" is the commit being
+            # replayed -- ours, from this run.
+            if ! git pull --rebase; then
+              git checkout --theirs -- used_prices.csv seen.json snapshot.json
+              git add used_prices.csv seen.json snapshot.json
+              GIT_EDITOR=true git rebase --continue || { git rebase --abort; exit 1; }
+            fi
+            # A union merge can leave repeated rows; collapse them.
+            python3 -c "import tw_used; tw_used.dedupe_history()"
+            if ! git diff --quiet history.csv; then
+              git commit -q --amend --no-edit -- history.csv
+            fi
             git push
           fi
 

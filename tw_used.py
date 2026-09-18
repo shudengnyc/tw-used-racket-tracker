@@ -600,10 +600,13 @@ def push_to_github():
     # The scheduled run may have pushed while we were scraping. history.csv is
     # set to union-merge in .gitattributes, so rebasing brings both sets of
     # rows together rather than conflicting; anything left over is a derived
-    # snapshot where ours is simply the newer one.
+    # snapshot where this scrape is simply the newer one. During a rebase
+    # "--theirs" is the commit being replayed -- this Mac's -- and "--ours" is
+    # GitHub's. history.csv is left out so its union merge is kept.
     if _run(["git", "pull", "--rebase", "--quiet"], capture_output=True).returncode:
-        _run(["git", "checkout", "--ours", "--"] + DATA_FILES, capture_output=True)
-        _run(["git", "add", "--"] + DATA_FILES, capture_output=True)
+        derived = [f for f in DATA_FILES if f != "history.csv"]
+        _run(["git", "checkout", "--theirs", "--"] + derived, capture_output=True)
+        _run(["git", "add", "--"] + derived, capture_output=True)
         if _run(["git", "rebase", "--continue"],
                 env={**os.environ, "GIT_EDITOR": "true"},
                 capture_output=True).returncode:

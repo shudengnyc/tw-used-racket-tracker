@@ -19,7 +19,7 @@ Baseline at review time, for comparison later:
 
 ## Phase 1 — Reliability (small, do first)
 
-### 1.1 Fail the CI run when the scrape returns nothing  `[ ]`
+### 1.1 Fail the CI run when the scrape returns nothing  `[x]`
 
 **Problem.** `main()` prints "No listings returned" and returns `None`, so the
 job exits 0, nothing commits, and the only symptom is the 12-hour staleness
@@ -41,7 +41,7 @@ mean success; only this one changes. `sys.exit(main())` already propagates it.
 **Verify.** Temporarily break `ROW_RE`, run `python3 tw_used.py --no-sync --no-push`,
 confirm exit code 2 (`echo $?`). Restore.
 
-### 1.2 Do not record a partial scrape  `[ ]`
+### 1.2 Do not record a partial scrape  `[x]`
 
 **Problem.** `get_used_listings` swallows fetch errors per racquet and returns
 `[]`. If 20 of 62 product pages fail, the run still appends history and
@@ -67,7 +67,7 @@ back as "new" next run, and the page silently under-reports.
 **Verify.** Point `BASE` at an invalid host for a test run and confirm the
 history file is untouched (`git diff --stat history.csv` is empty).
 
-### 1.3 Move the cron off the top of the hour  `[ ]`
+### 1.3 Move the cron off the top of the hour  `[x]`
 
 **Problem.** `gh run list` shows 3-4 scheduled runs per day against 6 slots.
 GitHub delays or drops `:00` crons under load.
@@ -87,7 +87,7 @@ gh run list --workflow check-racquets.yml --limit 60 --json createdAt,event \
 ```
 Expect 6 per day.
 
-### 1.4 Let the CI commit step self-heal on a race  `[ ]`
+### 1.4 Let the CI commit step self-heal on a race  `[x]`
 
 **Problem.** If the Mac pushes during the ~25 s CI scrape, the workflow's
 `git pull --rebase` conflicts on `snapshot.json` / `used_prices.csv` /
