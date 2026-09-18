@@ -186,7 +186,10 @@ column tooltip and the `notes` paragraph that explains signals.
 replays history day by day and prints the verdict distribution per method.
 That is also how you compare B and C later.
 
-### 2.2 Fix model-line grouping  `[ ]`
+### 2.2 Fix model-line grouping  `[x]`
+
+> Done without `Speed Pro` (a Head Speed model, not a line) or
+> `Graphene 360`, which is skipped as a technology tag instead.
 
 **Problem.** `familyOf()` in `report.py` takes the word after the brand, so
 "Wilson Pro Staff" and "Wilson Pro Labs" both become "Pro", and "Babolat Pure

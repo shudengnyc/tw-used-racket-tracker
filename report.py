@@ -762,11 +762,17 @@ function saveCurrent(){
 }
 
 /* The model line is the word after the brand: "Head Gravity Pro 2025" -> Gravity.
-   The list is rebuilt from whatever brands are selected, so it stays short and
-   only ever offers lines that actually have stock. */
+   A few lines are two words ("Wilson Pro Staff" vs "Wilson Pro Labs"), and some
+   names open with a technology tag rather than the line ("Head Graphene 360+
+   Speed MP" -> Speed). The list is rebuilt from whatever brands are selected,
+   so it stays short and only ever offers lines that actually have stock. */
+const TWO_WORD = ['Pro Staff','Pro Labs','Pure Drive','Pure Aero','Pure Strike'];
+const TECH_TAGS = new Set(['graphene','360','360+','auxetic']);
 function familyOf(name){
-  const w = name.split(/\\s+/);
-  return w.length > 1 ? w[1] : '';
+  const w = name.split(/\\s+/).slice(1);
+  while (w.length > 1 && TECH_TAGS.has(w[0].toLowerCase())) w.shift();
+  const two = w.slice(0, 2).join(' ');
+  return TWO_WORD.find(t => t.toLowerCase() === two.toLowerCase()) || w[0] || '';
 }
 
 function buildFamilies(){
