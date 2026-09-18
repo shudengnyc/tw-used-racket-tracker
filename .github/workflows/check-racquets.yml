@@ -6,10 +6,12 @@ on:
     # overnight. Cron is always UTC and has no notion of DST, so these are
     # Pacific Daylight (UTC-7); from November to March they land an hour
     # earlier, 5am-8pm. Close enough not to chase.
-    #   13:00 UTC = 6am    22:00 UTC = 3pm
-    #   16:00 UTC = 9am    01:00 UTC = 6pm
-    #   19:00 UTC = 12pm   04:00 UTC = 9pm
-    - cron: "0 13,16,19,22,1,4 * * *"
+    # At :17 past, not :00 -- GitHub delays or drops top-of-the-hour crons
+    # under load, and only ~4 of 6 were landing.
+    #   13:17 UTC = 6:17am    22:17 UTC = 3:17pm
+    #   16:17 UTC = 9:17am    01:17 UTC = 6:17pm
+    #   19:17 UTC = 12:17pm   04:17 UTC = 9:17pm
+    - cron: "17 13,16,19,22,1,4 * * *"
   workflow_dispatch:        # the "Run workflow" button
 
   # A scrape on the Mac pushes its results here; republish them so the phone

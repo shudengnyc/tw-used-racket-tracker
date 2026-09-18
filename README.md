@@ -112,7 +112,8 @@ Do not rebuild from `used_prices.csv`. It stringifies everything and stores
 ## The scheduled run
 
 `.github/workflows/check-racquets.yml` runs six times a day, every three hours
-from 6am to 9pm Pacific, and on push. Cron is UTC and has no notion of DST, so
+from 6:17am to 9:17pm Pacific (off the hour, where GitHub's scheduler is less
+crowded), and on push. Cron is UTC and has no notion of DST, so
 from November to March those land an hour earlier.
 
 Actions and Pages are free on public repositories. A run takes ~25s, of which
