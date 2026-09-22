@@ -186,6 +186,10 @@ Common changes:
   and JS). Anything from Tennis Warehouse must go through `esc()` before it
   reaches `innerHTML`. Preview with `./racket --pull --open`, which rebuilds
   from the last snapshot without scraping.
+- **Change how the table sorts.** Every sort is one entry in `SORTS` in
+  `report.py`: its label, which direction it starts in, and the words on the
+  direction button. `DEFAULT_SORT` is what a first-time visitor sees; after
+  that each browser remembers the last sort picked.
 - **Add a field to listings.** Add it in `parse_listings` (or `main()` for
   derived fields), to the `payload` key list in `write_html`, and to
   [DATA.md](DATA.md). Old snapshots lack it, so read it with `.get()`.

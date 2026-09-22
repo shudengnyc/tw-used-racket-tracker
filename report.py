@@ -230,8 +230,18 @@ input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{
 .btn[aria-busy="true"]{opacity:.55;pointer-events:none}
 .btn.ghost{background:none;color:var(--ink);border-color:var(--rule)}
 
+.countrow{display:flex;align-items:center;justify-content:space-between;
+ flex-wrap:wrap;gap:8px 16px;margin:16px 0 9px}
 .count{font:400 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;
- color:var(--muted);margin:16px 0 9px}
+ color:var(--muted)}
+.sortctl{display:flex;align-items:center;gap:6px}
+.sortctl label{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+ color:var(--muted);margin-right:2px}
+.sortctl select{min-width:0}
+.sortdir{font:500 11px/1 var(--mono);letter-spacing:.04em;white-space:nowrap;cursor:pointer;
+ padding:8px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--surface);
+ color:var(--ink)}
+.sortdir:hover{border-color:var(--ink)}
 
 /* ---------- table ---------- */
 .scroll{overflow-x:auto;border-top:2px solid var(--ink)}
@@ -243,6 +253,8 @@ th{font:500 10.5px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;
  background:var(--plane);padding-top:14px;padding-bottom:14px;
  border-bottom:1px solid var(--rule);transition:color .15s}
 th:hover{color:var(--ink)}
+th .sorth{all:unset;cursor:pointer}
+th .sorth:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
 th .ar{opacity:0;margin-left:5px;font-size:8px;vertical-align:middle}
 th[data-on]{color:var(--ink)} th[data-on] .ar{opacity:1;color:var(--ball)}
 tbody tr{animation:fade .4s ease backwards}
@@ -475,17 +487,6 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
     <div class="families" id="families" role="group" aria-label="Filter by model line"></div>
 
   <div class="specbar" id="specbar" hidden>
-    <div class="sf"><label for="sortby">Sort by</label>
-      <select id="sortby">
-        <option value="discount_pct">Biggest discount</option>
-        <option value="used_price">Cheapest first</option>
-        <option value="rating">Best reviewed</option>
-        <option value="swingweight">Swingweight</option>
-        <option value="stiffness">Stiffness (flex)</option>
-        <option value="head_in2">Head size</option>
-        <option value="weight_oz">Strung weight</option>
-        <option value="balance_pts">Balance</option>
-      </select></div>
     <div class="sf"><label for="grade">Condition</label>
       <select id="grade"><option value="">Any grade</option>__GRADES__</select></div>
     <div class="sf"><label for="grip">Grip size</label>
@@ -507,18 +508,25 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
     <div class="chips" id="chips" hidden></div>
   </div>
 
-  <div class="count" id="count"></div>
+  <div class="countrow">
+    <div class="count" id="count" aria-live="polite"></div>
+    <div class="sortctl">
+      <label for="sortby">Sort</label>
+      <select id="sortby"></select>
+      <button class="sortdir" id="sortdir" type="button"></button>
+    </div>
+  </div>
 
   <div class="scroll">
     <table>
       <thead><tr>
-        <th data-k="racquet">Racquet<span class="ar">▼</span></th>
-        <th class="r" data-k="used_price">Price<span class="ar">▼</span></th>
-        <th data-k="grade">Grade<span class="ar">▼</span></th>
-        <th data-k="grip">Grip<span class="ar">▼</span></th>
-        <th class="col-signal" data-k="rank">Signal<span class="ar">▼</span></th>
+        <th data-k="racquet"><button class="sorth">Racquet<span class="ar">▼</span></button></th>
+        <th class="r" data-k="used_price"><button class="sorth">Price<span class="ar">▼</span></button></th>
+        <th data-k="grade"><button class="sorth">Grade<span class="ar">▼</span></button></th>
+        <th data-k="grip"><button class="sorth">Grip<span class="ar">▼</span></button></th>
+        <th class="col-signal" data-k="rank"><button class="sorth">Signal<span class="ar">▼</span></button></th>
         <th class="col-spark">Trend</th>
-        <th class="col-qty r" data-k="in_stock">Qty<span class="ar">▼</span></th>
+        <th class="col-qty r" data-k="qty"><button class="sorth">Qty<span class="ar">▼</span></button></th>
       </tr></thead>
       <tbody id="tb"></tbody>
     </table>
@@ -569,9 +577,54 @@ const $ = id => document.getElementById(id);
 // Word-split rather than a word-boundary regex: this template is a plain
 // Python string, so a backslash-b would arrive here as a backspace character.
 const tidy = s => s.split(/\\s+/).filter(w => !/^racquets?$/i.test(w)).join(' ');
-let sortKey = 'discount_pct', sortDir = -1, view = 'all';
-// Balance runs head-light (negative) to head-heavy, so ascending reads naturally.
-const ASC = new Set(['used_price','stiffness','balance_pts']);
+/* ---------- sorting ----------
+   One table drives the dropdown, the direction button and the column headers.
+   dir is where a sort starts when first picked: 1 = low to high / A to Z,
+   -1 = high to low. Picking the same sort again (or the direction button)
+   reverses it. words = [ascending label, descending label]. val, when given,
+   is what to compare instead of r[key]. Ties fall back to price, then name. */
+const LH = ['Low → high', 'High → low'];
+const gripSize = g => {            // '4 3/8"' -> 4.375 ; text order puts 1/2 before 1/4
+  const [whole, frac] = String(g || '').replace('"', '').split(' ');
+  if (!whole) return null;
+  const [n, d] = (frac || '').split('/');
+  return +whole + (d ? n / d : 0);
+};
+const SORTS = {
+  discount_pct: {label: 'Discount off new', dir: -1, words: ['Least off first', 'Most off first']},
+  used_price:   {label: 'Price', dir: 1, words: LH},
+  rank:         {label: 'Signal', dir: 1, words: ['Best deals first', 'Best deals last']},
+  rating:       {label: 'Owner rating', dir: -1, words: LH},
+  racquet:      {label: 'Name', dir: 1, words: ['A → Z', 'Z → A']},
+  grade:        {label: 'Condition', dir: 1, words: ['Best (A) first', 'Worst (C) first']},
+  grip:         {label: 'Grip size', dir: 1, words: ['Small → large', 'Large → small'],
+                 val: r => gripSize(r.grip)},
+  qty:          {label: 'Quantity', dir: -1, words: ['Fewest first', 'Most first'],
+                 val: r => r.units > 1 ? r.units : (r.in_stock === '' ? null : r.in_stock)},
+  head_in2:     {label: 'Head size', dir: 1, words: ['Small → large', 'Large → small']},
+  weight_oz:    {label: 'Strung weight', dir: 1, words: ['Light → heavy', 'Heavy → light']},
+  swingweight:  {label: 'Swingweight', dir: 1, words: LH},
+  stiffness:    {label: 'Stiffness', dir: 1, words: ['Soft → stiff', 'Stiff → soft']},
+  // Balance runs head-light (negative) to head-heavy.
+  balance_pts:  {label: 'Balance', dir: 1, words: ['Head-light first', 'Head-heavy first']},
+};
+const DEFAULT_SORT = 'discount_pct';
+let sortKey = DEFAULT_SORT, sortDir = SORTS[DEFAULT_SORT].dir, view = 'all';
+const sortVal = (r, k) => {
+  const v = SORTS[k] && SORTS[k].val ? SORTS[k].val(r) : r[k];
+  return v === '' || v === undefined ? null : v;
+};
+function compareRows(x, y){
+  // Missing values sink to the bottom whichever way the sort runs.
+  const cmp = (a, b, dir) => {
+    if (a == null || b == null) return a == null && b == null ? 0 : (a == null ? 1 : -1);
+    return (typeof a === 'string' ? a.localeCompare(b) : a - b) * dir;
+  };
+  return cmp(sortVal(x, sortKey), sortVal(y, sortKey), sortDir)
+      || (sortKey === 'rank' ? cmp(x.discount_pct, y.discount_pct, -1) : 0)
+      || cmp(x.used_price, y.used_price, 1)
+      || cmp(x.racquet, y.racquet, 1);
+}
 
 /* 12-point price trend: faint area, thin line, endpoint in the accent */
 function spark(key){
@@ -865,11 +918,9 @@ function render(){
   if ($('group').checked) rows = group(rows);
 
   rows.sort((x,y)=>{
+    // "Buy new" traps stay at the bottom of the main list whatever the sort.
     if (view==='all' && x.new_cheaper !== y.new_cheaper) return x.new_cheaper ? 1 : -1;
-    let a = x[sortKey], c = y[sortKey];
-    if (a==null||a==='') a = sortDir<0 ? -Infinity : Infinity;
-    if (c==null||c==='') c = sortDir<0 ? -Infinity : Infinity;
-    return (typeof a==='string' ? a.localeCompare(c) : a-c) * sortDir;
+    return compareRows(x, y);
   });
 
   const COLS = 7;
@@ -1008,18 +1059,34 @@ document.addEventListener('mousemove', e => {
   tip.style.top = (e.clientY + 18) + 'px';
 });
 
-document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => {
-  const k = th.dataset.k;
-  sortDir = (k===sortKey) ? -sortDir
-          : (['racquet','brand','grade','grip'].includes(k) ? 1 : -1);
+$('sortby').innerHTML = Object.entries(SORTS)
+  .map(([k, s]) => `<option value="${k}">${s.label}</option>`).join('');
+
+const SORT_KEY = 'tw_sort';
+function setSort(k, dir){
+  if (!SORTS[k]) return;
   sortKey = k;
-  document.querySelectorAll('th[data-k]').forEach(o => {
-    o.removeAttribute('data-on'); o.querySelector('.ar').textContent = '▼';
+  sortDir = dir === 1 || dir === -1 ? dir : SORTS[k].dir;
+  $('sortby').value = k;
+  const words = SORTS[k].words;
+  $('sortdir').textContent = sortDir > 0 ? words[0] : words[1];
+  $('sortdir').setAttribute('aria-label',
+    `Sorted ${sortDir > 0 ? words[0] : words[1]}. Reverse the order`);
+  document.querySelectorAll('th[data-k]').forEach(th => {
+    const on = th.dataset.k === k;
+    th.toggleAttribute('data-on', on);
+    th.setAttribute('aria-sort', on ? (sortDir > 0 ? 'ascending' : 'descending') : 'none');
+    th.querySelector('.ar').textContent = on && sortDir > 0 ? '▲' : '▼';
   });
-  th.setAttribute('data-on','');
-  th.querySelector('.ar').textContent = sortDir < 0 ? '▼' : '▲';
+  try { localStorage.setItem(SORT_KEY, JSON.stringify({k: sortKey, d: sortDir})); } catch (e) {}
   render();
-});
+}
+
+// Same column again reverses it; a new column starts in its natural direction.
+document.querySelectorAll('th[data-k]').forEach(th =>
+  th.querySelector('.sorth').addEventListener('click', () =>
+    setSort(th.dataset.k, th.dataset.k === sortKey ? -sortDir : undefined)));
+$('sortdir').addEventListener('click', () => setSort(sortKey, -sortDir));
 
 document.querySelectorAll('.tabs button').forEach(btn => btn.onclick = () => {
   document.querySelectorAll('.tabs button')
@@ -1031,13 +1098,7 @@ document.querySelectorAll('.tabs button').forEach(btn => btn.onclick = () => {
 ['q','grade','grip','group'].concat(SPEC_IDS)
   .forEach(id => $(id).addEventListener('input', render));
 
-// The sort dropdown and the column headers drive the same sort state.
-$('sortby').addEventListener('change', () => {
-  sortKey = $('sortby').value;
-  sortDir = ASC.has(sortKey) ? 1 : -1;
-  document.querySelectorAll('th[data-k]').forEach(o => o.removeAttribute('data-on'));
-  render();
-});
+$('sortby').addEventListener('change', () => setSort($('sortby').value));
 
 $('specbtn').addEventListener('click', () => {
   const open = $('specbar').hidden;
@@ -1061,7 +1122,11 @@ const age = () => hrs < 48 ? Math.round(hrs)+' hours' : Math.round(hrs/24)+' day
 if (hrs > 12) $('staleness').innerHTML = `<div class="stale">__STALE__</div>`;
 
 buildBrands();
-render();
+// The last sort you picked, if this browser remembers one; otherwise the default.
+let savedSort = null;
+try { savedSort = JSON.parse(localStorage.getItem(SORT_KEY) || 'null'); } catch (e) {}
+setSort(savedSort && SORTS[savedSort.k] ? savedSort.k : DEFAULT_SORT,
+        savedSort && SORTS[savedSort.k] ? savedSort.d : undefined);
 </script>
 """
 
