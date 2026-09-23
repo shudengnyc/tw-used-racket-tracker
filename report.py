@@ -446,6 +446,20 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
   .tabs button{padding:9px 6px;font-size:10.5px;letter-spacing:.06em}
   #refresh{margin-left:0;width:100%;justify-content:center}
 }
+/* ---------- pull to refresh (published build only) ----------
+   Fixed above the page and pulled down by the gesture, so it reads as the
+   page itself moving rather than a floating toast. */
+#ptr{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:center;
+ pointer-events:none;transform:translateY(-100%);opacity:0}
+#ptr .ptrin{display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+ font:500 11px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;
+ color:var(--ink);background:var(--raised);border:1px solid var(--rule);
+ border-radius:20px;padding:9px 14px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+#ptr .ptrmark{display:inline-block;font-size:12px;transition:transform .15s}
+#ptr.ready .ptrmark{transform:rotate(180deg)}
+#ptr.busy .ptrmark{animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
@@ -1142,15 +1156,19 @@ PAGES_JS = r"""
 
    And a reload that returns identical data is indistinguishable from a broken
    button, so carry the old timestamp across and say plainly what happened. */
+function refetchPage(){
+  sessionStorage.setItem('tw_was', String(SCRAPED.getTime()));
+  const u = new URL(location.href);
+  u.searchParams.set('t', Date.now());
+  location.replace(u);
+}
+
 const cb = $('checkbtn');
 if (cb) {
   cb.addEventListener('click', () => {
     cb.textContent = 'Checking…';
     cb.disabled = true;
-    sessionStorage.setItem('tw_was', String(SCRAPED.getTime()));
-    const u = new URL(location.href);
-    u.searchParams.set('t', Date.now());
-    location.replace(u);
+    refetchPage();
   });
 
   const was = sessionStorage.getItem('tw_was');
@@ -1163,6 +1181,80 @@ if (cb) {
          (${stamp}). A fresh scrape runs every 3 hours through the day.</div>`
       : `<div class="stale ok">Updated — new prices from ${stamp}.</div>`;
   }
+}
+
+/* --- pull down to refresh -------------------------------------------------
+   Installed to the home screen there is no browser chrome, so the toolbar
+   reload is gone and the "Check for new prices" button may be scrolled away.
+   The gesture people already know fills that gap: drag down from the top of
+   the list and the page re-fetches, exactly as the button does.
+
+   Only for touch input. preventDefault on the vertical drag keeps iOS from
+   rubber-banding underneath us, and keeps Android Chrome's own pull-to-refresh
+   from firing a second one -- which is why the listener cannot be passive. */
+if (matchMedia('(hover: none) and (pointer: coarse)').matches) {
+  const TRIGGER = 72, MAX = 110;
+  const ptr = document.createElement('div');
+  ptr.id = 'ptr';
+  ptr.innerHTML = '<span class="ptrin"><span class="ptrmark">↓</span>' +
+                  '<span class="ptrtext">Pull to refresh</span></span>';
+  document.body.appendChild(ptr);
+
+  let startY = null, pull = 0, busy = false;
+
+  const draw = () => {
+    // Fully out of sight at 0, fully down at MAX; percentages are of the
+    // indicator's own height, so it never depends on the pill's size.
+    const shown = Math.min(pull, MAX) / MAX;
+    ptr.style.transform = `translateY(${shown * 100 - 100}%)`;
+    ptr.style.opacity = String(Math.min(1, pull / TRIGGER));
+    ptr.classList.toggle('ready', pull >= TRIGGER);
+    ptr.querySelector('.ptrtext').textContent =
+      pull >= TRIGGER ? 'Release to refresh' : 'Pull to refresh';
+  };
+  const reset = () => {
+    startY = null; pull = 0;
+    ptr.style.transition = 'transform .2s, opacity .2s';
+    ptr.style.transform = 'translateY(-100%)';
+    ptr.style.opacity = '0';
+    ptr.classList.remove('ready');
+    setTimeout(() => ptr.style.transition = '', 220);
+  };
+
+  addEventListener('touchstart', e => {
+    // One finger, already at the top, and not in the middle of a pinch.
+    if (busy || e.touches.length !== 1 || scrollY > 0) { startY = null; return; }
+    startY = e.touches[0].clientY;
+    pull = 0;
+  }, {passive: true});
+
+  addEventListener('touchmove', e => {
+    if (startY === null || busy) return;
+    const dy = e.touches[0].clientY - startY;
+    // An upward drag, or a sideways one (the table scrolls across), is not a pull.
+    if (dy <= 0 || scrollY > 0) { if (pull) reset(); return; }
+    e.preventDefault();
+    pull = dy * 0.5;                    // resistance, so it feels like a stretch
+    draw();
+  }, {passive: false});
+
+  addEventListener('touchend', () => {
+    if (startY === null || busy) return;
+    if (pull >= TRIGGER) {
+      busy = true;
+      ptr.style.transform = 'translateY(0%)';
+      ptr.style.opacity = '1';
+      ptr.classList.remove('ready');
+      ptr.classList.add('busy');
+      ptr.querySelector('.ptrmark').textContent = '↻';
+      ptr.querySelector('.ptrtext').textContent = 'Checking…';
+      refetchPage();
+    } else {
+      reset();
+    }
+  }, {passive: true});
+
+  addEventListener('touchcancel', reset, {passive: true});
 }
 """
 
