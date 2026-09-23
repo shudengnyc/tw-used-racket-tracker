@@ -473,11 +473,83 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
   .name{min-width:190px;max-width:230px}
   .nw{gap:9px} .pic{width:24px;height:52px}
 }
+/* ---------- phone ----------
+   On a 375px screen the four scoreboard tiles, the two pill rows and a table
+   that needed 386px of sideways scrolling pushed the first listing 900px down
+   -- past the end of the screen. Here the chrome shrinks to a strip and the
+   rows become cards, so listings start about a third of the way down and
+   nothing scrolls sideways. */
 @media(max-width:720px){
   /* The deck is too tall to pin on a phone -- it would cover the listings. */
   .deck{position:static}
+  .wrap{padding-top:20px}
+  h1{font-size:30px;margin-bottom:8px}
+  .meta{font-size:11.5px;line-height:1.5}
+  .baseline{margin-top:14px}
+
+  /* Stats become one compact strip: label over number, no captions. */
+  .board{grid-template-columns:repeat(4,1fr);margin-bottom:14px}
+  .cell,.cell:nth-child(3){padding:10px 6px;border-left:1px solid var(--line);
+   border-top:0}
+  .cell:first-child{padding-left:0}
+  .cell .lab{font-size:8.5px;letter-spacing:.09em;margin-bottom:6px;
+   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cell .val{font-size:22px}
+  .cell .sub{display:none}
+
+  /* The view tabs take the full width, so keep the toggle and the refresh
+     button together on the line below rather than one each. */
+  .deck-actions{width:100%;justify-content:space-between;gap:8px}
+  .deck-actions .btn{padding:9px 11px;font-size:10px;letter-spacing:.04em}
+  .tog{font-size:10.5px;letter-spacing:.04em}
+  .countrow{margin:12px 0 6px;gap:6px 10px}
+  .count{font-size:10.5px;letter-spacing:.04em}
+  .sortctl{flex:1 1 auto;justify-content:flex-end}
+  .sortctl label{display:none}
+
+  /* Brands and lines stay on one swipeable row instead of stacking. */
+  .brands,.families{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+   padding-bottom:2px}
+  .brands::-webkit-scrollbar,.families::-webkit-scrollbar{display:none}
+  .bpill,.fpill{flex:none}
+
+  /* Listings as cards: name and price on top, the rest underneath. */
+  .scroll{overflow-x:visible;border-top:1px solid var(--ink)}
+  /* The table element itself has to stop being a table, or it sizes to its
+     widest content and the expanded spec grid overflows the screen. */
+  table,tbody,tr,td{display:block}
+  table{min-width:0;width:100%}
+  thead{display:none}
+  tr.row{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px 10px;
+   padding:13px 0;border-bottom:1px solid var(--line)}
+  tr.row>td{border:0;padding:0;white-space:normal}
+  tr.row .name{min-width:0;max-width:none;flex:1 1 auto;position:static;
+   background:none}
+  /* A zero-height item that always fills the row, so the name and price keep
+     the first line to themselves and the rest wrap below. */
+  tr.row::after{content:'';flex-basis:100%;height:0;order:1}
+  /* The name cell carried the "buy new" tint on desktop; on a card the whole
+     row takes it, or the warning disappears. */
+  tr.trap .name{background:none}
+  tr.row.trap{background:var(--crit-soft);padding-left:10px;padding-right:10px}
+  .name .caret{display:none}
+  .pic{width:34px;height:60px}
+  .pricecell{flex:0 0 auto;margin-left:auto;text-align:right}
+  .pricecell .p{font-size:19px}
+  /* Second line: condition, grip, signal, trend. */
+  .grade,.grip,.col-signal,.col-spark{flex:0 0 auto;align-self:center}
+  .grade{order:2} .grip{order:3} .col-signal{order:4} .col-spark{order:5}
+  .grip{font:400 12px var(--mono);color:var(--ink2)}
+  .col-spark{margin-left:auto}
+  tr.det{padding:0}
+  tr.det.open{display:block}
+  tr.det > td{padding:14px 0 18px;border-bottom:1px solid var(--line);
+   background:none}
+  .specs{grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px 16px}
 }
 @media(max-width:560px){
+  /* Let the search field shrink so the Filter button stays on its line. */
+  .qwrap{flex:1 1 110px;min-width:0}
   .tabs{width:100%;justify-content:space-between;margin-right:0}
   .tabs button{padding:9px 6px;font-size:10.5px;letter-spacing:.06em}
   #refresh{margin-left:0;width:100%;justify-content:center}
@@ -984,7 +1056,7 @@ function render(){
     <td class="r pricecell">
       <span class="p">$${r.used_price.toFixed(0)}</span>
       <span class="psub">${priceSub(r)}</span></td>
-    <td><span class="chip">${esc((r.grade||'—').replace('Grade ',''))}</span></td>
+    <td class="grade"><span class="chip">${esc((r.grade||'—').replace('Grade ',''))}</span></td>
     <td class="grip">${r.grip ? esc(r.grip) : '<span class="dash">—</span>'}</td>
     <td class="col-signal" title="${esc(r.basis ? 'Compared with ' + r.basis : '')}">${signal(r)}${r.median?` <span class="med">~$${Math.round(r.median)}</span>`:''}</td>
     <td class="col-spark">${spark(r.key)}</td>
@@ -1003,8 +1075,12 @@ function render(){
   buildSaved();
   drawChips();
 
-  $('count').textContent = $('group').checked && rows.length !== total
-    ? `${rows.length} of ${ROWS.length} listings · ${total - rows.length} duplicates folded in`
+  // The phone has room for the numbers but not the sentence.
+  const narrow = matchMedia('(max-width: 720px)').matches;
+  const folded = total - rows.length;
+  $('count').textContent = $('group').checked && folded
+    ? (narrow ? `${rows.length} of ${ROWS.length} · ${folded} folded`
+              : `${rows.length} of ${ROWS.length} listings · ${folded} duplicates folded in`)
     : `${rows.length} of ${ROWS.length} listings`;
   $('empty').hidden = rows.length > 0;
 }

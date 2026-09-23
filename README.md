@@ -144,6 +144,14 @@ Do not rebuild from `used_prices.csv`. It stringifies everything and stores
 `"12"` and break the sorting and filtering the report's JavaScript does.
 `snapshot.json` exists for that.
 
+### On a phone
+
+Below 720px the page is laid out for the screen rather than scaled down: the
+scoreboard becomes a compact strip, the brand and model-line pills sit on one
+swipeable row, and each listing is a card (name and price, then condition,
+grip, signal and trend) instead of a table that scrolls sideways. Column
+headers are gone there, so the sort control above the list is how you reorder.
+
 ### Added to a home screen
 
 The published page ships a web app manifest and icons, so **Add to Home
