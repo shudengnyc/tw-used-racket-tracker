@@ -76,9 +76,7 @@ The published page cannot fetch Tennis Warehouse itself — TW sends no
 the workflow, because that needs a token with `actions: write` and this repo is
 public, so embedding one would publish a credential anyone could write with.
 Hence the schedule, and a **Check for new prices** button that re-fetches the
-published page rather than pretending to scrape. On a touch device the same
-re-fetch is bound to a pull-down-from-the-top gesture, since a page added to
-the home screen has no browser reload button.
+published page rather than pretending to scrape.
 
 That button cache-busts on purpose: Pages serves the report with
 `Cache-Control: max-age=600`, so a plain reload inside ten minutes would quietly
@@ -156,8 +154,7 @@ headers are gone there, so the sort control above the list is how you reorder.
 
 The published page ships a web app manifest and icons, so **Add to Home
 Screen** (iOS) or **Install** (Android) gives it its own icon and opens it
-without browser chrome. There is no browser reload button in that mode, so
-pulling down from the top of the page re-fetches it.
+without browser chrome.
 
 It is not offline-capable: there is no service worker, so opening it without a
 connection shows the browser's offline page. Adding one would mean deciding how
