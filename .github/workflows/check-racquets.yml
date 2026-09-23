@@ -102,7 +102,8 @@ jobs:
           fi
 
       - name: Assemble the Pages site
-        # --html-mode pages already wrote site/index.html and site/fonts.css.
+        # --html-mode pages already wrote site/index.html, site/fonts.css,
+        # the web app manifest and the icons.
         # The images are linked by relative path so browsers cache them
         # across rebuilds: thumbs for the table, thumbs_large for the lightbox.
         run: cp -r thumbs site/thumbs && cp -r thumbs_large site/thumbs_large

@@ -121,6 +121,8 @@ data. The measured trade-offs, and a rejected alternative, are in
 | `histfile.py` | The one reader for `history.csv` |
 | `tests/` | Parser and judging tests against saved pages |
 | `tools/eval_judge.py` | Replays history to compare judging methods |
+| `tools/make_icons.py` | Draws `icons/` — rerun after changing the design |
+| `icons/` | App icons for the published page's home-screen install |
 | `DATA.md` | Field-by-field schemas of the data files |
 | `ROADMAP.md` | Follow-ups, parked ideas, and why things are the way they are |
 | `racket` | CLI wrapper — run it from anywhere |
@@ -141,6 +143,17 @@ Do not rebuild from `used_prices.csv`. It stringifies everything and stores
 `specs`/`nspec` as Python dict reprs, so reloading it would turn `12` into
 `"12"` and break the sorting and filtering the report's JavaScript does.
 `snapshot.json` exists for that.
+
+### Added to a home screen
+
+The published page ships a web app manifest and icons, so **Add to Home
+Screen** (iOS) or **Install** (Android) gives it its own icon and opens it
+without browser chrome. There is no browser reload button in that mode, so
+pulling down from the top of the page re-fetches it.
+
+It is not offline-capable: there is no service worker, so opening it without a
+connection shows the browser's offline page. Adding one would mean deciding how
+long a cached copy may be shown before it misleads — see [ROADMAP.md](ROADMAP.md).
 
 ## The scheduled run
 
@@ -188,6 +201,9 @@ Common changes:
   and JS). Anything from Tennis Warehouse must go through `esc()` before it
   reaches `innerHTML`. Preview with `./racket --pull --open`, which rebuilds
   from the last snapshot without scraping.
+- **Change the app icon.** Edit the design constants at the top of
+  `tools/make_icons.py`, run it, and commit the regenerated `icons/`. The
+  manifest itself is `MANIFEST` in `report.py`.
 - **Change how the table sorts.** Every sort is one entry in `SORTS` in
   `report.py`: its label, which direction it starts in, and the words on the
   direction button. `DEFAULT_SORT` is what a first-time visitor sees; after

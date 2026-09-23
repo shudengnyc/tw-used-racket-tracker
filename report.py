@@ -14,6 +14,7 @@ import datetime as dt
 import html
 import json
 import os
+import shutil
 
 import histfile
 
@@ -27,6 +28,41 @@ except FileNotFoundError:          # still renders, just in the fallback stack
 
 LOCAL_HEAD = ('<!doctype html>\n<meta charset="utf-8">\n'
               '<meta name="viewport" content="width=device-width,initial-scale=1">\n')
+
+# Only the published build: added to a home screen it runs with no browser
+# chrome, so it needs a name, an icon and a colour of its own. Kept out of the
+# local build, which is a file:// page where a manifest means nothing.
+ICON_DIR = os.path.join(HERE, "icons")
+PWA_HEAD = (
+    '<link rel="manifest" href="manifest.webmanifest">\n'
+    '<link rel="apple-touch-icon" href="icons/icon-180.png">\n'
+    '<link rel="icon" href="icons/icon-192.png" type="image/png">\n'
+    '<meta name="apple-mobile-web-app-capable" content="yes">\n'
+    '<meta name="mobile-web-app-capable" content="yes">\n'
+    '<meta name="apple-mobile-web-app-title" content="Used Racquets">\n'
+    '<meta name="apple-mobile-web-app-status-bar-style" content="default">\n'
+    '<meta name="theme-color" content="#f2f3ee" media="(prefers-color-scheme: light)">\n'
+    '<meta name="theme-color" content="#08110f" media="(prefers-color-scheme: dark)">\n')
+
+MANIFEST = {
+    "name": "Used Racquets — Tennis Warehouse",
+    "short_name": "Used Racquets",
+    "description": "Used racquet prices at Tennis Warehouse, with price history.",
+    # Relative, so the app works from the project path GitHub Pages serves it
+    # under without naming the repo here.
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#f2f3ee",
+    "theme_color": "#f2f3ee",
+    "icons": [
+        {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png",
+         "purpose": "any maskable"},
+        {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png",
+         "purpose": "any maskable"},
+    ],
+}
 
 TMPL = """<title>Used Racquets — Tennis Warehouse</title>
 <style>
@@ -1479,10 +1515,19 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     split = mode == "pages"
     thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings if r.get("code")},
                          inline=not split)
+    site = os.path.dirname(path)
     if split and FONT_CSS:
-        with open(os.path.join(os.path.dirname(path), "fonts.css"), "w",
-                  encoding="utf-8") as f:
+        with open(os.path.join(site, "fonts.css"), "w", encoding="utf-8") as f:
             f.write(FONT_CSS)
+    if split:
+        with open(os.path.join(site, "manifest.webmanifest"), "w",
+                  encoding="utf-8") as f:
+            json.dump(MANIFEST, f, indent=2, ensure_ascii=False)
+        # Small enough (~10 KB all told) to copy here rather than in the
+        # workflow, so one command still produces a complete site/.
+        if os.path.isdir(ICON_DIR):
+            shutil.copytree(ICON_DIR, os.path.join(site, "icons"),
+                            dirs_exist_ok=True)
 
     series = load_series(hist_path)
     keys = {f"{r['racquet']}||{r['grade']}" for r in listings}
@@ -1499,6 +1544,7 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     ]).replace("<", "\\u003c")
 
     page = (("" if web else LOCAL_HEAD)
+            + (PWA_HEAD if split else "")
             + ('<link rel="stylesheet" href="fonts.css">\n' if split and FONT_CSS else "")
             + TMPL
             .replace("__FONTS__", "" if split else FONT_CSS)

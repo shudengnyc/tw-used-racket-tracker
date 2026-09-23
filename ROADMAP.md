@@ -66,6 +66,12 @@ Not planned; recorded so they are not re-derived.
   price clears.
 - **More brands.** Babolat and Dunlop are the gaps. One line in
   `TARGET_BRANDS`; `TWO_WORD` in `report.py` already has the Babolat lines.
+- **Offline support (service worker).** The published page installs to a home
+  screen but is not offline-capable. A service worker could serve the last
+  page instantly and refresh behind it, but stale prices shown as current are
+  worse than a clear offline page, so it needs a visible "showing saved copy
+  from …" state. Android Chrome also wants a service worker before it offers
+  its own install prompt; iOS does not.
 - **Retire `used_prices.csv` from git.** Derivable from `snapshot.json`.
 - **Split `tw_used.py`** (~930 lines) into fetch/parse, history/judging and
   sync modules if it keeps growing. Its sections are already in that order.
