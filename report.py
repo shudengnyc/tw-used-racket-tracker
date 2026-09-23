@@ -446,6 +446,13 @@ tr.det > td{background:color-mix(in srgb,var(--ink) 3%,transparent);
  font:400 13.5px/1.65 var(--sans)}
 .stale{background:var(--warn-soft);color:var(--warn-ink);
  border:1px solid color-mix(in srgb,var(--warn-ink) 24%,transparent)}
+/* Dismissable banners: the close button sits top right, text wraps around it. */
+.stale:has(.bclose){position:relative;padding-right:44px}
+.bclose{position:absolute;top:8px;right:8px;width:28px;height:28px;padding:0;
+ border:0;border-radius:6px;background:none;color:inherit;cursor:pointer;
+ font:400 13px/1 var(--sans);opacity:.65}
+.bclose:hover,.bclose:focus-visible{opacity:1;
+ background:color-mix(in srgb,currentColor 12%,transparent)}
 /* same banner, but for "that worked" rather than "careful" */
 .stale.ok{background:var(--good-soft);color:var(--good);
  border-color:color-mix(in srgb,var(--good) 24%,transparent)}
@@ -1232,6 +1239,12 @@ addEventListener('keydown', e => {
 });
 
 const SCRAPED = new Date(__SCRAPED_ISO__);
+// A ✕ for banners that are information, not warnings you must act on.
+const CLOSE = '<button class="bclose" type="button" aria-label="Dismiss">✕</button>';
+$('staleness').addEventListener('click', e => {
+  const b = e.target.closest('.bclose');
+  if (b) b.parentElement.remove();
+});
 __REFRESHJS__
 const hrs = (Date.now() - SCRAPED) / 3.6e6;
 const age = () => hrs < 48 ? Math.round(hrs)+' hours' : Math.round(hrs/24)+' days';
@@ -1280,8 +1293,8 @@ if (cb) {
       weekday: 'short', hour: 'numeric', minute: '2-digit' });
     $('staleness').innerHTML = Number(was) === SCRAPED.getTime()
       ? `<div class="stale">No change — these are the latest published prices
-         (${stamp}). A fresh scrape runs every 3 hours through the day.</div>`
-      : `<div class="stale ok">Updated — new prices from ${stamp}.</div>`;
+         (${stamp}). A fresh scrape runs every 3 hours through the day.${CLOSE}</div>`
+      : `<div class="stale ok">Updated — new prices from ${stamp}.${CLOSE}</div>`;
   }
 }
 """
