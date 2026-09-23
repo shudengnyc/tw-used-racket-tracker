@@ -482,10 +482,14 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
 @media(max-width:720px){
   /* The deck is too tall to pin on a phone -- it would cover the listings. */
   .deck{position:static}
-  .wrap{padding-top:20px}
-  h1{font-size:30px;margin-bottom:8px}
-  .meta{font-size:11.5px;line-height:1.5}
-  .baseline{margin-top:14px}
+  /* Header: one small eyebrow, a smaller title, and a single line saying
+     when the prices were scraped -- about half the height it was. */
+  .wrap{padding-top:14px}
+  .eyebrow{font-size:9.5px;margin-bottom:8px}
+  h1{font-size:26px;margin-bottom:5px}
+  .meta{font-size:11px;line-height:1.4}
+  .meta-more{display:none}
+  .baseline{margin-top:10px}
 
   /* Stats become one compact strip: label over number, no captions. */
   .board{grid-template-columns:repeat(4,1fr);margin-bottom:14px}
@@ -1537,8 +1541,11 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
             if not r.get("new_cheaper") and r.get("discount_pct") != ""]
     best = max(real, key=lambda r: r["discount_pct"]) if real else None
 
-    sub = (f"Scraped <b>{stamp}</b> · {len(listings)} listings across {racquets} "
-           f"racquets · {days} day{'s' if days != 1 else ''} of price history")
+    # The tail repeats what the scoreboard shows, so a phone hides it and keeps
+    # the one line that matters there: how fresh the prices are.
+    sub = (f"Scraped <b>{stamp}</b><span class=\"meta-more\"> · {len(listings)} "
+           f"listings across {racquets} racquets · {days} "
+           f"day{'s' if days != 1 else ''} of price history</span>")
 
     board = (
         _cell("Listings", len(listings), f"across {racquets} racquets") +
