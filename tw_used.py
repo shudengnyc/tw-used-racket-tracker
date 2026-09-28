@@ -86,6 +86,10 @@ NEW_FOR = dt.timedelta(hours=24)
 # stores specs/nspec as Python dict reprs, so it can't be loaded back without
 # guessing types. This is the exact round-trip copy the local rebuild reads.
 SNAP_PATH = os.path.join(HERE, "snapshot.json")
+# {racquet name: {code, specs, nspec}} for every racquet ever listed. history.csv
+# keeps prices only, so once a racquet's last listing sells this is the one
+# place its photo, product link and specs survive -- the Sold view needs them.
+MODELS_PATH = os.path.join(HERE, "models.json")
 
 REPO = "shudengnyc/tw-used-racket-tracker"   # where the scrape actually runs
 HTML_PATH = os.path.join(HERE, "report.html")        # standalone clickable report
@@ -458,6 +462,24 @@ def load_sku_prices():
 
 # --- judging -----------------------------------------------------------------
 
+def load_models():
+    if not os.path.exists(MODELS_PATH):
+        return {}
+    with open(MODELS_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def update_models(listings, models=None):
+    """Fold this scrape's racquets into models.json; the newest details win."""
+    models = load_models() if models is None else models
+    for r in listings:
+        models[r["racquet"]] = {"code": r["code"], "specs": r.get("specs") or {},
+                                "nspec": r.get("nspec") or {}}
+    with open(MODELS_PATH, "w", encoding="utf-8") as f:
+        json.dump(dict(sorted(models.items())), f, indent=1, ensure_ascii=False)
+    return models
+
+
 def marked_down_from(row, sku_hist):
     """The higher price this exact listing carried before its current one.
 
@@ -600,7 +622,7 @@ def sync_from_github():
 
 
 DATA_FILES = ["used_prices.csv", "history.csv", "seen.json", "snapshot.json",
-              "thumbs", "thumbs_large"]
+              "models.json", "thumbs", "thumbs_large"]
 
 
 def load_first_seen():
@@ -887,6 +909,7 @@ def main():
         r["was_price"] = marked_down_from(r, sku_hist)
     with open(STATE_PATH, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(fresh.items())), f, indent=0)
+    update_models(listings)
 
     listings.sort(key=lambda r: (-(r["discount_pct"] or 0), r["used_price"]))
 

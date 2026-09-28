@@ -1,0 +1,2983 @@
+{
+ "Head Boom MP 2024 Racquet": {
+  "code": "HBOOMM",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "62",
+   "beam": "23mm / 24mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 317.0,
+   "stiffness": 62.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Boom MP 2026 Racquet": {
+  "code": "HBOMP6",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "316",
+   "stiffness": "61",
+   "beam": "23mm / 24mm / 22mm",
+   "composition": "Boron/Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 316.0,
+   "stiffness": 61.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Boom MP Mint Racquet": {
+  "code": "BOOMMA",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "62",
+   "beam": "23mm / 24mm / 22mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 317.0,
+   "stiffness": 62.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Boom Pro 2026 Racquet": {
+  "code": "HBOOP6",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "325",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 21.5mm",
+   "composition": "BoronAuxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 325.0,
+   "stiffness": 64.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Boom Pro Racquet": {
+  "code": "HBOOMP",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "323",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 21.5mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 323.0,
+   "stiffness": 64.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Extreme MP L 2024 Racquet": {
+  "code": "HEMPL24",
+  "specs": {
+   "head": "100 in / 645.16 cm",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "308",
+   "stiffness": "64",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 308.0,
+   "stiffness": 64.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Head Extreme MP Racquet": {
+  "code": "HREM26",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "318",
+   "stiffness": "67",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Boron, Auxetic 2, Graphene, Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 318.0,
+   "stiffness": 67.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Extreme MP XL Racquet": {
+  "code": "HEMPXL",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.99in / 32.99cm / 6 pts HL",
+   "swingweight": "326",
+   "stiffness": "63",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Boron, Auxetic 2, Graphene, Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 326.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Extreme Pro 2024 Racquet": {
+  "code": "HREP24",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "322",
+   "stiffness": "64",
+   "beam": "22mm / 23mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 322.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Extreme Pro Racquet": {
+  "code": "HEXP26",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "319",
+   "stiffness": "64",
+   "beam": "22mm / 23mm / 21mm",
+   "composition": "Boron, Auxetic 2, Graphene Inside, Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 319.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Extreme Team 2024 Racquet": {
+  "code": "HRET24",
+  "specs": {
+   "head": "105 in² / 677.42 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "9.8oz / 278g",
+   "balance": "13.7in / 34.8cm / 2 pts HH",
+   "swingweight": "304",
+   "stiffness": "61",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "52-62 pounds"
+  },
+  "nspec": {
+   "head_in2": 105.0,
+   "weight_oz": 9.8,
+   "weight_g": 278.0,
+   "swingweight": 304.0,
+   "stiffness": 61.0,
+   "balance_pts": 2.0
+  }
+ },
+ "Head Extreme Team Racquet": {
+  "code": "HRETE2",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.2oz / 289g",
+   "balance": "13.26in / 33.68cm / 2 pts HL",
+   "swingweight": "302",
+   "stiffness": "61",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "52-62 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.2,
+   "weight_g": 289.0,
+   "swingweight": 302.0,
+   "stiffness": 61.0,
+   "balance_pts": -2.0
+  }
+ },
+ "Head Extreme Tour Racquet": {
+  "code": "HRET22",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "63",
+   "beam": "22mm / 23mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 317.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Graphene 360+ Extreme MP Racquet": {
+  "code": "360XM",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "325",
+   "stiffness": "66",
+   "beam": "23mm / 26mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "52-62 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 325.0,
+   "stiffness": 66.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Head Gravity MP 2025 Racquet": {
+  "code": "HGMPG",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "323",
+   "stiffness": "57",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphene Inside/Auxetic 2/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 323.0,
+   "stiffness": 57.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Head Gravity MP L 2025 Racquet": {
+  "code": "HGMLPG",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13.3in / 33.78cm / 2 pts HL",
+   "swingweight": "308",
+   "stiffness": "57",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphene Inside/Auxetic 2/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 308.0,
+   "stiffness": 57.0,
+   "balance_pts": -2.0
+  }
+ },
+ "Head Gravity MP XL 2025 Racquet": {
+  "code": "HGMPXL",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 8 pts HL",
+   "swingweight": "330",
+   "stiffness": "58",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 58.0,
+   "balance_pts": -8.0
+  }
+ },
+ "Head Gravity Pro 2025 Racquet": {
+  "code": "HGPRR",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "329",
+   "stiffness": "59",
+   "beam": "20mm / 20mm / 20mm",
+   "composition": "Graphene Inside/Auxetic 2/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 329.0,
+   "stiffness": 59.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Gravity Team 2025 Racquet": {
+  "code": "HRTMPG",
+  "specs": {
+   "head": "104 in² / 670.97 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10oz / 283g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "304",
+   "stiffness": "57",
+   "beam": "24mm / 24mm / 24mm",
+   "composition": "Graphene Inside/Auxetic 2/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 104.0,
+   "weight_oz": 10.0,
+   "weight_g": 283.0,
+   "swingweight": 304.0,
+   "stiffness": 57.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Head Gravity Tour 2025 Racquet": {
+  "code": "HGTRR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "328",
+   "stiffness": "59",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": ": Graphene Inside/Auxetic 2/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 328.0,
+   "stiffness": 59.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Instinct MP 2025 Racquet": {
+  "code": "HINMP",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "317",
+   "stiffness": "64",
+   "beam": "23mm / 26mm / 23mm",
+   "composition": "Auextic/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 317.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Instinct PWR 110 Racquet": {
+  "code": "INSPW0",
+  "specs": {
+   "head": "110 in² / 709.68 cm²",
+   "length": "27.4in / 69.6cm",
+   "weight": "9.7oz / 275g",
+   "balance": "13.8in / 35.05cm / 1 pts HH",
+   "swingweight": "307",
+   "stiffness": "67",
+   "beam": "26mm / 25mm / 23mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Medium-High",
+   "stroke": "Compact-Medium",
+   "swing": "Slow-Moderate",
+   "griptype": "Head Hydrosorb Comfort",
+   "tension": "52-62 pounds"
+  },
+  "nspec": {
+   "head_in2": 110.0,
+   "weight_oz": 9.7,
+   "weight_g": 275.0,
+   "swingweight": 307.0,
+   "stiffness": 67.0,
+   "balance_pts": 1.0
+  }
+ },
+ "Head PWR 110 Racquet": {
+  "code": "HPWR10",
+  "specs": {
+   "head": "110 in² / 709.68 cm²",
+   "length": "27.4in / 69.6cm",
+   "weight": "9.8oz / 278g",
+   "balance": "13.8in / 35.05cm / 1 pts HH",
+   "swingweight": "315",
+   "stiffness": "65",
+   "beam": "26mm / 25mm / 23mm",
+   "composition": "Auextic/Graphene Inside/Graphite",
+   "power": "Medium-High",
+   "stroke": "Compact-Medium",
+   "swing": "Slow-Moderate",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "52-62 pounds"
+  },
+  "nspec": {
+   "head_in2": 110.0,
+   "weight_oz": 9.8,
+   "weight_g": 278.0,
+   "swingweight": 315.0,
+   "stiffness": 65.0,
+   "balance_pts": 1.0
+  }
+ },
+ "Head Prestige MP L Racquet": {
+  "code": "HPRMPL",
+  "specs": {
+   "head": "99 in² / 638.71 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "309",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 99.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 309.0,
+   "stiffness": 61.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Prestige Pro Racquet": {
+  "code": "PRPROR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.9oz / 337g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "324",
+   "stiffness": "58",
+   "beam": "20mm / 20mm / 20mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.9,
+   "weight_g": 337.0,
+   "swingweight": 324.0,
+   "stiffness": 58.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Prestige Tour Racquet": {
+  "code": "THPRTR",
+  "specs": {
+   "head": "95 in² / 612.9 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "330",
+   "stiffness": "62",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 95.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 330.0,
+   "stiffness": 62.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Radical Elite 2025 Racquet": {
+  "code": "RADELT",
+  "specs": {
+   "head": "102 in² / 658.06 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10 ounces / 283.50 grams",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "306",
+   "stiffness": "64",
+   "beam": "22mm / 25mm / 23mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 102.0,
+   "swingweight": 306.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Radical MP 2021 Racquet": {
+  "code": "HRRMP",
+  "specs": {
+   "head": "98 in / 632.26 cm",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "321",
+   "stiffness": "65",
+   "beam": "20mm / 23mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 321.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Radical MP 2023 Racquet": {
+  "code": "HMPR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "323",
+   "stiffness": "65",
+   "beam": "20mm / 23mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 323.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Radical MP 2025 Racquet": {
+  "code": "HRMP",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "323",
+   "stiffness": "66",
+   "beam": "20mm / 23mm / 21mm",
+   "composition": "Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 323.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Radical Pro 2023 Racquet": {
+  "code": "HRPR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "325",
+   "stiffness": "64",
+   "beam": "20mm / 21.5mm / 21mm",
+   "composition": "Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 325.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Radical Pro 2025 Racquet": {
+  "code": "HPRR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "329",
+   "stiffness": "65",
+   "beam": "20mm / 21.5mm / 21mm",
+   "composition": "Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 329.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Radical Team 2025 Racquet": {
+  "code": "HRRT",
+  "specs": {
+   "head": "102 in² / 658.06 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "303",
+   "stiffness": "63",
+   "beam": "22mm / 25mm / 23mm",
+   "composition": "Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 102.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 303.0,
+   "stiffness": 63.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed MP 2024 Racquet": {
+  "code": "HSPDM",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "330",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 330.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed MP 2026 Racquet": {
+  "code": "HSPMP6",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "329",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 329.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed MP L 2026 Racquet": {
+  "code": "HSMPL6",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "316",
+   "stiffness": "61",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 316.0,
+   "stiffness": 61.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Head Speed MP Legend 2025 Racquet": {
+  "code": "HSMPL5",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "329",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 329.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed MP Racquet": {
+  "code": "SPDM",
+  "specs": {
+   "head": "100 in / 645.16 cm",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "323",
+   "stiffness": "62",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic/Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 323.0,
+   "stiffness": 62.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed Pro 2024 Racquet": {
+  "code": "HSPDP",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.6oz / 329g",
+   "balance": "12.8in / 32.51cm / 6 pts HL",
+   "swingweight": "333",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.6,
+   "weight_g": 329.0,
+   "swingweight": 333.0,
+   "stiffness": 60.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Speed Pro 2026 Racquet": {
+  "code": "HSPDP6",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "328",
+   "stiffness": "61",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 328.0,
+   "stiffness": 61.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Speed Pro Legend 2025 Racquet": {
+  "code": "HSPPL5",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "328",
+   "stiffness": "61",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 328.0,
+   "stiffness": 61.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Head Speed Pro Racquet": {
+  "code": "HSPDP",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.6oz / 329g",
+   "balance": "12.8in / 32.51cm / 6 pts HL",
+   "swingweight": "333",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.6,
+   "weight_g": 329.0,
+   "swingweight": 333.0,
+   "stiffness": 60.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Speed Team 2026 Racquet": {
+  "code": "HSPTM6",
+  "specs": {
+   "head": "105 in² / 677.42 cm²",
+   "length": "27.4in / 69.6cm",
+   "weight": "10oz / 283g",
+   "balance": "13.1in / 33.27cm / 5 pts HL",
+   "swingweight": "303",
+   "stiffness": "62",
+   "beam": "24mm / 24mm / 24mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Medium",
+   "stroke": "Medium",
+   "swing": "Medium",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 105.0,
+   "weight_oz": 10.0,
+   "weight_g": 283.0,
+   "swingweight": 303.0,
+   "stiffness": 62.0,
+   "balance_pts": -5.0
+  }
+ },
+ "Head Speed Tour 2026 Racquet": {
+  "code": "HSPDT6",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "325",
+   "stiffness": "61",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene Inside/Boron/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 325.0,
+   "stiffness": 61.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Squared Racquet": {
+  "code": "HSQUR",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.9oz / 309g",
+   "balance": "12in / 30.48cm / 12",
+   "swingweight": "291",
+   "stiffness": "60",
+   "beam": "23mm / 25mm / 24mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.9,
+   "weight_g": 309.0,
+   "swingweight": 291.0,
+   "stiffness": 60.0
+  }
+ },
+ "Tecnifibre Fire 260 OS Racquet": {
+  "code": "TFFI26",
+  "specs": {
+   "head": "110 in² / 709.68 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "9.7oz / 275g",
+   "balance": "13.19in / 33.5cm / 2 pts HL",
+   "swingweight": "292",
+   "stiffness": "67",
+   "beam": "24.5mm / 25mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Synthetic",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 110.0,
+   "weight_oz": 9.7,
+   "weight_g": 275.0,
+   "swingweight": 292.0,
+   "stiffness": 67.0,
+   "balance_pts": -2.0
+  }
+ },
+ "Tecnifibre Fire 285 Racquet": {
+  "code": "TFFI28",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "313",
+   "stiffness": "67",
+   "beam": "24.5mm / 25mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Synthetic",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 313.0,
+   "stiffness": 67.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Tecnifibre Fire 300 Racquet": {
+  "code": "TFFI30",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "318",
+   "stiffness": "69",
+   "beam": "24.5mm / 25mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Synthetic",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 318.0,
+   "stiffness": 69.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Tecnifibre TF40 290g (16x19) Racquet 2024": {
+  "code": "TF40R9",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.7oz / 303g",
+   "balance": "13.07in / 33.2cm / 3 pts HL",
+   "swingweight": "312",
+   "stiffness": "65",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 10.7,
+   "weight_g": 303.0,
+   "swingweight": 312.0,
+   "stiffness": 65.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Tecnifibre TF40 305g (16x19) Racquet 2024": {
+  "code": "TF40R1",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "13.07in / 33.2cm / 3 pts HL",
+   "swingweight": "320",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 320.0,
+   "stiffness": 64.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Tecnifibre TF40 305g (18x20) Racquet 2024": {
+  "code": "TF40R2",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.12in / 33.32cm / 3 pts HL",
+   "swingweight": "330",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 64.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Tecnifibre TF40 315g (16x19) Racquet 2024": {
+  "code": "TF40R5",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.51in / 31.78cm / 8 pts HL",
+   "swingweight": "319",
+   "stiffness": "63",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 319.0,
+   "stiffness": 63.0,
+   "balance_pts": -8.0
+  }
+ },
+ "Tecnifibre TF40 v1 305 18x20 Racquet": {
+  "code": "TF4018",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.12in / 33.32cm / 3 pts HL",
+   "swingweight": "330",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 64.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Tecnifibre TFight 300 ID Racquet": {
+  "code": "TF30ID",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "318",
+   "stiffness": "65",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 318.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Tecnifibre TFight 300 Racquet": {
+  "code": "TF30ST",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "318",
+   "stiffness": "65",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 318.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Tecnifibre TFight 300S IG Racquet": {
+  "code": "TF3IGS",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "321",
+   "stiffness": "66",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 321.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Tecnifibre TFight 305S ID Racquet": {
+  "code": "TF3SID",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "324",
+   "stiffness": "63",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "50-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 324.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Tecnifibre TFight 305S Racquet": {
+  "code": "TF305S",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "324",
+   "stiffness": "63",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 324.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Tecnifibre TFight 315S Racquet": {
+  "code": "TF315S",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "325",
+   "stiffness": "65",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 325.0,
+   "stiffness": 65.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Tecnifibre TFight Blue 305S Racquet": {
+  "code": "TFB305",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "324",
+   "stiffness": "63",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre X-Tra Feel",
+   "tension": "50-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 324.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Blade 100 v10 Racquet": {
+  "code": "WB1001",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "319",
+   "stiffness": "61",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 319.0,
+   "stiffness": 61.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 100 v9 Racquet": {
+  "code": "WB1009",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "60",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 322.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 100L v10 Racquet": {
+  "code": "WB10L1",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "313",
+   "stiffness": "67",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 313.0,
+   "stiffness": 67.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Wilson Blade 100L v9 Racquet": {
+  "code": "WB100L",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.28in / 33.73cm / 2 pts HL",
+   "swingweight": "308",
+   "stiffness": "69",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 308.0,
+   "stiffness": 69.0,
+   "balance_pts": -2.0
+  }
+ },
+ "Wilson Blade 100UL v9 Racquet": {
+  "code": "WB10UL",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10oz / 283g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "304",
+   "stiffness": "65",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.0,
+   "weight_g": 283.0,
+   "swingweight": 304.0,
+   "stiffness": 65.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Wilson Blade 104 v10 Racquet": {
+  "code": "WB104V",
+  "specs": {
+   "head": "104 in² / 670.97 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "10.8oz / 306g",
+   "balance": "12.99in / 32.99cm / 6 pts HL",
+   "swingweight": "315",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 104.0,
+   "weight_oz": 10.8,
+   "weight_g": 306.0,
+   "swingweight": 315.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Blade 104 v9 Racquet": {
+  "code": "WB104",
+  "specs": {
+   "head": "104 in² / 670.97 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "10.8oz / 306g",
+   "balance": "12.99in / 32.99cm / 6 pts HL",
+   "swingweight": "311",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 104.0,
+   "weight_oz": 10.8,
+   "weight_g": 306.0,
+   "swingweight": 311.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Blade 98 16x19 v10 Racquet": {
+  "code": "WB9810",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 20.5mm",
+   "composition": "Carbon/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 322.0,
+   "stiffness": 61.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98 16x19 v10 US Open Racquet 2026": {
+  "code": "WBUSO26",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 20.5mm",
+   "composition": "Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 322.0,
+   "stiffness": 61.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98 16x19 v9 Racquet": {
+  "code": "WB9816",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "324",
+   "stiffness": "62",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 324.0,
+   "stiffness": 62.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98 18x20 v10 Racquet": {
+  "code": "WB9818",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "325",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 20.5mm",
+   "composition": "Carbon/Braided Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 325.0,
+   "stiffness": 61.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98 18x20 v9 Racquet": {
+  "code": "WB18V",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "330",
+   "stiffness": "60",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98S v9 Racquet": {
+  "code": "WB98SV",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "324",
+   "stiffness": "61",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "Braided Graphite & Basalt",
+   "power": "Low-Medium",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Sublime",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 324.0,
+   "stiffness": 61.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Wilson Blade Pro 100 v10 Racquet": {
+  "code": "WB100P",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.25in / 69.22cm",
+   "weight": "10.9oz / 309g",
+   "balance": "13in / 33.02cm / 5 pts HL",
+   "swingweight": "318",
+   "stiffness": "68",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Medium",
+   "stroke": "Medium",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.9,
+   "weight_g": 309.0,
+   "swingweight": 318.0,
+   "stiffness": 68.0,
+   "balance_pts": -5.0
+  }
+ },
+ "Wilson Blade Pro 98 16x19 v10 Racquet": {
+  "code": "WB98P1",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "337",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Braided Aramid/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 337.0,
+   "stiffness": 61.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Wilson Blade Pro 98 16x19 v9 Racquet": {
+  "code": "WBPRO6",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "337",
+   "stiffness": "61",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 337.0,
+   "stiffness": 61.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Wilson Blade Pro 98 18x20 v9 Racquet": {
+  "code": "WBPROV",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "341",
+   "stiffness": "60",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 341.0,
+   "stiffness": 60.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Wilson Clash 100 Pro v3 Racquet": {
+  "code": "CL1P3V",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "327",
+   "stiffness": "57",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 327.0,
+   "stiffness": 57.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Wilson Clash 100 v3 Racquet": {
+  "code": "CL103V",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "308",
+   "stiffness": "54",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 308.0,
+   "stiffness": 54.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Wilson Clash 100L v3 Racquet": {
+  "code": "CL1L3V",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "301",
+   "stiffness": "54",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 301.0,
+   "stiffness": 54.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Clash 100L v3 Reverse Racquet": {
+  "code": "WC1L3R",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "301",
+   "stiffness": "54",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 301.0,
+   "stiffness": 54.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Clash 108 v3 Racquet": {
+  "code": "CL183V",
+  "specs": {
+   "head": "108 in² / 696.77 cm²",
+   "length": "27.25in / 69.22cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13.5in / 34.29cm / 1 pts HL",
+   "swingweight": "312",
+   "stiffness": "58",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Medium",
+   "stroke": "Medium",
+   "swing": "Medium",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 108.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 312.0,
+   "stiffness": 58.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Wilson Labs Project Shift 99 300g Racquet": {
+  "code": "WLPS30",
+  "specs": {
+   "head": "99 in / 638.71 cm",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "320",
+   "stiffness": "68",
+   "beam": "23.5mm / 23.5mm / 23.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 99.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 320.0,
+   "stiffness": 68.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Pro Staff 97 Classic Racquet": {
+  "code": "WPS97C",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.6in / 32cm / 7 pts HL",
+   "swingweight": "325",
+   "stiffness": "66",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Aramid/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 325.0,
+   "stiffness": 66.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Wilson Pro Staff 97 v14 Racquet": {
+  "code": "W97V14",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.6in / 32cm / 7 pts HL",
+   "swingweight": "325",
+   "stiffness": "66",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Aramid/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 325.0,
+   "stiffness": 66.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Wilson Pro Staff Six.One 95 v14 Racquet": {
+  "code": "W95V14",
+  "specs": {
+   "head": "95 in² / 612.9 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "12.3oz / 349g",
+   "balance": "12.4in / 31.5cm / 9 pts HL",
+   "swingweight": "325",
+   "stiffness": "64",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 95.0,
+   "weight_oz": 12.3,
+   "weight_g": 349.0,
+   "swingweight": 325.0,
+   "stiffness": 64.0,
+   "balance_pts": -9.0
+  }
+ },
+ "Wilson RF 01 Future Racquet": {
+  "code": "WRFFR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "301",
+   "stiffness": "64",
+   "beam": "23.2mm / 23mm / 22mm",
+   "composition": "Carbon +Carbon Braid",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 301.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson RF 01 Pro Racquet": {
+  "code": "WRFPR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.9oz / 337g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "331",
+   "stiffness": "67",
+   "beam": "23.2mm / 23mm / 22mm",
+   "composition": "Carbon +Carbon Braid",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Leather",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.9,
+   "weight_g": 337.0,
+   "swingweight": 331.0,
+   "stiffness": 67.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson RF 01 Racquet": {
+  "code": "WRF1R",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.85in / 32.64cm / 5 pts HL",
+   "swingweight": "319",
+   "stiffness": "64",
+   "beam": "23.2mm / 23mm / 22mm",
+   "composition": "Carbon +Carbon Braid",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 319.0,
+   "stiffness": 64.0,
+   "balance_pts": -5.0
+  }
+ },
+ "Wilson Shift 99 US Open 2024 Racquet": {
+  "code": "USSH99",
+  "specs": {
+   "head": "99 in² / 638.71 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "67",
+   "beam": "23.5mm / 23.5mm / 23.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 99.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 317.0,
+   "stiffness": 67.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Wilson Triad Three Racquet": {
+  "code": "WTRI3",
+  "specs": {
+   "head": "113 in² / 729.03 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "9.8oz / 278g",
+   "balance": "14.56in / 36.98cm / 6 pts HH",
+   "swingweight": "331",
+   "stiffness": "N/A (very low)",
+   "beam": "26mm / 30mm / 26mm",
+   "composition": "Graphite",
+   "power": "Medium-High",
+   "stroke": "Compact-Medium",
+   "swing": "Slow-Moderate",
+   "griptype": "Wilson Synthetic",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 113.0,
+   "weight_oz": 9.8,
+   "weight_g": 278.0,
+   "swingweight": 331.0,
+   "balance_pts": 6.0
+  }
+ },
+ "Wilson Ultra 100 v5 Desert Vibes Racquet": {
+  "code": "WU1V5DV",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "67",
+   "beam": "24mm / 26.5mm / 24.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 322.0,
+   "stiffness": 67.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Ultra 100 v5 Racquet": {
+  "code": "WU1005",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "67",
+   "beam": "24mm / 26.5mm / 24.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 322.0,
+   "stiffness": 67.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Ultra 100L v5 Racquet": {
+  "code": "WU10L5",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "310",
+   "stiffness": "64",
+   "beam": "24mm / 26.5mm / 24.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 310.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Ultra 100UL v5 Racquet": {
+  "code": "WU1UL5",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "9.7oz / 275g",
+   "balance": "13.7in / 34.8cm / 2 pts HH",
+   "swingweight": "290",
+   "stiffness": "65",
+   "beam": "24mm / 26.5mm / 24.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 9.7,
+   "weight_g": 275.0,
+   "swingweight": 290.0,
+   "stiffness": 65.0,
+   "balance_pts": 2.0
+  }
+ },
+ "Wilson Ultra 111 v5 Racquet": {
+  "code": "WU1115",
+  "specs": {
+   "head": "111 in² / 716.13 cm²",
+   "length": "27.25in / 69.22cm",
+   "weight": "10oz / 283g",
+   "balance": "13in / 33.02cm / 5 pts HL",
+   "swingweight": "290",
+   "stiffness": "66",
+   "beam": "26mm / 27.5mm / 25mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Medium-High",
+   "stroke": "Compact-Medium",
+   "swing": "Slow-Moderate",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 111.0,
+   "weight_oz": 10.0,
+   "weight_g": 283.0,
+   "swingweight": 290.0,
+   "stiffness": 66.0,
+   "balance_pts": -5.0
+  }
+ },
+ "Wilson Ultra 99 Pro v5 Racquet": {
+  "code": "WU99P5",
+  "specs": {
+   "head": "99 in² / 638.71 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.17in / 33.45cm / 3 pts HL",
+   "swingweight": "330",
+   "stiffness": "69",
+   "beam": "22mm / 23.5mm / 21.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 99.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 69.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Wilson Ultra Pro 18x20 v4 Racquet": {
+  "code": "WUPRO8",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.76in / 32.41cm / 6 pts HL",
+   "swingweight": "319",
+   "stiffness": "62",
+   "beam": "20.6mm / 20.6mm / 20.6mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 319.0,
+   "stiffness": 62.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Yonex EZONE 100 (2025) Racquet": {
+  "code": "EZ10BB",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "315",
+   "stiffness": "68",
+   "beam": "24.5mm / 26.5mm / 23mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 315.0,
+   "stiffness": 68.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Yonex EZONE 100+ (2025) Racquet": {
+  "code": "LEZ10B",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13.38in / 33.99cm / 3 pts HL",
+   "swingweight": "332",
+   "stiffness": "68",
+   "beam": "24.5mm / 26.5mm / 23mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 332.0,
+   "stiffness": 68.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Yonex EZONE 100+ Racquet": {
+  "code": "EZ10PL",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13.38in / 33.99cm / 3 pts HL",
+   "swingweight": "336",
+   "stiffness": "67",
+   "beam": "23.8mm / 26.5mm / 22.5mm",
+   "composition": "2G-NAMD SPEED/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 336.0,
+   "stiffness": 67.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Yonex EZONE 100L (2025) Racquet": {
+  "code": "EZ1LBB",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "310",
+   "stiffness": "67",
+   "beam": "24.5mm / 26.5mm / 23mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "40-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 310.0,
+   "stiffness": 67.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Yonex EZONE 115 (2025) Racquet": {
+  "code": "EZ115B",
+  "specs": {
+   "head": "115 in² / 741.93 cm²",
+   "length": "27.25in / 69.22cm",
+   "weight": "9.3oz / 264g",
+   "balance": "13.5in / 34.29cm / 1 pts HL",
+   "swingweight": "320",
+   "stiffness": "68",
+   "beam": "27mm / 29.5mm / 25mm",
+   "composition": "Minolon/Nanocell NEO/HM Graphite",
+   "power": "Medium",
+   "stroke": "Medium",
+   "swing": "Medium",
+   "griptype": "Yonex Synthetic",
+   "tension": "40-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 115.0,
+   "weight_oz": 9.3,
+   "weight_g": 264.0,
+   "swingweight": 320.0,
+   "stiffness": 68.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Yonex EZONE 98 (2025) Racquet": {
+  "code": "EZ98BB",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "320",
+   "stiffness": "63",
+   "beam": "23.8mm / 24.5mm / 19.5mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 320.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Yonex EZONE 98+ (2025) Racquet": {
+  "code": "LEZ98B",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.07in / 33.2cm / 5 pts HL",
+   "swingweight": "334",
+   "stiffness": "62",
+   "beam": "23.8mm/24.5mm/19.5mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 334.0,
+   "stiffness": 62.0,
+   "balance_pts": -5.0
+  }
+ },
+ "Yonex Muse 100 Racquet": {
+  "code": "YMUS10",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.9oz / 309g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "311",
+   "stiffness": "55",
+   "beam": "24.5mm / 24.5mm / 18mm",
+   "composition": "HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "40-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.9,
+   "weight_g": 309.0,
+   "swingweight": 311.0,
+   "stiffness": 55.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Yonex Muse 100L Racquet": {
+  "code": "YMU10L",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "balance": "13.18in / 33.47cm / 3HL",
+   "swingweight": "310",
+   "stiffness": "56",
+   "beam": "24.5mm / 24.5mm / 18mm",
+   "composition": "HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "40-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "swingweight": 310.0,
+   "stiffness": 56.0
+  }
+ },
+ "Yonex Muse 98 Racquet": {
+  "code": "YMUS8",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "314",
+   "stiffness": "57",
+   "beam": "24mm / 24mm / 18mm",
+   "composition": "HM Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "40-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 314.0,
+   "stiffness": 57.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Yonex Percept 97 Racquet": {
+  "code": "PERC97",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "315",
+   "stiffness": "60",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "NAMD-2G/H.M.Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 315.0,
+   "stiffness": 60.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Yonex Percept 97D Midnight Navy Racquet": {
+  "code": "PERM9D",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.9oz / 337g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "329",
+   "stiffness": "62",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "NAMD-2G/H.M.Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.9,
+   "weight_g": 337.0,
+   "swingweight": 329.0,
+   "stiffness": 62.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Yonex Percept 97D Racquet": {
+  "code": "PERC9D",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.9oz / 337g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "329",
+   "stiffness": "62",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "NAMD-2G/H.M.Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.9,
+   "weight_g": 337.0,
+   "swingweight": 329.0,
+   "stiffness": 62.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Yonex VCORE 100 8th Gen Racquet": {
+  "code": "VC108G",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "325",
+   "stiffness": "65",
+   "beam": "24mm / 26mm / 23mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 325.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Yonex VCORE 100 Sand Beige Racquet": {
+  "code": "VC10SB",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "322",
+   "stiffness": "65",
+   "beam": "25.3mm / 25.3mm / 22mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 322.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Yonex VCORE 95 8th Gen Racquet": {
+  "code": "VC958G",
+  "specs": {
+   "head": "95 in² / 612.9 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "323",
+   "stiffness": "62",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 95.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 323.0,
+   "stiffness": 62.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Yonex VCORE 98 Tour 8th Gen Racquet": {
+  "code": "VC9T8G",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "334",
+   "stiffness": "64",
+   "beam": "23mm / 23.5mm / 22mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 334.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ }
+}

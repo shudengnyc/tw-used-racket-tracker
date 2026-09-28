@@ -100,7 +100,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add used_prices.csv history.csv seen.json snapshot.json thumbs thumbs_large
+          git add used_prices.csv history.csv seen.json snapshot.json models.json thumbs thumbs_large
           # Nothing changed on a quiet run -- that is a success, not a failure.
           if git diff --cached --quiet; then
             echo "No price changes this run."
@@ -111,8 +111,8 @@ jobs:
             # newer one. During a rebase "--theirs" is the commit being
             # replayed -- ours, from this run.
             if ! git pull --rebase; then
-              git checkout --theirs -- used_prices.csv seen.json snapshot.json
-              git add used_prices.csv seen.json snapshot.json
+              git checkout --theirs -- used_prices.csv seen.json snapshot.json models.json
+              git add used_prices.csv seen.json snapshot.json models.json
               GIT_EDITOR=true git rebase --continue || { git rebase --abort; exit 1; }
             fi
             # A union merge can leave repeated rows; collapse them.
