@@ -65,6 +65,14 @@ The same listings as `snapshot.json`, flattened for a spreadsheet. `specs` and
 `nspec` are Python dict reprs and every value is a string. Nothing reads it
 back; do not rebuild from it.
 
+## `models.json`
+
+`{racquet name: {"code": str, "specs": {...}, "nspec": {...}}}` — the same
+`code`/`specs`/`nspec` a listing carries, for every racquet ever listed.
+Updated on each scrape (newest wins) so it outlives the listings; the Sold tab
+reads it for photos, links and specs. Rebuild from git with
+`tools/backfill_models.py`.
+
 ## `watch.json`
 
 Hand-edited list of deal-alert watches; the fields are documented in the

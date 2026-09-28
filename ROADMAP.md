@@ -67,15 +67,20 @@ listings:
 - Next step if wanted: a "Watch this" button on the page's saved searches
   that produces the `watch.json` entry (the fields already line up).
 
+### Days listed and Sold (2026-09-28)
+
+- "Sold" means gone from the site. TW doesn't distinguish sold from
+  withdrawn; the notes paragraph says so rather than pretending.
+- Computed at page-build time from history.csv, not stored per listing, so
+  `--pull` rebuilds and old snapshots get it for free.
+- Known gap: a scrape run with `--brands` narrower than TARGET_BRANDS would
+  make the other brands' listings look sold on that build (and rewrites
+  seen.json the same way). The scheduled run never does this.
+
 ## Parked ideas
 
 Not planned; recorded so they are not re-derived.
 
-- **Sold-through tracking.** A SKU disappearing means it sold or was pulled.
-  Recording when and at what price would show how long deals last and what
-  price clears.
-- **More brands.** Babolat and Dunlop are the gaps. One line in
-  `TARGET_BRANDS`; `TWO_WORD` in `report.py` already has the Babolat lines.
 - **Offline support (service worker).** The published page installs to a home
   screen but is not offline-capable. A service worker could serve the last
   page instantly and refresh behind it, but stale prices shown as current are

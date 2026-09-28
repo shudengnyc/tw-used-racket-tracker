@@ -315,6 +315,9 @@ tbody tr:hover .pic{transform:scale(1.09)}
 .name a{font:600 14.5px/1.35 var(--sans);color:var(--ink);text-decoration:none;
  display:block;position:relative}
 .name a:hover{color:var(--accent)}
+.name .brand .age{margin-left:6px;color:var(--muted);letter-spacing:.06em}
+.soldnote{font:400 12px/1.4 var(--mono);color:var(--ink2);white-space:normal}
+.soldnote b{color:var(--ink);font-weight:600}
 .name .brand{display:block;font:400 10.5px/1 var(--mono);letter-spacing:.12em;
  text-transform:uppercase;color:var(--muted);margin-top:6px}
 tbody tr:hover .name{background:color-mix(in srgb,var(--ink) 3%,var(--plane))}
@@ -586,6 +589,7 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
         <button data-view="deals">Deals</button>
         <button data-view="cheap">Under $150</button>
         <button data-view="trap">Avoid · __NTRAP__</button>
+        <button data-view="sold">Sold · __NSOLD__</button>
       </div>
       <div class="deck-actions">
         <label class="tog"><input type="checkbox" id="group" checked> Group identical</label>
@@ -667,6 +671,7 @@ code{font:400 11.5px var(--mono);background:color-mix(in srgb,var(--ink) 7%,tran
 
 <script id="data" type="application/json">__DATA__</script>
 <script id="series" type="application/json">__SERIES__</script>
+<script id="sold" type="application/json">__SOLD__</script>
 <script id="thumbs" type="application/json">__THUMBS__</script>
 <script>
 const ROWS = JSON.parse(document.getElementById('data').textContent);
@@ -681,7 +686,8 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g,
   c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const SPEC_IDS = ['head_min','head_max','wt_min','wt_max','sw_min','sw_max','st_min','st_max'];
 const RANK = {'LOWEST EVER':0,'BELOW USUAL':2,'':4,'typical':4,'high':5};
-ROWS.forEach(r => {
+const SOLD = JSON.parse(document.getElementById('sold').textContent);
+ROWS.concat(SOLD).forEach(r => {
   r.rank = r.new_cheaper ? 9
          : r.verdict === 'LOWEST EVER' ? 0
          : r.was_price ? 1                       // marked down since we first saw it
@@ -726,6 +732,8 @@ const SORTS = {
   stiffness:    {label: 'Stiffness', dir: 1, words: ['Soft → stiff', 'Stiff → soft']},
   // Balance runs head-light (negative) to head-heavy.
   balance_pts:  {label: 'Balance', dir: 1, words: ['Head-light first', 'Head-heavy first']},
+  listed_days:  {label: 'Days listed', dir: 1, words: ['Newest first', 'Longest listed first']},
+  sold_on:      {label: 'Date sold', dir: -1, words: ['Oldest first', 'Most recent first']},
 };
 const DEFAULT_SORT = 'discount_pct';
 let sortKey = DEFAULT_SORT, sortDir = SORTS[DEFAULT_SORT].dir, view = 'all';
@@ -983,6 +991,22 @@ function priceSub(r){
   return `<s>${n}</s> <span class="cut">${r.discount_pct}% off</span>`;
 }
 
+/* "listed 12 days" -- how long a live listing has been up. A + means it was
+   already up when tracking began, so the real figure is higher. */
+function ageTag(r){
+  if (r.listed_days == null) return '';
+  const d = r.listed_days, plus = r.listed_plus ? '+' : '';
+  const txt = d === 0 && !plus ? 'listed today' : `listed ${d}${plus} day${d === 1 && !plus ? '' : 's'}`;
+  // The dot keeps it from reading as part of the review count before it.
+  return `<span class="age">· ${txt}</span>`;
+}
+const shortDate = iso => new Date(iso + 'T12:00').toLocaleDateString([], {month: 'short', day: 'numeric'});
+function soldNote(r){
+  const plus = r.listed_plus ? '+' : '';
+  return `<span class="soldnote">Last seen <b>${shortDate(r.sold_on)}</b> · up ${r.listed_days}${plus} days` +
+         (r.was_price ? ` · first $${r.was_price.toFixed(0)}` : '') + '</span>';
+}
+
 function signal(r){
   if (r.new_cheaper) return '<span class="tag t-trap">⚠ buy new</span>';
   if (r.verdict==='LOWEST EVER') return '<span class="tag t-low">▼ lowest ever</span>';
@@ -1014,7 +1038,8 @@ function render(){
   const q = $('q').value.toLowerCase().trim();
   const g = $('grade').value, gr = $('grip').value;
 
-  let rows = ROWS.filter(r =>
+  const SRC = view === 'sold' ? SOLD : ROWS;
+  let rows = SRC.filter(r =>
     (!q || r.racquet.toLowerCase().includes(q)) &&
     (!brandSel.size || brandSel.has(r.brand)) &&
     (!g || r.grade===g) && (!gr || r.grip===gr) &&
@@ -1048,16 +1073,18 @@ function render(){
     <td class="name"><div class="nw">${thumb(r)}<div>
       <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(tidy(r.racquet))}</a>
       <span class="brand">${esc(r.brand)}${r.units>1?`<span class="units">${r.units} available</span>`:''}${
-        r.rating?`<span class="rate"><b>${r.rating}</b>/5 · ${r.reviews}</span>`:''}</span>
+        r.rating?`<span class="rate"><b>${r.rating}</b>/5 · ${r.reviews}</span>`:''}${
+        r.sold ? '' : ageTag(r)}</span>
       </div></div><span class="caret">▶</span></td>
     <td class="r pricecell">
       <span class="p">$${r.used_price.toFixed(0)}</span>
       <span class="psub">${priceSub(r)}</span></td>
     <td class="grade"><span class="chip">${esc((r.grade||'—').replace('Grade ',''))}</span></td>
     <td class="grip">${r.grip ? esc(r.grip) : '<span class="dash">—</span>'}</td>
-    <td class="col-signal" title="${esc(r.basis ? 'Compared with ' + r.basis : '')}">${signal(r)}${r.median?` <span class="med">~$${Math.round(r.median)}</span>`:''}</td>
+    <td class="col-signal" title="${esc(r.basis ? 'Compared with ' + r.basis : '')}">${r.sold ? soldNote(r) :
+      signal(r) + (r.median ? ` <span class="med">~$${Math.round(r.median)}</span>` : '')}</td>
     <td class="col-spark">${spark(r.key)}</td>
-    <td class="col-qty r num">${r.units>1?r.units:(r.in_stock??'')}</td></tr>
+    <td class="col-qty r num">${r.sold ? '' : r.units>1?r.units:(r.in_stock??'')}</td></tr>
     <tr class="det" data-i="${i}"><td colspan="${COLS}">${details(r)}</td></tr>`).join('');
 
   const active = SPEC_IDS.concat(['grade','grip']).filter(id => $(id).value !== '').length;
@@ -1074,11 +1101,12 @@ function render(){
 
   // The phone has room for the numbers but not the sentence.
   const narrow = matchMedia('(max-width: 720px)').matches;
+  const noun = view === 'sold' ? 'sold' : 'listings';
   const folded = total - rows.length;
   $('count').textContent = $('group').checked && folded
-    ? (narrow ? `${rows.length} of ${ROWS.length} · ${folded} folded`
-              : `${rows.length} of ${ROWS.length} listings · ${folded} duplicates folded in`)
-    : `${rows.length} of ${ROWS.length} listings`;
+    ? (narrow ? `${rows.length} of ${SRC.length} · ${folded} folded`
+              : `${rows.length} of ${SRC.length} ${noun} · ${folded} duplicates folded in`)
+    : `${rows.length} of ${SRC.length} ${noun}`;
   $('empty').hidden = rows.length > 0;
 }
 
@@ -1186,7 +1214,7 @@ $('sortby').innerHTML = Object.entries(SORTS)
   .map(([k, s]) => `<option value="${k}">${s.label}</option>`).join('');
 
 const SORT_KEY = 'tw_sort';
-function setSort(k, dir){
+function setSort(k, dir, persist = true){
   if (!SORTS[k]) return;
   sortKey = k;
   sortDir = dir === 1 || dir === -1 ? dir : SORTS[k].dir;
@@ -1201,7 +1229,7 @@ function setSort(k, dir){
     th.setAttribute('aria-sort', on ? (sortDir > 0 ? 'ascending' : 'descending') : 'none');
     th.querySelector('.ar').textContent = on && sortDir > 0 ? '▲' : '▼';
   });
-  try { localStorage.setItem(SORT_KEY, JSON.stringify({k: sortKey, d: sortDir})); } catch (e) {}
+  if (persist) try { localStorage.setItem(SORT_KEY, JSON.stringify({k: sortKey, d: sortDir})); } catch (e) {}
   render();
 }
 
@@ -1211,11 +1239,23 @@ document.querySelectorAll('th[data-k]').forEach(th =>
     setSort(th.dataset.k, th.dataset.k === sortKey ? -sortDir : undefined)));
 $('sortdir').addEventListener('click', () => setSort(sortKey, -sortDir));
 
+// The Sold tab opens on "most recently sold", and leaving it puts back the
+// sort you had -- without saving the Sold one as your preference.
+let sortBeforeSold = null;
 document.querySelectorAll('.tabs button').forEach(btn => btn.onclick = () => {
   document.querySelectorAll('.tabs button')
     .forEach(o => o.setAttribute('aria-pressed', o === btn));
+  const was = view;
   view = btn.dataset.view;
-  render();
+  if (view === 'sold' && was !== 'sold') {
+    sortBeforeSold = {k: sortKey, d: sortDir};
+    setSort('sold_on', -1, false);
+  } else if (was === 'sold' && view !== 'sold' && sortBeforeSold) {
+    setSort(sortBeforeSold.k, sortBeforeSold.d, false);
+    sortBeforeSold = null;
+  } else {
+    render();
+  }
 });
 
 ['q','grade','grip','group'].concat(SPEC_IDS)
@@ -1408,6 +1448,68 @@ def load_thumbs(thumb_dir, codes, inline=True):
     return out
 
 
+SOLD_WINDOW_DAYS = 90      # how far back the Sold tab reaches
+
+
+def lifetimes(hist_path, listings, asof):
+    """How long listings have been up, and what has sold.
+
+    Returns ({sku: (days listed, open-ended?)}, [sold rows]). A sold row is a
+    SKU in history that is not in the current scrape: Tennis Warehouse only
+    removes a used listing when it sells (or, rarely, is withdrawn -- it
+    doesn't say which). "Open-ended" means it was already up when history
+    began, so the true count is higher.
+    """
+    first, last, first_price = {}, {}, {}
+    for row in histfile.rows(hist_path):
+        sku, day = row["sku"], row["date"]
+        if sku not in first or day < first[sku]:
+            first[sku], first_price[sku] = day, row["price"]
+        if sku not in last or day >= last[sku]["date"]:
+            last[sku] = row
+    if not first:
+        return {}, []
+    start = min(first.values())
+    days = lambda a, b: (dt.date.fromisoformat(b) - dt.date.fromisoformat(a)).days
+
+    live = {r["sku"] for r in listings}
+    listed = {sku: (days(first[sku], asof.isoformat()), first[sku] == start)
+              for sku in live if sku in first}
+
+    models_path = os.path.join(os.path.dirname(hist_path), "models.json")
+    models = {}
+    if os.path.exists(models_path):
+        with open(models_path, encoding="utf-8") as f:
+            models = json.load(f)
+    sold = []
+    for sku, row in last.items():
+        if sku in live or days(row["date"], asof.isoformat()) > SOLD_WINDOW_DAYS:
+            continue
+        price = row["price"]
+        try:
+            new = float(row["new_price"])
+        except (TypeError, ValueError):
+            new = None
+        m = models.get(row["racquet"], {})
+        code = m.get("code")
+        sold.append({
+            "brand": row["brand"], "racquet": row["racquet"], "grade": row["grade"],
+            "grip": row["grip"], "used_price": price, "new_price": new,
+            "discount_pct": round(100 * (new - price) / new) if new else "",
+            "new_cheaper": False, "in_stock": "", "sku": sku, "code": code,
+            "url": f"https://www.tennis-warehouse.com/orderusedproduct.html?pcode={code}"
+                   if code else "",
+            "specs": m.get("specs") or {}, "nspec": m.get("nspec") or {},
+            "is_new": False, "verdict": "", "median": None, "basis": "",
+            # Its opening price, when it came down before selling.
+            "was_price": first_price[sku] if first_price[sku] > price else None,
+            "sold": True, "sold_on": row["date"],
+            "listed_days": days(first[sku], row["date"]),
+            "listed_plus": first[sku] == start,
+        })
+    return listed, sold
+
+
 def load_series(hist_path):
     """{racquet||grade: [[date, min price that day], ...]} for the sparklines."""
     by_day = {}
@@ -1491,6 +1593,12 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
                      "before they can fire, so most rows currently read <i>new</i>. The "
                      "Trend column appears once there are two days to compare.</p>")
     else:
+        notes.append("<p><b>Sold</b> lists used racquets that have left the site in "
+                     f"the last {SOLD_WINDOW_DAYS} days, at the last price they carried "
+                     "and how long they were up. Tennis Warehouse only removes a listing "
+                     "when it sells (or, rarely, is withdrawn — it doesn't say which). "
+                     "<b>Listed</b> on a live listing counts from the first day it was "
+                     "seen; a <b>+</b> means it was already up when tracking began.</p>")
         notes.append("<p>Signals compare each listing against that same racquet and "
                      "grade's own past prices, not a fixed threshold. Each listing counts "
                      "once per price it has carried, however long it sat there. With "
@@ -1521,7 +1629,10 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     # served as separate files so they stay in the browser cache. The local and
     # artifact builds stay one self-contained file.
     split = mode == "pages"
-    thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings if r.get("code")},
+    listed, sold = lifetimes(hist_path, listings, now.date())
+    for r in listings:
+        r["listed_days"], r["listed_plus"] = listed.get(r.get("sku"), (None, False))
+    thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings + sold if r.get("code")},
                          inline=not split)
     site = os.path.dirname(path)
     if split and FONT_CSS:
@@ -1538,7 +1649,7 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
                             dirs_exist_ok=True)
 
     series = load_series(hist_path)
-    keys = {f"{r['racquet']}||{r['grade']}" for r in listings}
+    keys = {f"{r['racquet']}||{r['grade']}" for r in listings + sold}
     series = {k: v for k, v in series.items() if k in keys and len(v) >= 2}
 
     # .get, not [], so a snapshot written before a field existed still renders.
@@ -1547,9 +1658,11 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
                                "new_price", "discount_pct", "in_stock", "url",
                                "is_new", "verdict", "median", "basis", "was_price",
                                "new_cheaper", "code", "list_price", "rating",
-                               "reviews", "specs", "nspec")}
+                               "reviews", "specs", "nspec", "listed_days",
+                               "listed_plus")}
         for r in listings
     ]).replace("<", "\\u003c")
+    sold_payload = json.dumps(sold).replace("<", "\\u003c")
 
     page = (("" if web else LOCAL_HEAD)
             + (PWA_HEAD if split else "")
@@ -1585,6 +1698,8 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
             .replace("__SERIES__", json.dumps(series).replace("<", "\\u003c"))
             .replace("__THUMBS__", json.dumps(thumbs).replace("<", "\\u003c"))
             .replace("__SCRAPED_ISO__", json.dumps(now.isoformat()))
+            .replace("__SOLD__", sold_payload)
+            .replace("__NSOLD__", str(len(sold)))
             .replace("__DATA__", payload))
 
     tmp = path + ".tmp"

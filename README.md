@@ -84,6 +84,20 @@ That button cache-busts on purpose: Pages serves the report with
 `Cache-Control: max-age=600`, so a plain reload inside ten minutes would quietly
 re-show the cached copy and look broken.
 
+## Days listed and the Sold tab
+
+Each live listing shows how long it has been up (`listed 12 days`; a `+`
+means it was already up when tracking began on 2026-08-06). The **Sold** tab
+lists listings that left the site in the last 90 days — Tennis Warehouse only
+removes a used listing when it sells, or rarely when it's withdrawn — at the
+last price they carried, when they were last seen, and how long they lasted.
+It opens sorted most-recent-first; leaving it restores your usual sort.
+
+Both are computed from `history.csv` when the page is built, so they need no
+extra scraping. `models.json` keeps each racquet's code and specs after its
+last listing is gone, so sold rows keep their photo and link; it was
+backfilled from past snapshots with `tools/backfill_models.py`.
+
 ## Deal alerts
 
 A quarter of used listings sell within four days, so the page alone is too
@@ -155,6 +169,7 @@ data. The measured trade-offs, and a rejected alternative, are in
 | `histfile.py` | The one reader for `history.csv` |
 | `alerts.py` | Deal alerts: matches new listings against `watch.json`, opens an issue |
 | `watch.json` | What you want to be alerted about — edit this |
+| `models.json` | Every racquet's product code and specs, kept after it sells (for the Sold tab) |
 | `alerted.json` | Listings already alerted, so none is sent twice (written by CI) |
 | `tests/` | Parser and judging tests against saved pages |
 | `tools/eval_judge.py` | Replays history to compare judging methods |
