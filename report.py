@@ -1454,15 +1454,17 @@ SOLD_WINDOW_DAYS = 90      # how far back the Sold tab reaches
 def lifetimes(hist_path, listings, asof):
     """How long listings have been up, and what has sold.
 
-    Returns ({sku: (days listed, open-ended?)}, [sold rows]). A sold row is a
-    SKU in history that is not in the current scrape: Tennis Warehouse only
+    Returns ({(sku, racquet): (days listed, open-ended?)}, [sold rows]). A
+    listing is its SKU *and* racquet, because Tennis Warehouse reuses SKU codes
+    for different racquets once one sells. A sold row is a listing in history
+    that is not in the current scrape: Tennis Warehouse only
     removes a used listing when it sells (or, rarely, is withdrawn -- it
     doesn't say which). "Open-ended" means it was already up when history
     began, so the true count is higher.
     """
     first, last, first_price = {}, {}, {}
     for row in histfile.rows(hist_path):
-        sku, day = row["sku"], row["date"]
+        sku, day = (row["sku"], row["racquet"]), row["date"]
         if sku not in first or day < first[sku]:
             first[sku], first_price[sku] = day, row["price"]
         if sku not in last or day >= last[sku]["date"]:
@@ -1472,7 +1474,7 @@ def lifetimes(hist_path, listings, asof):
     start = min(first.values())
     days = lambda a, b: (dt.date.fromisoformat(b) - dt.date.fromisoformat(a)).days
 
-    live = {r["sku"] for r in listings}
+    live = {(r["sku"], r["racquet"]) for r in listings}
     listed = {sku: (days(first[sku], asof.isoformat()), first[sku] == start)
               for sku in live if sku in first}
 
@@ -1496,7 +1498,7 @@ def lifetimes(hist_path, listings, asof):
             "brand": row["brand"], "racquet": row["racquet"], "grade": row["grade"],
             "grip": row["grip"], "used_price": price, "new_price": new,
             "discount_pct": round(100 * (new - price) / new) if new else "",
-            "new_cheaper": False, "in_stock": "", "sku": sku, "code": code,
+            "new_cheaper": False, "in_stock": "", "sku": sku[0], "code": code,
             "url": f"https://www.tennis-warehouse.com/orderusedproduct.html?pcode={code}"
                    if code else "",
             "specs": m.get("specs") or {}, "nspec": m.get("nspec") or {},
@@ -1631,7 +1633,8 @@ def write_html(listings, path, days, hist_path, mode="local", thumb_dir=None,
     split = mode == "pages"
     listed, sold = lifetimes(hist_path, listings, now.date())
     for r in listings:
-        r["listed_days"], r["listed_plus"] = listed.get(r.get("sku"), (None, False))
+        r["listed_days"], r["listed_plus"] = listed.get((r.get("sku"), r.get("racquet")),
+                                                       (None, False))
     thumbs = load_thumbs(thumb_dir, {r.get("code") for r in listings + sold if r.get("code")},
                          inline=not split)
     site = os.path.dirname(path)

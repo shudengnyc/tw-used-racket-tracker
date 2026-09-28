@@ -74,9 +74,9 @@ def discount(day, _cache={}):
             used, new = float(h["used_price"]), float(h["new_price"])
         except ValueError:
             continue
-        if not new or (h["sku"], used) in seen:
+        if not new or (h["sku"], h["racquet"], used) in seen:
             continue
-        seen.add((h["sku"], used))
+        seen.add((h["sku"], h["racquet"], used))
         off = 100 * (new - used) / new
         by_rq.setdefault(h["racquet"], []).append(off)
         by_bg.setdefault((h["brand"], h["grade"]), []).append(off)

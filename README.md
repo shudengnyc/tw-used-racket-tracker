@@ -100,7 +100,7 @@ backfilled from past snapshots with `tools/backfill_models.py`.
 
 ## Deal alerts
 
-A quarter of used listings sell within four days, so the page alone is too
+Nearly half of used listings sell within four days (median: six), so the page alone is too
 slow. After every scrape, listings that are new or repriced in the last 24
 hours are checked against [`watch.json`](watch.json); new matches are opened
 as one GitHub issue (label `deal-alert`) that @-mentions you, so GitHub emails
@@ -130,7 +130,7 @@ alert** ticked (Actions → Check used racquets → Run workflow), or
 the workflow: GitHub doesn't notify you of an issue you opened yourself.
 
 Replayed over the first 53 days of history: "lowest ever" would have alerted
-on 4 days, 40%+ off on 2, any markdown on 19, any new listing on 30.
+on 4 days, 40%+ off on 2, any markdown on 6, any new listing on 30.
 
 ## How listings are judged
 

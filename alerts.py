@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deal alerts: tell the owner when a new listing matches their watch list.
 
-A quarter of used listings sell within four days, so checking the page is
+Nearly half of used listings sell within four days, so checking the page is
 not fast enough. After each scrape the workflow runs this: every listing that
 appeared (or was repriced) in the last 24 hours is checked against watch.json,
 and new matches become one GitHub issue that @-mentions the repo owner --
@@ -159,7 +159,7 @@ def body(found, owner=None, page_url=None):
     lines.append("")
     if page_url:
         lines.append(f"All listings: {page_url}")
-    lines.append("Used racquets sell fast — a quarter are gone within four days. "
+    lines.append("Used racquets sell fast — nearly half are gone within four days. "
                  "Edit `watch.json` to change what alerts you; close this issue "
                  "when you're done with it.")
     return "\n".join(lines)

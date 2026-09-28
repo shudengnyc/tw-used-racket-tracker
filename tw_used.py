@@ -445,18 +445,29 @@ def load_history(before=None, distinct=True, path=None):
             continue
         price = row["price"]
         if distinct:
-            if (row["sku"], price) in seen:
+            if (*listing_id(row), price) in seen:
                 continue
-            seen.add((row["sku"], price))
+            seen.add((*listing_id(row), price))
         hist.setdefault((row["racquet"], row["grade"]), []).append(price)
     return hist
 
 
+def listing_id(row):
+    """(sku, racquet): what identifies one used racquet over time.
+
+    Not the SKU alone -- Tennis Warehouse recycles SKU codes. Once a used
+    racquet sells its code can be given to a different racquet (57 of the
+    first 214 codes were), and keyed on the SKU the new racquet inherited the
+    old one's price trail as a fake markdown and its first-seen date.
+    """
+    return row["sku"], row["racquet"]
+
+
 def load_sku_prices():
-    """{sku: [(date, price), ...]} -- every price each exact listing has carried."""
+    """{listing_id: [(date, price), ...]} -- every price each listing has carried."""
     out = {}
     for row in histfile.rows(HIST_PATH):
-        out.setdefault(row["sku"], []).append((row["date"], row["price"]))
+        out.setdefault(listing_id(row), []).append((row["date"], row["price"]))
     return out
 
 
@@ -489,7 +500,7 @@ def marked_down_from(row, sku_hist):
     honest signal: a lower price than it carried last time is a markdown, and
     the previous figure is worth showing. None when it never cost more.
     """
-    trail = sorted(sku_hist.get(row["sku"], []))
+    trail = sorted(sku_hist.get(listing_id(row), []))
     for _date, price in reversed(trail):
         if price != row["used_price"]:
             return price if price > row["used_price"] else None

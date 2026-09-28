@@ -138,14 +138,18 @@ class JudgeTest(unittest.TestCase):
                          ("", None, ""))
 
     def test_marked_down_from(self):
-        hist = {"S1": [("2026-09-01", 229.0), ("2026-09-05", 189.0),
-                       ("2026-09-06", 139.0)]}
-        row = {"sku": "S1", "used_price": 139.0}
+        hist = {("S1", "R"): [("2026-09-01", 229.0), ("2026-09-05", 189.0),
+                              ("2026-09-06", 139.0)],
+                # The same SKU code later reused for a different racquet.
+                ("S1", "Other"): [("2026-09-20", 99.0)]}
+        row = {"sku": "S1", "racquet": "R", "used_price": 139.0}
         self.assertEqual(tw_used.marked_down_from(row, hist), 189.0)
+        self.assertIsNone(tw_used.marked_down_from({**row, "used_price": 239.0}, hist))
         self.assertIsNone(tw_used.marked_down_from(
-            {"sku": "S1", "used_price": 239.0}, hist))
+            {"sku": "S2", "racquet": "R", "used_price": 1.0}, hist))
+        # A recycled code does not inherit the old racquet's prices.
         self.assertIsNone(tw_used.marked_down_from(
-            {"sku": "S2", "used_price": 1.0}, hist))
+            {"sku": "S1", "racquet": "Other", "used_price": 99.0}, hist))
 
 
 class DistinctHistoryTest(unittest.TestCase):
@@ -258,6 +262,29 @@ class AlertsTest(unittest.TestCase):
         b2 = alerts.body([(self.R, ["Any"])] * 2, owner="me")
         self.assertTrue(b2.startswith("@me — 2 new listings match your watch list."))
         self.assertIn("was $199", b)
+
+
+class LifetimesTest(unittest.TestCase):
+    def test_reused_sku_is_a_separate_listing(self):
+        import datetime as dt
+        import tempfile
+        import report
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False) as f:
+            f.write("date,brand,racquet,grade,grip,used_price,new_price,sku\n"
+                    "2026-09-01,W,Old,Grade B,4,200,300,S1\n"
+                    "2026-09-03,W,Old,Grade B,4,180,300,S1\n"   # marked down, then sold
+                    "2026-09-10,W,New,Grade A,4,250,300,S1\n"   # code reused
+                    "2026-09-12,W,New,Grade A,4,250,300,S1\n")
+        try:
+            live = [{"sku": "S1", "racquet": "New"}]
+            listed, sold = report.lifetimes(f.name, live, dt.date(2026, 9, 12))
+            self.assertEqual(listed, {("S1", "New"): (2, False)})
+            self.assertEqual([(s["racquet"], s["used_price"], s["was_price"],
+                               s["sold_on"], s["listed_days"], s["listed_plus"])
+                              for s in sold],
+                             [("Old", 180.0, 200.0, "2026-09-03", 2, True)])
+        finally:
+            os.unlink(f.name)
 
 if __name__ == "__main__":
     unittest.main()

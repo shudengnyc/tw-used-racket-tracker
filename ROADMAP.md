@@ -63,7 +63,8 @@ listings:
 - Only CI sends. A scrape from the Mac reaches CI as a push, and that run
   sends; `alerted.json` makes "first run to see it" the sender either way.
 - Starting watches are deliberately rare ("lowest ever", 40%+ off). Any
-  markdown would have alerted on 19 of 53 days; any new listing on 30.
+  markdown would have alerted on 6 of 53 days; any new listing on 30. (First
+  measured as 19 -- inflated by the SKU-reuse bug below.)
 - Next step if wanted: a "Watch this" button on the page's saved searches
   that produces the `watch.json` entry (the fields already line up).
 
@@ -76,6 +77,20 @@ listings:
 - Known gap: a scrape run with `--brands` narrower than TARGET_BRANDS would
   make the other brands' listings look sold on that build (and rewrites
   seen.json the same way). The scheduled run never does this.
+
+### SKU codes are recycled (found 2026-09-28)
+
+Tennis Warehouse gives a sold racquet's SKU code to a later, different
+racquet: 57 of the first 214 codes were reused. Everything that treated a SKU
+as permanent was wrong for those: 11 of 15 live "was $" markdowns were a
+previous racquet's price, reused codes inherited old first-seen dates, and
+the Sold tab lost 81 of its 168 listings. A listing is now identified by
+`(sku, racquet)` -- `listing_id()` in tw_used.py. With that fixed, the
+sell-through picture is sharper: median 6 days listed, 44% gone within 4.
+
+seen.json and alerted.json still key on `sku|price`; a clash there needs the
+same code and the same price on two racquets live at once, which can't
+happen because a code is only reused after its racquet sells.
 
 ## Parked ideas
 
