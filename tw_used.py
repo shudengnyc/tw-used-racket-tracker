@@ -65,6 +65,12 @@ MIN_OBS_POOL = 4
 BELOW_USUAL = 0.9
 HIGH = 1.1
 
+# The scheduled run fires hourly through the day, because GitHub delays its
+# cron by hours and silently drops slots. Each run only scrapes when the last
+# scrape -- from GitHub or the Mac -- is at least this old; the rest exit in
+# seconds. Net effect: a scrape roughly every 3 hours whichever slots land.
+SCRAPE_EVERY = dt.timedelta(hours=2.5)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "used_prices.csv")     # latest snapshot
 HIST_PATH = os.path.join(HERE, "history.csv")        # append-only, all runs
@@ -893,6 +899,15 @@ def load_snapshot():
     if isinstance(snap, list):        # written before the timestamp was added
         return snap, None
     return snap["listings"], dt.datetime.fromisoformat(snap["scraped"])
+
+
+def scrape_due(now=None):
+    """True when the last recorded scrape is SCRAPE_EVERY old, or unknown."""
+    _rows, scraped_at = load_snapshot()
+    if scraped_at is None:
+        return True
+    now = now or dt.datetime.now(dt.timezone.utc)
+    return now - scraped_at.astimezone(dt.timezone.utc) >= SCRAPE_EVERY
 
 
 def finish(listings, args, scraped_at=None):

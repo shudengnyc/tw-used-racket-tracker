@@ -5,11 +5,13 @@ done; its individual changes are in git history (`git log --since=2026-09-18`).
 
 ## Follow-ups
 
-- [ ] **~2026-09-25: check the schedule lands 6 runs a day.** The cron moved
-  from `:00` to `:17` because only ~4 of 6 top-of-hour runs were landing.
+- [x] **2026-09-28: schedule checked -- the :17 move did not help.** Still 3-4
+  scheduled runs a day, starting 1-2 h late; the 6am and noon slots almost
+  never ran. Replaced with an hourly trigger gated on data age (see README).
+- [ ] **~2026-10-05: check scrapes now land ~6 a day.** Count commits, not
+  runs (most hourly runs exit without scraping):
   ```sh
-  gh run list --workflow check-racquets.yml --limit 60 --json createdAt,event \
-    --jq '[.[]|select(.event=="schedule")|.createdAt[0:10]]|group_by(.)|map("\(.[0]) \(length)")|.[]'
+  git log --since=2026-09-29 --author=github-actions --format=%ad --date=short | sort | uniq -c
   ```
 - [ ] **~2026-10-18: re-run `python3 tools/eval_judge.py`.** Watch whether the
   latest-day "none" count keeps falling for A and B, and whether C's "high"

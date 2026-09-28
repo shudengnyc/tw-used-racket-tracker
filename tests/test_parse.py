@@ -177,5 +177,25 @@ class HistFileTest(unittest.TestCase):
             os.unlink(f.name)
         self.assertEqual(histfile.rows(f.name), [])
 
+
+class ScrapeDueTest(unittest.TestCase):
+    def test_due_after_the_gap(self):
+        import datetime as dt
+        import json
+        import tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump({"scraped": "2026-09-28T10:00:00-07:00", "listings": []}, f)
+        saved = tw_used.SNAP_PATH
+        tw_used.SNAP_PATH = f.name
+        try:
+            at = lambda hhmm: dt.datetime.fromisoformat(f"2026-09-28T{hhmm}:00-07:00")
+            self.assertFalse(tw_used.scrape_due(at("12:29")))    # 2h29m
+            self.assertTrue(tw_used.scrape_due(at("12:30")))     # 2h30m
+            tw_used.SNAP_PATH = f.name + ".missing"
+            self.assertTrue(tw_used.scrape_due())                # no snapshot yet
+        finally:
+            tw_used.SNAP_PATH = saved
+            os.unlink(f.name)
+
 if __name__ == "__main__":
     unittest.main()

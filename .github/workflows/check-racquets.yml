@@ -2,16 +2,15 @@ name: Check used racquets
 
 on:
   schedule:
-    # Six times a day, every 3 hours from 6am to 9pm Pacific -- nothing
-    # overnight. Cron is always UTC and has no notion of DST, so these are
-    # Pacific Daylight (UTC-7); from November to March they land an hour
-    # earlier, 5am-8pm. Close enough not to chase.
-    # At :17 past, not :00 -- GitHub delays or drops top-of-the-hour crons
-    # under load, and only ~4 of 6 were landing.
-    #   13:17 UTC = 6:17am    22:17 UTC = 3:17pm
-    #   16:17 UTC = 9:17am    01:17 UTC = 6:17pm
-    #   19:17 UTC = 12:17pm   04:17 UTC = 9:17pm
-    - cron: "17 13,16,19,22,1,4 * * *"
+    # Hourly from 6am to 9pm Pacific, nothing overnight. GitHub does not keep
+    # to cron times: with six fixed 3-hourly slots, runs started 1-2 hours
+    # late and the 6am and noon slots almost never ran, leaving ~3 scrapes a
+    # day with gaps up to 11 hours. So ask every hour and let the "Is a scrape
+    # due?" step below decide: it scrapes only when the last scrape is 2.5
+    # hours old (SCRAPE_EVERY in tw_used.py), and otherwise the run ends in
+    # seconds without committing or redeploying.
+    # Cron is UTC with no DST; 13-04 UTC is 6am-9pm PDT, 5am-8pm in winter.
+    - cron: "23 13-23,0-4 * * *"
   workflow_dispatch:        # the "Run workflow" button
 
   # A scrape on the Mac pushes its results here; republish them so the phone
@@ -47,6 +46,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Scheduled runs fire hourly; only one in ~3 has anything to do. Pushes
+      # and the Run workflow button always go ahead.
+      - name: Is a scrape due?
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = schedule ] &&
+             [ "$(python3 -c 'import tw_used; print(tw_used.scrape_due())')" = False ]; then
+            echo "Last scrape is under 2.5 hours old -- nothing to do."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
+
       # No setup-python and no pip install: the runner already ships a python3
       # and tw_used.py is pure standard library. Skipping the action saves a
       # couple of seconds on every run.
@@ -55,9 +67,11 @@ jobs:
       # broken; a layout change on Tennis Warehouse shows up in the scrape
       # step instead (it exits 2 or 3).
       - name: Run tests
+        if: steps.gate.outputs.go == 'true'
         run: python3 -m unittest -v
 
       - name: Build the report
+        if: steps.gate.outputs.go == 'true'
         # Runners are UTC; without this the report is stamped in UTC and the
         # "as of" time reads hours off.
         env:
@@ -74,7 +88,7 @@ jobs:
       - name: Commit price history
         # A push-triggered run scrapes nothing, so there is never anything new
         # to record -- the data is what the Mac just pushed.
-        if: github.event_name != 'push'
+        if: steps.gate.outputs.go == 'true' && github.event_name != 'push'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -102,6 +116,7 @@ jobs:
           fi
 
       - name: Assemble the Pages site
+        if: steps.gate.outputs.go == 'true'
         # --html-mode pages already wrote site/index.html, site/fonts.css,
         # the web app manifest and the icons.
         # The images are linked by relative path so browsers cache them
@@ -112,8 +127,11 @@ jobs:
       # just reads that config. Don't add `enablement: true` -- it needs an
       # admin token the workflow's GITHUB_TOKEN doesn't have.
       - uses: actions/configure-pages@v5
+        if: steps.gate.outputs.go == 'true'
       - uses: actions/upload-pages-artifact@v3
+        if: steps.gate.outputs.go == 'true'
         with:
           path: site
       - id: deploy
+        if: steps.gate.outputs.go == 'true'
         uses: actions/deploy-pages@v4

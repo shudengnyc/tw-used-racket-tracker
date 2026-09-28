@@ -162,10 +162,14 @@ long a cached copy may be shown before it misleads — see [ROADMAP.md](ROADMAP.
 
 ## The scheduled run
 
-`.github/workflows/check-racquets.yml` runs six times a day, every three hours
-from 6:17am to 9:17pm Pacific (off the hour, where GitHub's scheduler is less
-crowded), and on push. Cron is UTC and has no notion of DST, so
-from November to March those land an hour earlier.
+`.github/workflows/check-racquets.yml` scrapes about every three hours from
+6am to 9pm Pacific, and republishes on push. GitHub does not keep to cron
+times -- fixed 3-hourly slots started 1-2 hours late and some never ran -- so
+the workflow is triggered **hourly** and its first step checks whether a scrape
+is due: only when the last one (from GitHub or the Mac) is 2.5 hours old
+(`SCRAPE_EVERY` in `tw_used.py`). The other runs finish in seconds with no
+commit and no redeploy. Cron is UTC with no DST, so in winter it all lands an
+hour earlier.
 
 Actions and Pages are free on public repositories. A run takes ~25s, of which
 the scrape is ~5s and the rest is GitHub's own setup and Pages deploy.
