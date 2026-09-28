@@ -51,7 +51,8 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 # --- settings: the knobs worth turning -------------------------------------
 # Change these, then run tools/eval_judge.py to see the effect on past data.
 
-TARGET_BRANDS = ["Wilson", "Yonex", "Tecnifibre", "Head", "Prince", "Solinco"]
+TARGET_BRANDS = ["Wilson", "Yonex", "Tecnifibre", "Head", "Prince", "Solinco",
+                 "Dunlop", "Babolat"]
 
 # How many distinct past prices before a verdict is trustworthy. A racquet's
 # own grade needs MIN_OBS; when it has fewer, the racquet's other grades are
@@ -201,6 +202,20 @@ def get_catalog():
     return parse_catalog(fetch(CATALOG))
 
 
+# The catalog names some brands by company: "Prince Direct", "Solinco LLC".
+# Matched exactly, those never equalled "Prince" or "Solinco", and neither
+# brand was tracked at all from August to 2026-09-28.
+COMPANY_SUFFIXES = ("Direct", "LLC", "Inc", "Inc.", "USA")
+
+
+def brand_name(raw):
+    """"Solinco LLC" -> "Solinco"; plain brand names pass through."""
+    words = raw.split()
+    while len(words) > 1 and words[-1] in COMPANY_SUFFIXES:
+        words.pop()
+    return " ".join(words)
+
+
 def parse_catalog(page):
     """The used-racquet catalog page -> one dict per racquet, first seen wins."""
     out, seen = [], set()
@@ -219,7 +234,7 @@ def parse_catalog(page):
         out.append({
             "code": code,
             "name": html.unescape(m.group("name")),
-            "brand": html.unescape(m.group("brand")),
+            "brand": brand_name(html.unescape(m.group("brand"))),
             "new_price": _num(m.group("price")),
             "list_price": _num(msrp.group(1)) if msrp else None,
             "rating": float(rating.group(1)) if rating else None,
@@ -854,12 +869,18 @@ def main():
     key = lambda r: f"{r['sku']}|{r['used_price']}"
     now = dt.datetime.now()
     first_seen = load_first_seen()
+    # A brand scraped for the first time (just added to TARGET_BRANDS) brings
+    # its whole stock at once. None of it is new -- it was only invisible to
+    # us -- so it must not light up as "new" or fire deal alerts.
+    known_brands = {row["brand"] for row in histfile.rows(HIST_PATH, priced=False)
+                    if row["date"] < today}
     fresh = {}
     for r in listings:
         k = key(r)
         # Carry the original sighting forward; only a key never seen before --
         # a new listing, or an old one at a new price -- starts its clock now.
-        since = first_seen.get(k, now)
+        unseen = now if r["brand"] in known_brands or not known_brands else now - NEW_FOR
+        since = first_seen.get(k, unseen)
         fresh[k] = since.isoformat(timespec="seconds")
         r["is_new"] = now - since < NEW_FOR
         r["verdict"], r["median"], r["basis"] = judge(r, hist, factors)

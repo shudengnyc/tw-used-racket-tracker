@@ -13,7 +13,9 @@ Every run appends to `history.csv`, and each listing is judged against *that
 racquet's own past prices* rather than one blunt threshold, so "cheap" means
 cheap for that frame. See [How listings are judged](#how-listings-are-judged).
 
-Brands tracked: Wilson, Yonex, Tecnifibre, Head, Prince, Solinco.
+Brands tracked: Wilson, Yonex, Tecnifibre, Head, Prince, Solinco, Dunlop, Babolat
+(Babolat had no used stock when added). The catalog names some brands by
+company ("Solinco LLC"); `brand_name()` strips that so they match.
 
 ## Using it
 

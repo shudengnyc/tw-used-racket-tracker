@@ -36,6 +36,13 @@ class CatalogTest(unittest.TestCase):
             "brand": "Wilson", "new_price": 199.0, "list_price": 269.0,
             "rating": 4.7, "reviews": 39, "flags": ["sale"]})
 
+    def test_company_names_become_brands(self):
+        self.assertEqual(tw_used.brand_name("Prince Direct"), "Prince")
+        self.assertEqual(tw_used.brand_name("Solinco LLC"), "Solinco")
+        self.assertEqual(tw_used.brand_name("Wilson"), "Wilson")
+        brands = {c["brand"] for c in self.cat}
+        self.assertFalse(any(b.endswith((" LLC", " Direct")) for b in brands), brands)
+
     def test_every_racquet_has_the_basics(self):
         for c in self.cat:
             self.assertTrue(c["name"] and c["brand"], c)
