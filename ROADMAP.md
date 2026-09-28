@@ -62,7 +62,8 @@ listings:
   GitHub app's push, with nothing else to sign up for or hold a token for.
 - Only CI sends. A scrape from the Mac reaches CI as a push, and that run
   sends; `alerted.json` makes "first run to see it" the sender either way.
-- Starting watches are deliberately rare ("lowest ever", 40%+ off). Any
+- Watches (all limited to 4 1/4" and 4 3/8" grips): "lowest ever", 40%+ off,
+  and any markdown (added once the SKU fix showed markdowns are rare). Any
   markdown would have alerted on 6 of 53 days; any new listing on 30. (First
   measured as 19 -- inflated by the SKU-reuse bug below.)
 - Next step if wanted: a "Watch this" button on the page's saved searches
