@@ -65,6 +65,17 @@ The same listings as `snapshot.json`, flattened for a spreadsheet. `specs` and
 `nspec` are Python dict reprs and every value is a string. Nothing reads it
 back; do not rebuild from it.
 
+## `watch.json`
+
+Hand-edited list of deal-alert watches; the fields are documented in the
+README and at the top of `alerts.py`, and checked by `check_watches()`.
+
+## `alerted.json`
+
+Written only by the workflow. A sorted list of `sku|used_price` keys (the
+`seen.json` key format) already sent as alerts, trimmed each time to listings
+still on sale.
+
 ## `seen.json`
 
 When each listing-at-a-price was first seen, for "new or repriced":

@@ -7,6 +7,7 @@ regexes until these pass, and update the expected values below.
     python3 -m unittest -v
 """
 import gzip
+import json
 import os
 import unittest
 
@@ -196,6 +197,58 @@ class ScrapeDueTest(unittest.TestCase):
         finally:
             tw_used.SNAP_PATH = saved
             os.unlink(f.name)
+
+
+class AlertsTest(unittest.TestCase):
+    R = {"sku": "S1", "racquet": "Wilson Blade 98 v9 Racquet", "brand": "Wilson",
+         "grade": "Grade B", "grip": '4 3/8"', "used_price": 169.0,
+         "discount_pct": 32, "new_cheaper": False, "is_new": True,
+         "verdict": "typical", "was_price": 199.0, "url": "u",
+         "nspec": {"head_in2": 98.0, "weight_oz": 11.4}}
+
+    def test_matching(self):
+        import alerts
+        m = lambda **w: alerts.matches(self.R, w)
+        self.assertTrue(m())
+        self.assertTrue(m(q="blade 98", brands=["Wilson"], grades=["Grade A", "Grade B"],
+                          grips=['4 3/8"'], max_price=170, min_discount=30))
+        self.assertFalse(m(q="Clash"))
+        self.assertFalse(m(grips=['4 1/4"']))
+        self.assertFalse(m(max_price=150))
+        self.assertFalse(m(min_discount=40))
+        self.assertTrue(m(signals=["markdown"]))
+        self.assertFalse(m(signals=["lowest ever"]))
+        self.assertTrue(m(specs={"head_min": 97, "head_max": 100}))
+        self.assertFalse(m(specs={"wt_max": 11.0}))
+        self.assertFalse(m(specs={"sw_min": 300}))        # spec unknown -> no match
+        self.assertFalse(alerts.matches({**self.R, "new_cheaper": True}, {}))
+
+    def test_pending_sends_once_and_only_new(self):
+        import alerts
+        old = {**self.R, "sku": "S2", "is_new": False}
+        found = alerts.pending([self.R, old], [{"name": "Any"}], set())
+        self.assertEqual([(r["sku"], n) for r, n in found], [("S1", ["Any"])])
+        self.assertEqual(alerts.pending([self.R], [{}], {"S1|169.0"}), [])
+        # A markdown is a new key, so it alerts again.
+        cut = {**self.R, "used_price": 149.0}
+        self.assertEqual(len(alerts.pending([cut], [{}], {"S1|169.0"})), 1)
+
+    def test_watch_file_is_checked(self):
+        import alerts
+        with self.assertRaises(ValueError):
+            alerts.check_watches([{"name": "x", "grip": ['4 3/8"']}])   # typo
+        with self.assertRaises(ValueError):
+            alerts.check_watches([{"signals": ["cheap"]}])
+        with open(alerts.WATCH_PATH, encoding="utf-8") as f:
+            alerts.check_watches(json.load(f))                        # the real one
+
+    def test_issue_text(self):
+        import alerts
+        t = alerts.title([(self.R, ["Any"])])
+        self.assertEqual(t, 'Deal alert: Wilson Blade 98 v9 $169 (B, 4 3/8")')
+        b = alerts.body([(self.R, ["Any"])], owner="me", page_url="p")
+        self.assertTrue(b.startswith("@me"))
+        self.assertIn("was $199", b)
 
 if __name__ == "__main__":
     unittest.main()

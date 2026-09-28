@@ -24,12 +24,15 @@ on:
       - report.py           # or the report itself changed
       - tw_used.py
       - histfile.py
+      - alerts.py
+      - watch.json          # so a new watch is checked straight away
 
 # Least privilege: write the data files back, and publish the report to Pages.
 permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write             # deal alerts are opened as issues
 
 # Never let two runs race on the same commit history.
 concurrency:
@@ -135,3 +138,20 @@ jobs:
       - id: deploy
         if: steps.gate.outputs.go == 'true'
         uses: actions/deploy-pages@v4
+
+      # Last, so a problem sending an alert never holds up the page. Runs on
+      # pushes too: a scrape from the Mac arrives that way, and whichever run
+      # sees a new match first sends it (alerted.json stops repeats).
+      - name: Send deal alerts
+        if: steps.gate.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 alerts.py
+          git add alerted.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -q -m "Record sent deal alerts"
+            git pull -q --rebase && git push -q
+          fi

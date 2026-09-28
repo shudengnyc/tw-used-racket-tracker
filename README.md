@@ -82,6 +82,36 @@ That button cache-busts on purpose: Pages serves the report with
 `Cache-Control: max-age=600`, so a plain reload inside ten minutes would quietly
 re-show the cached copy and look broken.
 
+## Deal alerts
+
+A quarter of used listings sell within four days, so the page alone is too
+slow. After every scrape, listings that are new or repriced in the last 24
+hours are checked against [`watch.json`](watch.json); new matches are opened
+as one GitHub issue (label `deal-alert`) that @-mentions you, so GitHub emails
+you and notifies its mobile app. Each listing-at-a-price alerts once
+(`alerted.json` remembers); a markdown is a new price and alerts again.
+
+To change what alerts you, edit `watch.json` — on the GitHub website works
+fine from a phone. Committing it re-checks the current listings straight away.
+Every field is optional, and a listing must pass all the fields a watch sets:
+
+```json
+[
+  {"name": "Blade 98 in my grip", "q": "Blade 98",
+   "grades": ["Grade A", "Grade B"], "grips": ["4 3/8\""], "max_price": 180},
+  {"name": "Lowest price ever seen", "signals": ["lowest ever"]}
+]
+```
+
+Fields: `q` (name contains), `brands`, `grades`, `grips`, `max_price`,
+`min_discount` (% off new), `signals` (any of `lowest ever`, `below usual`,
+`markdown`), `specs` (`head_min`/`max`, `wt_min`/`max`, `sw_min`/`max`,
+`st_min`/`max`). A typo fails the run loudly rather than silently matching
+nothing. Preview without sending: `python3 alerts.py --dry-run`.
+
+Replayed over the first 53 days of history: "lowest ever" would have alerted
+on 4 days, 40%+ off on 2, any markdown on 19, any new listing on 30.
+
 ## How listings are judged
 
 The Signal column, in priority order:
@@ -117,6 +147,9 @@ data. The measured trade-offs, and a rejected alternative, are in
 | `tw_used.py` | Scraping, history, judging, git sync, CLI (settings at the top) |
 | `report.py` | Builds the HTML report (local build self-contained; Pages build links fonts and thumbnails) |
 | `histfile.py` | The one reader for `history.csv` |
+| `alerts.py` | Deal alerts: matches new listings against `watch.json`, opens an issue |
+| `watch.json` | What you want to be alerted about — edit this |
+| `alerted.json` | Listings already alerted, so none is sent twice (written by CI) |
 | `tests/` | Parser and judging tests against saved pages |
 | `tools/eval_judge.py` | Replays history to compare judging methods |
 | `tools/make_icons.py` | Draws `icons/` — rerun after changing the design |

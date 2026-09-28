@@ -1,0 +1,4 @@
+[
+  {"name": "Lowest price ever seen", "signals": ["lowest ever"]},
+  {"name": "40% or more off new", "min_discount": 40}
+]

@@ -56,13 +56,21 @@ listings:
 - A scrape with more than max(2, 10%) failed pages records nothing, so missed
   listings don't lose their first-seen dates.
 
+### Deal alerts (2026-09-28)
+
+- Delivered as a GitHub issue that @-mentions the owner: email plus the
+  GitHub app's push, with nothing else to sign up for or hold a token for.
+- Only CI sends. A scrape from the Mac reaches CI as a push, and that run
+  sends; `alerted.json` makes "first run to see it" the sender either way.
+- Starting watches are deliberately rare ("lowest ever", 40%+ off). Any
+  markdown would have alerted on 19 of 53 days; any new listing on 30.
+- Next step if wanted: a "Watch this" button on the page's saved searches
+  that produces the `watch.json` entry (the fields already line up).
+
 ## Parked ideas
 
 Not planned; recorded so they are not re-derived.
 
-- **Watchlist alerts.** Saved searches exist client-side. A `watch.json` of
-  filters checked in CI, notifying via a GitHub Issue, would turn the tracker
-  from pull to push.
 - **Sold-through tracking.** A SKU disappearing means it sold or was pulled.
   Recording when and at what price would show how long deals last and what
   price clears.
