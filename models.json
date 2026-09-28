@@ -1,4 +1,212 @@
 {
+ "Dunlop CX 200 OS Racquet": {
+  "code": "DCX2OS",
+  "specs": {
+   "head": "105 in² / 677.42 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.9oz / 309g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "319",
+   "stiffness": "63",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Viper Dry",
+   "tension": "40-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 105.0,
+   "weight_oz": 10.9,
+   "weight_g": 309.0,
+   "swingweight": 319.0,
+   "stiffness": 63.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Dunlop CX 200 Racquet": {
+  "code": "DCX2S",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.63in / 32.08cm / 7 pts HL",
+   "swingweight": "314",
+   "stiffness": "64",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Viper Dry",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 314.0,
+   "stiffness": 64.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Dunlop CX 200 Tour 16x19 Racquet": {
+  "code": "DCX2T6",
+  "specs": {
+   "head": "95 in² / 612.9 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "314",
+   "stiffness": "66",
+   "beam": "20.5mm / 20.5mm / 20.5mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Viper Dry",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 95.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 314.0,
+   "stiffness": 66.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Dunlop CX 400 Tour Racquet": {
+  "code": "DCX4T",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "317",
+   "stiffness": "66",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Viper Dry",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 317.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Dunlop FX 500 LS Racquet": {
+  "code": "DF50LS",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "307",
+   "stiffness": "67",
+   "beam": "23mm / 26mm / 23mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Synthetic",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 307.0,
+   "stiffness": 67.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Dunlop FX 500 Lite Racquet": {
+  "code": "DF50LI",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10oz / 283g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "306",
+   "stiffness": "67",
+   "beam": "23mm / 26mm / 23mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Synthetic",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.0,
+   "weight_g": 283.0,
+   "swingweight": 306.0,
+   "stiffness": 67.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Dunlop FX 500 Tour Racquet": {
+  "code": "DF50T",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "322",
+   "stiffness": "65",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Synthetic",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 322.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Dunlop SX 300 Tour Racquet 2025": {
+  "code": "DSXTR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "321",
+   "stiffness": "69",
+   "beam": "23mm / 26mm / 23mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Compact-Medium",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Synthetic",
+   "tension": "45-65 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 321.0,
+   "stiffness": 69.0,
+   "balance_pts": -6.0
+  }
+ },
  "Head Boom MP 2024 Racquet": {
   "code": "HBOOMM",
   "specs": {
@@ -1163,6 +1371,341 @@
    "weight_g": 309.0,
    "swingweight": 291.0,
    "stiffness": 60.0
+  }
+ },
+ "Prince O3 Phantom 100X Racquet 2025": {
+  "code": "PO310X",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "324",
+   "stiffness": "66",
+   "beam": "19mm / 20mm / 20mm",
+   "composition": "Textreme/Zylon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince ResiTex Tour",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 324.0,
+   "stiffness": 66.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Prince Tour 100 290g 2026 Racquet": {
+  "code": "PTR629",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.8oz / 306g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "316",
+   "stiffness": "64",
+   "beam": "22mm / 23mm / 20mm",
+   "composition": "Textreme/Zylon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.8,
+   "weight_g": 306.0,
+   "swingweight": 316.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Prince Tour 100 310g 2026 Racquet": {
+  "code": "PTR631",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "321",
+   "stiffness": "63",
+   "beam": "22mm / 23mm / 20mm",
+   "composition": "Textreme/Zylon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 321.0,
+   "stiffness": 63.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Prince Tour 100P 2026 Racquet": {
+  "code": "PTR61P",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "325",
+   "stiffness": "61",
+   "beam": "22mm / 23mm / 20mm",
+   "composition": "Textreme/Zylon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 325.0,
+   "stiffness": 61.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Solinco Blackout 285 Racquet": {
+  "code": "BLKO28",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "315",
+   "stiffness": "70",
+   "beam": "23.5mm / 26mm / 23mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 315.0,
+   "stiffness": 70.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Solinco Blackout 300 XTD v2 Camo Racquet": {
+  "code": "BKOCAX",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.8in / 32.51cm / 8 pts HL",
+   "swingweight": "327",
+   "stiffness": "67",
+   "beam": "23.5mm / 26mm / 23mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 327.0,
+   "stiffness": 67.0,
+   "balance_pts": -8.0
+  }
+ },
+ "Solinco Whiteout 290 Racquet": {
+  "code": "WHTO29",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.7oz / 303g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "314",
+   "stiffness": "67",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 10.7,
+   "weight_g": 303.0,
+   "swingweight": 314.0,
+   "stiffness": 67.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Solinco Whiteout 290 v2 Camo Racquet": {
+  "code": "WTOCAL",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.7oz / 303g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "315",
+   "stiffness": "65",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Solinco Synthetic"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 10.7,
+   "weight_g": 303.0,
+   "swingweight": 315.0,
+   "stiffness": 65.0,
+   "balance_pts": -3.0
+  }
+ },
+ "Solinco Whiteout 305 18x20 Racquet": {
+  "code": "WHO18X",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "324",
+   "stiffness": "66",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 324.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Solinco Whiteout 305 Racquet": {
+  "code": "WHTO30",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "327",
+   "stiffness": "66",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 327.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Solinco Whiteout 305 XTD 18x20 Racquet": {
+  "code": "WO18XT",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 6 pts HL",
+   "swingweight": "331",
+   "stiffness": "65",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 331.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Solinco Whiteout 305 XTD v2 Camo Racquet": {
+  "code": "WTOCAX",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 6 pts HL",
+   "swingweight": "333",
+   "stiffness": "65",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 333.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Solinco Whiteout 305 v2 Camo Racquet": {
+  "code": "WTOCAH",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "328",
+   "stiffness": "65",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 328.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
   }
  },
  "Tecnifibre Fire 260 OS Racquet": {
