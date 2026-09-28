@@ -13,6 +13,7 @@ is sent once, whichever run -- a scheduled scrape or a push from the Mac --
 sees it first. A markdown is a new price, so it alerts again.
 
     python3 alerts.py --dry-run    # print what would be sent; send nothing
+    python3 alerts.py --test       # send one sample alert, marked TEST; record nothing
 
 watch.json is a list of watches. Every field is optional; a listing must pass
 all the fields a watch sets, and matching any one watch is enough:
@@ -174,6 +175,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dry-run", action="store_true",
                     help="print the alert that would be sent; send and record nothing")
+    ap.add_argument("--test", action="store_true",
+                    help="send one sample alert built from a current listing, "
+                         "marked TEST, to check delivery; records nothing")
     args = ap.parse_args()
 
     watches = _load(WATCH_PATH, [])
@@ -185,7 +189,14 @@ def main():
     listings = snap["listings"] if isinstance(snap, dict) else snap
     alerted = set(_load(ALERTED_PATH, []))
 
-    found = pending(listings, watches, alerted)
+    if args.test:
+        # The best current deal, whether or not it is new or watched -- it only
+        # has to look like the real thing.
+        best = max((r for r in listings if not r.get("new_cheaper")),
+                   key=lambda r: r.get("discount_pct") or 0)
+        found = [(best, ["TEST"])]
+    else:
+        found = pending(listings, watches, alerted)
     if not found:
         print(f"No new matches for {len(watches)} watch(es).")
         return 0
@@ -194,6 +205,10 @@ def main():
     owner = os.environ.get("GITHUB_REPOSITORY_OWNER") or (repo.split("/")[0] or None)
     page = f"https://{owner}.github.io/{repo.split('/')[1]}/" if "/" in repo else None
     t, b = title(found), body(found, owner, page)
+    if args.test:
+        t = "TEST — " + t
+        b = ("**This is a test alert** — nothing new matched; this checks that "
+             "alerts reach you. Real ones look exactly like this.\n\n" + b)
     if args.dry_run:
         print(t, "\n", b, sep="")
         return 0
@@ -208,6 +223,8 @@ def main():
         print(f"Couldn't open the alert issue: {r.stderr.strip()}", file=sys.stderr)
         return 1
     print(f"Alerted: {r.stdout.strip()}")
+    if args.test:
+        return 0                           # a test records nothing
 
     # Remember what was sent. Keys for listings no longer on sale are dropped,
     # which keeps the file as small as the current catalog.

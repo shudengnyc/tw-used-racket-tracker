@@ -12,6 +12,11 @@ on:
     # Cron is UTC with no DST; 13-04 UTC is 6am-9pm PDT, 5am-8pm in winter.
     - cron: "23 13-23,0-4 * * *"
   workflow_dispatch:        # the "Run workflow" button
+    inputs:
+      test_alert:
+        description: "Also send a TEST deal alert, to check it reaches you"
+        type: boolean
+        default: false
 
   # A scrape on the Mac pushes its results here; republish them so the phone
   # doesn't sit on older prices than the laptop. This does NOT scrape again --
@@ -148,6 +153,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 alerts.py
+          if [ "${{ inputs.test_alert }}" = true ]; then python3 alerts.py --test; fi
           git add alerted.json 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git config user.name  "github-actions[bot]"

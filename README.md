@@ -107,7 +107,11 @@ Fields: `q` (name contains), `brands`, `grades`, `grips`, `max_price`,
 `min_discount` (% off new), `signals` (any of `lowest ever`, `below usual`,
 `markdown`), `specs` (`head_min`/`max`, `wt_min`/`max`, `sw_min`/`max`,
 `st_min`/`max`). A typo fails the run loudly rather than silently matching
-nothing. Preview without sending: `python3 alerts.py --dry-run`.
+nothing. Preview without sending: `python3 alerts.py --dry-run`. To check
+alerts still reach you, run the workflow by hand with **Also send a TEST deal
+alert** ticked (Actions → Check used racquets → Run workflow), or
+`gh workflow run check-racquets.yml -f test_alert=true`. It has to come from
+the workflow: GitHub doesn't notify you of an issue you opened yourself.
 
 Replayed over the first 53 days of history: "lowest ever" would have alerted
 on 4 days, 40%+ off on 2, any markdown on 19, any new listing on 30.

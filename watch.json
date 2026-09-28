@@ -1,4 +1,6 @@
 [
-  {"name": "Lowest price ever seen", "signals": ["lowest ever"]},
-  {"name": "40% or more off new", "min_discount": 40}
+  {"name": "Lowest price ever seen", "signals": ["lowest ever"],
+   "grips": ["4 1/4\"", "4 3/8\""]},
+  {"name": "40% or more off new", "min_discount": 40,
+   "grips": ["4 1/4\"", "4 3/8\""]}
 ]
