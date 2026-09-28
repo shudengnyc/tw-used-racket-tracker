@@ -247,7 +247,9 @@ class AlertsTest(unittest.TestCase):
         t = alerts.title([(self.R, ["Any"])])
         self.assertEqual(t, 'Deal alert: Wilson Blade 98 v9 $169 (B, 4 3/8")')
         b = alerts.body([(self.R, ["Any"])], owner="me", page_url="p")
-        self.assertTrue(b.startswith("@me"))
+        self.assertTrue(b.startswith("@me — 1 new listing matches your watch list."))
+        b2 = alerts.body([(self.R, ["Any"])] * 2, owner="me")
+        self.assertTrue(b2.startswith("@me — 2 new listings match your watch list."))
         self.assertIn("was $199", b)
 
 if __name__ == "__main__":

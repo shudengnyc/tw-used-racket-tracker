@@ -146,8 +146,9 @@ def title(found):
 def body(found, owner=None, page_url=None):
     lines = []
     if owner:
-        lines.append(f"@{owner} — {len(found)} new listing"
-                     f"{'s' if len(found) > 1 else ''} match your watch list.\n")
+        n = len(found)
+        lines.append(f"@{owner} — {n} new listing{'s' if n > 1 else ''} "
+                     f"match{'' if n > 1 else 'es'} your watch list.\n")
     lines += ["| Racquet | Price | Off new | Grade | Grip | Signal | Watch |",
               "|---|---|---|---|---|---|---|"]
     for r, names in found:
