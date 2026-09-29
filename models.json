@@ -1,4 +1,30 @@
 {
+ "Babolat Pure Strike EVO Racquet": {
+  "code": "PSEVO",
+  "specs": {
+   "head": "102 in² / 658.06 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.4oz / 295g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "308",
+   "stiffness": "65",
+   "beam": "23mm / 25mm / 23mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Synthetic",
+   "tension": "50-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 102.0,
+   "weight_oz": 10.4,
+   "weight_g": 295.0,
+   "swingweight": 308.0,
+   "stiffness": 65.0,
+   "balance_pts": -4.0
+  }
+ },
  "Dunlop CX 200 OS Racquet": {
   "code": "DCX2OS",
   "specs": {
@@ -257,6 +283,32 @@
    "swingweight": 316.0,
    "stiffness": 61.0,
    "balance_pts": -6.0
+  }
+ },
+ "Head Boom MP L 2026 Purple Racquet": {
+  "code": "BMPLA6",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.2oz / 289g",
+   "balance": "13.18in / 33.48cm / 3 pts HL",
+   "swingweight": "305",
+   "stiffness": "63",
+   "beam": "23mm / 24mm / 22mm",
+   "composition": "Boron/Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.2,
+   "weight_g": 289.0,
+   "swingweight": 305.0,
+   "stiffness": 63.0,
+   "balance_pts": -3.0
   }
  },
  "Head Boom MP Mint Racquet": {
@@ -1162,6 +1214,32 @@
    "weight_oz": 11.2,
    "weight_g": 318.0,
    "swingweight": 329.0,
+   "stiffness": 60.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Head Speed MP Legend Racquet": {
+  "code": "HSPMPL",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "330",
+   "stiffness": "60",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "Auxetic 2/Graphene 360+/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 330.0,
    "stiffness": 60.0,
    "balance_pts": -4.0
   }
@@ -3341,6 +3419,32 @@
    "balance_pts": -6.0
   }
  },
+ "Yonex Percept 100 Racquet": {
+  "code": "PERC",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "318",
+   "stiffness": "66",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "2G-Namd/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 318.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
  "Yonex Percept 97 Racquet": {
   "code": "PERC97",
   "specs": {
@@ -3469,6 +3573,32 @@
    "swingweight": 322.0,
    "stiffness": 65.0,
    "balance_pts": -4.0
+  }
+ },
+ "Yonex VCORE 100L Sand Beige Racquet": {
+  "code": "VC1LSB",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.5oz / 298g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "312",
+   "stiffness": "66",
+   "beam": "25.3mm / 25.3mm / 22mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.5,
+   "weight_g": 298.0,
+   "swingweight": 312.0,
+   "stiffness": 66.0,
+   "balance_pts": -1.0
   }
  },
  "Yonex VCORE 95 8th Gen Racquet": {
