@@ -2826,6 +2826,32 @@
    "balance_pts": -7.0
   }
  },
+ "Wilson Pro Staff Six.One 100 v14 Racquet": {
+  "code": "WPS614",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "326",
+   "stiffness": "65",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 326.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
+  }
+ },
  "Wilson Pro Staff Six.One 95 v14 Racquet": {
   "code": "W95V14",
   "specs": {
@@ -3443,6 +3469,32 @@
    "swingweight": 318.0,
    "stiffness": 66.0,
    "balance_pts": -4.0
+  }
+ },
+ "Yonex Percept 100D Midnight Navy Racquet": {
+  "code": "PERM1D",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "318",
+   "stiffness": "66",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "NAMD-2G/H.M.Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 318.0,
+   "stiffness": 66.0,
+   "balance_pts": -6.0
   }
  },
  "Yonex Percept 97 Racquet": {
