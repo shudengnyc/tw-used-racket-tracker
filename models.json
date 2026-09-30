@@ -1,4 +1,186 @@
 {
+ "Babolat Pure Strike 100 16x20 Racquet 2024": {
+  "code": "PS1620",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "320",
+   "stiffness": "61",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 320.0,
+   "stiffness": 61.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Babolat Pure Strike 100 3rd Gen Racquet": {
+  "code": "BPSTRI",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "319",
+   "stiffness": "69",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "50-59 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 319.0,
+   "stiffness": 69.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Babolat Pure Strike 100 Racquet 2024": {
+  "code": "STRPS",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.99in / 32.99cm / 4 pts HL",
+   "swingweight": "324",
+   "stiffness": "63",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 324.0,
+   "stiffness": 63.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Babolat Pure Strike 18x20 3rd Gen Racquet": {
+  "code": "PS182",
+  "specs": {
+   "head": "98 in 2 / 632.26 cm 2",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "334",
+   "stiffness": "66",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "50-59 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 334.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Babolat Pure Strike 97 Racquet": {
+  "code": "PS97S",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "321",
+   "stiffness": "63",
+   "beam": "21mm / 22mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "LEATHER!",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 321.0,
+   "stiffness": 63.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Babolat Pure Strike 98 16x19 Racquet 2024": {
+  "code": "PSRKT",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "330",
+   "stiffness": "64",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 330.0,
+   "stiffness": 64.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Babolat Pure Strike 98 18x20 Racquet 2024": {
+  "code": "PSSTRR",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "332",
+   "stiffness": "63",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 332.0,
+   "stiffness": 63.0,
+   "balance_pts": -4.0
+  }
+ },
  "Babolat Pure Strike EVO Racquet": {
   "code": "PSEVO",
   "specs": {
@@ -23,6 +205,58 @@
    "swingweight": 308.0,
    "stiffness": 65.0,
    "balance_pts": -4.0
+  }
+ },
+ "Babolat Pure Strike Team Racquet 2024": {
+  "code": "BSRKT",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.7oz / 303g",
+   "balance": "13.38in / 33.99cm / 1 pts HL",
+   "swingweight": "307",
+   "stiffness": "64",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "46-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.7,
+   "weight_g": 303.0,
+   "swingweight": 307.0,
+   "stiffness": 64.0,
+   "balance_pts": -1.0
+  }
+ },
+ "Babolat Pure Strike VS Racquet": {
+  "code": "PSVSIN",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "322",
+   "stiffness": "63",
+   "beam": "21mm / 22mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "LEATHER!",
+   "tension": "50-59 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 322.0,
+   "stiffness": 63.0,
+   "balance_pts": -7.0
   }
  },
  "Dunlop CX 200 OS Racquet": {
@@ -1449,6 +1683,32 @@
    "weight_g": 309.0,
    "swingweight": 291.0,
    "stiffness": 60.0
+  }
+ },
+ "Prince Classic Graphite 107 Racquet": {
+  "code": "CG107",
+  "specs": {
+   "head": "107 in² / 690.32 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "12.2oz / 345.86g",
+   "balance": "12.7in / 32.26cm / 6 pts HL",
+   "swingweight": "336",
+   "stiffness": "65",
+   "beam": "19mm / 19mm / 19mm /",
+   "composition": "100% Graphite!",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince Leather",
+   "tension": "57-67 pounds"
+  },
+  "nspec": {
+   "head_in2": 107.0,
+   "weight_oz": 12.2,
+   "weight_g": 345.86,
+   "swingweight": 336.0,
+   "stiffness": 65.0,
+   "balance_pts": -6.0
   }
  },
  "Prince O3 Phantom 100X Racquet 2025": {
@@ -2902,6 +3162,32 @@
    "swingweight": 301.0,
    "stiffness": 64.0,
    "balance_pts": -4.0
+  }
+ },
+ "Wilson RF 01 Laver Cup 2026 Racquet": {
+  "code": "WRF26LC",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.85in / 32.64cm / 5 pts HL",
+   "swingweight": "319",
+   "stiffness": "64",
+   "beam": "23.2mm / 23mm / 22mm",
+   "composition": "Carbon +Carbon Braid",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 319.0,
+   "stiffness": 64.0,
+   "balance_pts": -5.0
   }
  },
  "Wilson RF 01 Pro Racquet": {
