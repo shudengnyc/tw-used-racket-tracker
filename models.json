@@ -77,6 +77,32 @@
    "balance_pts": -4.0
   }
  },
+ "Babolat Pure Strike 16x19 3rd Gen Racquet": {
+  "code": "PS1619",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "327",
+   "stiffness": "66",
+   "beam": "21mm / 23mm / 21mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Babolat Syntec Team",
+   "tension": "50-59 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 327.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
  "Babolat Pure Strike 18x20 3rd Gen Racquet": {
   "code": "PS182",
   "specs": {
