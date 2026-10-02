@@ -3475,6 +3475,32 @@
    "balance_pts": -3.0
   }
  },
+ "Wilson Ultra Pro 16x19 v4 Racquet": {
+  "code": "WUPRO6",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.76in / 32.41cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "62",
+   "beam": "20.6mm / 20.6mm / 20.6mm",
+   "composition": "Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Wilson Sublime",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 317.0,
+   "stiffness": 62.0,
+   "balance_pts": -6.0
+  }
+ },
  "Wilson Ultra Pro 18x20 v4 Racquet": {
   "code": "WUPRO8",
   "specs": {
