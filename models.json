@@ -2176,6 +2176,32 @@
    "balance_pts": -3.0
   }
  },
+ "Tecnifibre TF40 305 (18x20) Racquet": {
+  "code": "TF4TW",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.12in / 33.32cm / 3 pts HL",
+   "swingweight": "328",
+   "stiffness": "64",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Dynacore XTC/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 328.0,
+   "stiffness": 64.0,
+   "balance_pts": -3.0
+  }
+ },
  "Tecnifibre TF40 305g (16x19) Racquet 2024": {
   "code": "TF40R1",
   "specs": {
