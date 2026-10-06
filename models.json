@@ -519,6 +519,32 @@
    "balance_pts": -6.0
   }
  },
+ "Head Boom MP 2026 Purple Racquet": {
+  "code": "HBOMPA",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "316",
+   "stiffness": "61",
+   "beam": "23mm / 24mm / 22mm",
+   "composition": "Boron/Auxetic 2/Graphene Inside/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 316.0,
+   "stiffness": 61.0,
+   "balance_pts": -6.0
+  }
+ },
  "Head Boom MP 2026 Racquet": {
   "code": "HBOMP6",
   "specs": {
@@ -1709,6 +1735,32 @@
    "weight_g": 309.0,
    "swingweight": 291.0,
    "stiffness": 60.0
+  }
+ },
+ "Prince ATS Textreme Tour 100P Racquet": {
+  "code": "ATR10P",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "322",
+   "stiffness": "61",
+   "beam": "22mm / 23mm / 20mm",
+   "composition": "Textreme/Twaron/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 322.0,
+   "stiffness": 61.0,
+   "balance_pts": -7.0
   }
  },
  "Prince Classic Graphite 107 Racquet": {
@@ -2956,6 +3008,32 @@
    "balance_pts": -7.0
   }
  },
+ "Wilson Clash 100 v2 Racquet": {
+  "code": "WC100V",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "313",
+   "stiffness": "57",
+   "beam": "24.5mm / 24.5mm / 24.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 313.0,
+   "stiffness": 57.0,
+   "balance_pts": -7.0
+  }
+ },
  "Wilson Clash 100 v3 Racquet": {
   "code": "CL103V",
   "specs": {
@@ -4040,6 +4118,32 @@
    "weight_g": 326.0,
    "swingweight": 323.0,
    "stiffness": 62.0,
+   "balance_pts": -7.0
+  }
+ },
+ "Yonex VCORE 95 Racquet": {
+  "code": "YVC95",
+  "specs": {
+   "head": "95 in² / 612.9 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "321",
+   "stiffness": "61",
+   "beam": "22mm / 22mm / 21mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 95.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 321.0,
+   "stiffness": 61.0,
    "balance_pts": -7.0
   }
  },
