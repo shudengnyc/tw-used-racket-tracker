@@ -1789,6 +1789,32 @@
    "balance_pts": -6.0
   }
  },
+ "Prince O3 Legacy 110 Racquet": {
+  "code": "P3LY11",
+  "specs": {
+   "head": "110 in² / 709.68 cm²",
+   "length": "27.25in / 69.22cm",
+   "weight": "10.1oz / 286g",
+   "balance": "14in / 35.56cm / 3 pts HH",
+   "swingweight": "327",
+   "stiffness": "73",
+   "beam": "25mm / 27mm / 26mm",
+   "composition": "Twaron/Textreme/Graphite",
+   "power": "Medium",
+   "stroke": "Medium",
+   "swing": "Medium",
+   "griptype": "Prince ResiTex Soft",
+   "tension": "53-63 pounds"
+  },
+  "nspec": {
+   "head_in2": 110.0,
+   "weight_oz": 10.1,
+   "weight_g": 286.0,
+   "swingweight": 327.0,
+   "stiffness": 73.0,
+   "balance_pts": 3.0
+  }
+ },
  "Prince O3 Phantom 100X Racquet 2025": {
   "code": "PO310X",
   "specs": {
@@ -1891,6 +1917,32 @@
    "swingweight": 325.0,
    "stiffness": 61.0,
    "balance_pts": -7.0
+  }
+ },
+ "Prince Tour 98 2026 Racquet": {
+  "code": "PTR698",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "323",
+   "stiffness": "64",
+   "beam": "23mm / 23mm / 20mm",
+   "composition": "Textreme/Zylon/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 323.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
   }
  },
  "Solinco Blackout 285 Racquet": {
