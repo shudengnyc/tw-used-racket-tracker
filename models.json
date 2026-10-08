@@ -3320,6 +3320,32 @@
    "balance_pts": -9.0
   }
  },
+ "Wilson Pro Staff X v14 Racquet": {
+  "code": "W97VX",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "322",
+   "stiffness": "66",
+   "beam": "21.5mm / 21.5mm / 21.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 322.0,
+   "stiffness": 66.0,
+   "balance_pts": -7.0
+  }
+ },
  "Wilson RF 01 Future Racquet": {
   "code": "WRFFR",
   "specs": {
