@@ -3034,6 +3034,32 @@
    "balance_pts": -3.0
   }
  },
+ "Wilson Burn 100S v5 Racquet": {
+  "code": "BRNSV5",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "13.35in / 33.91cm / 1 pts HL",
+   "swingweight": "325",
+   "stiffness": "73",
+   "beam": "23.5mm / 25mm / 23.5mm",
+   "composition": "Carbon Fiber Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 325.0,
+   "stiffness": 73.0,
+   "balance_pts": -1.0
+  }
+ },
  "Wilson Clash 100 Pro v3 Racquet": {
   "code": "CL1P3V",
   "specs": {
@@ -3448,6 +3474,32 @@
    "swingweight": 319.0,
    "stiffness": 64.0,
    "balance_pts": -5.0
+  }
+ },
+ "Wilson Shift 99 Pro Racquet": {
+  "code": "WSP315",
+  "specs": {
+   "head": "99 in² / 638.71 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.7oz / 332g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "332",
+   "stiffness": "68",
+   "beam": "23.5mm / 23.5mm / 23.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 99.0,
+   "weight_oz": 11.7,
+   "weight_g": 332.0,
+   "swingweight": 332.0,
+   "stiffness": 68.0,
+   "balance_pts": -6.0
   }
  },
  "Wilson Shift 99 US Open 2024 Racquet": {
