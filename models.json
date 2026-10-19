@@ -363,6 +363,32 @@
    "balance_pts": -7.0
   }
  },
+ "Dunlop CX 400 Racquet": {
+  "code": "DCX4R",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.6oz / 301g",
+   "balance": "13.29in / 33.76cm / 2 pts HL",
+   "swingweight": "313",
+   "stiffness": "69",
+   "beam": "24mm / 24mm / 24mm",
+   "composition": "Sonic Core Infinergy/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Dunlop Viper Dry",
+   "tension": "40-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 10.6,
+   "weight_g": 301.0,
+   "swingweight": 313.0,
+   "stiffness": 69.0,
+   "balance_pts": -2.0
+  }
+ },
  "Dunlop CX 400 Tour Racquet": {
   "code": "DCX4T",
   "specs": {
@@ -2251,6 +2277,58 @@
    "weight_g": 318.0,
    "swingweight": 318.0,
    "stiffness": 69.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Tecnifibre Fire 305S Racquet": {
+  "code": "TFFI35",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "325",
+   "stiffness": "66",
+   "beam": "23mm / 23mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Synthetic",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 325.0,
+   "stiffness": 66.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Tecnifibre TF-X1 300 Racquet": {
+  "code": "TFX130",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "323",
+   "stiffness": "71",
+   "beam": "24mm / 24mm / 24mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre WaxGripFeel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 323.0,
+   "stiffness": 71.0,
    "balance_pts": -4.0
   }
  },
