@@ -753,18 +753,24 @@ function compareRows(x, y){
       || cmp(x.racquet, y.racquet, 1);
 }
 
-/* 12-point price trend: faint area, thin line, endpoint in the accent */
+/* Whole-history price trend: faint area, stepped line, endpoint in the accent.
+   x is by date, so a stretch with nothing listed shows as a gap in time, and the
+   line steps because a used price holds until someone changes it. */
+const DAY = 864e5;
 function spark(key){
-  const pts = (SERIES[key] || []).slice(-12);
+  const pts = SERIES[key] || [];
   if (pts.length < 2) return '<span class="dash">—</span>';
   const W = 78, H = 24, P = 3;
   const vals = pts.map(p => p[1]);
   const lo = Math.min(...vals), hi = Math.max(...vals), span = (hi - lo) || 1;
+  const t = pts.map(p => Date.parse(p[0]));
+  const t0 = t[0], tspan = (t[t.length-1] - t0) || 1;
   const xy = pts.map((p,i) => [
-    P + i * (W - 2*P) / (pts.length - 1),
+    P + (W - 2*P) * (t[i] - t0) / tspan,
     P + (H - 2*P) * (1 - (p[1] - lo) / span)
   ]);
-  const d = xy.map((p,i) => (i?'L':'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const d = xy.map((p,i) => i ? `H${p[0].toFixed(1)} V${p[1].toFixed(1)}`
+                              : `M${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
   const area = `${d} L${xy[xy.length-1][0].toFixed(1)} ${H} L${xy[0][0].toFixed(1)} ${H} Z`;
   const last = xy[xy.length-1];
   return `<svg class="spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"
@@ -1202,9 +1208,19 @@ document.addEventListener('mousemove', e => {
   const pts = SERIES[s.dataset.key] || [];
   const vals = pts.map(p=>p[1]);
   const med = [...vals].sort((a,b)=>a-b)[Math.floor(vals.length/2)];
+  // One line per run of days at one price; a missing day starts a new run.
+  const runs = [];
+  pts.forEach(([d, v]) => {
+    const r = runs[runs.length-1];
+    if (r && r.v === v && Date.parse(d) - Date.parse(r.to) <= DAY) r.to = d;
+    else runs.push({from: d, to: d, v});
+  });
+  const shown = runs.slice(-6);
   tip.innerHTML = `<b>$${Math.min(...vals)}</b> low · <b>$${med}</b> typical ·
     <b>$${Math.max(...vals)}</b> high<br>
-    <span style="color:var(--muted)">${pts.length} days · latest ${pts[pts.length-1][0]}</span>`;
+    <span style="color:var(--muted)">${pts.length} days since ${pts[0][0]}</span>` +
+    (runs.length > shown.length ? `<br><span style="color:var(--muted)">…</span>` : '') +
+    shown.map(r => `<br>${r.from === r.to ? r.from : r.from + ' – ' + r.to} <b>$${r.v}</b>`).join('');
   tip.style.opacity = 1;
   tip.style.left = Math.min(e.clientX + 15, innerWidth - 264) + 'px';
   tip.style.top = (e.clientY + 18) + 'px';

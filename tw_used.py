@@ -603,10 +603,30 @@ def show_trend(pattern):
         print(f"\n{racquet} -- {grade or 'ungraded'}")
         print(f"  low ${min(prices):.0f} / median ${statistics.median(prices):.0f} "
               f"/ high ${max(prices):.0f}   ({len(by_date)} days observed)")
-        for date in sorted(by_date):
-            day = by_date[date]
-            print(f"    {date}  ${min(day):.2f}" +
-                  (f"  ({len(day)} listed)" if len(day) > 1 else ""))
+        for start, end, price, listed in _price_runs(by_date):
+            span = start if start == end else f"{start} – {end}"
+            print(f"    {span:<23}  ${price:.2f}" +
+                  (f"  ({listed} listed)" if listed > 1 else ""))
+
+
+def _price_runs(by_date):
+    """Collapse {date: [prices]} into (start, end, low price, count listed) runs.
+
+    A run is consecutive days at the same low price and listing count; a day
+    with nothing listed ends it, so gaps between listings stay visible.
+    """
+    runs = []
+    for date in sorted(by_date):
+        day = by_date[date]
+        key = (min(day), len(day))
+        if runs:
+            start, end, *prev = runs[-1]
+            gap = dt.date.fromisoformat(date) - dt.date.fromisoformat(end)
+            if tuple(prev) == key and gap.days == 1:
+                runs[-1] = (start, date, *key)
+                continue
+        runs.append((date, date, *key))
+    return runs
 
 
 # --- git sync: the Mac and the scheduled run share one history ----------------
