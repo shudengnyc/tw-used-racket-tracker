@@ -4407,6 +4407,32 @@
    "balance_pts": -4.0
   }
  },
+ "Yonex VCORE 100D 8th Gen Racquet": {
+  "code": "VC1D8G",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "328",
+   "stiffness": "66",
+   "beam": "24mm / 26mm / 23mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 328.0,
+   "stiffness": 66.0,
+   "balance_pts": -6.0
+  }
+ },
  "Yonex VCORE 100L Sand Beige Racquet": {
   "code": "VC1LSB",
   "specs": {
