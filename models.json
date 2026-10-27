@@ -2670,6 +2670,32 @@
    "balance_pts": -4.0
   }
  },
+ "Tecnifibre TFight 300S Racquet": {
+  "code": "TF300S",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "321",
+   "stiffness": "66",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Tecnifibre Xtra Feel",
+   "tension": "49-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 321.0,
+   "stiffness": 66.0,
+   "balance_pts": -4.0
+  }
+ },
  "Tecnifibre TFight 305S ID Racquet": {
   "code": "TF3SID",
   "specs": {
@@ -4561,6 +4587,32 @@
    "swingweight": 334.0,
    "stiffness": 64.0,
    "balance_pts": -4.0
+  }
+ },
+ "Yonex VCORE 98+ 8th Gen Racquet": {
+  "code": "VC9P8G",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13.18in / 33.48cm / 5 pts HL",
+   "swingweight": "335",
+   "stiffness": "63",
+   "beam": "23mm / 23.5mm / 22mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 335.0,
+   "stiffness": 63.0,
+   "balance_pts": -5.0
   }
  }
 }
