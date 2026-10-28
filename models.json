@@ -3034,6 +3034,32 @@
    "balance_pts": -4.0
   }
  },
+ "Wilson Blade 98 16x19 v8 Racquet": {
+  "code": "16BV8R",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.3oz / 320g",
+   "balance": "12.85in / 32.64cm / 5 pts HL",
+   "swingweight": "317",
+   "stiffness": "61",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.3,
+   "weight_g": 320.0,
+   "swingweight": 317.0,
+   "stiffness": 61.0,
+   "balance_pts": -5.0
+  }
+ },
  "Wilson Blade 98 16x19 v9 Racquet": {
   "code": "WB9816",
   "specs": {
@@ -3046,6 +3072,32 @@
    "beam": "21mm / 21mm / 21mm",
    "composition": "Basalt/Braided Graphite",
    "power": "Low",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 324.0,
+   "stiffness": 62.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Wilson Blade 98 16x19 v9 US Open Racquet 2025": {
+  "code": "WBUSO25",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "324",
+   "stiffness": "62",
+   "beam": "21mm / 21mm / 21mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
    "stroke": "Medium-Full",
    "swing": "Medium-Fast",
    "griptype": "Wilson Pro Performance",
@@ -4122,6 +4174,32 @@
    "weight_g": 323.0,
    "swingweight": 320.0,
    "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Yonex EZONE 98 Racquet": {
+  "code": "EZO98",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "314",
+   "stiffness": "65",
+   "beam": "23.5mm / 24.5mm / 19.5mm",
+   "composition": "2G-NAMD SPEED/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 314.0,
+   "stiffness": 65.0,
    "balance_pts": -6.0
   }
  },
