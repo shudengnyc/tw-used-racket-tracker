@@ -2204,6 +2204,32 @@
    "balance_pts": -6.0
   }
  },
+ "Solinco Whiteout 305 XTD Racquet": {
+  "code": "WHO30X",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "11.4oz / 323g",
+   "balance": "13in / 33.02cm / 6 pts HL",
+   "swingweight": "333",
+   "stiffness": "67",
+   "beam": "21.7mm / 21.7mm / 21.7mm",
+   "composition": "40T Carbon/Graphite",
+   "power": "Low",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 333.0,
+   "stiffness": 67.0,
+   "balance_pts": -6.0
+  }
+ },
  "Solinco Whiteout 305 XTD v2 Camo Racquet": {
   "code": "WTOCAX",
   "specs": {
@@ -4049,6 +4075,32 @@
  },
  "Yonex EZONE 100 (2025) Racquet": {
   "code": "EZ10BB",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "315",
+   "stiffness": "68",
+   "beam": "24.5mm / 26.5mm / 23mm",
+   "composition": "Minolon/2NAMD-Speed/HM Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 315.0,
+   "stiffness": 68.0,
+   "balance_pts": -4.0
+  }
+ },
+ "Yonex EZONE 100 Espresso Brown Racquet": {
+  "code": "EZ10EB",
   "specs": {
    "head": "100 in² / 645.16 cm²",
    "length": "27in / 68.58cm",
