@@ -1815,6 +1815,32 @@
    "stiffness": 60.0
   }
  },
+ "Prince ATS Textreme Tour 100 310 Racquet": {
+  "code": "ATR310",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.59in / 31.98cm / 7 pts HL",
+   "swingweight": "323",
+   "stiffness": "62",
+   "beam": "22mm / 23mm / 20mm",
+   "composition": "Textreme/Twaron/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Prince Resi Pro",
+   "tension": "48-58 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 323.0,
+   "stiffness": 62.0,
+   "balance_pts": -7.0
+  }
+ },
  "Prince ATS Textreme Tour 100P Racquet": {
   "code": "ATR10P",
   "specs": {
@@ -3500,6 +3526,32 @@
    "swingweight": 312.0,
    "stiffness": 58.0,
    "balance_pts": -1.0
+  }
+ },
+ "Wilson Defyer 98 Pro Racquet": {
+  "code": "WRL98",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.75in / 32.39cm / 6 pts HL",
+   "swingweight": "319",
+   "stiffness": "64",
+   "beam": "22mm / 23.5mm / 22mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 319.0,
+   "stiffness": 64.0,
+   "balance_pts": -6.0
   }
  },
  "Wilson Labs Project Shift 99 300g Racquet": {
