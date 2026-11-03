@@ -4537,6 +4537,32 @@
    "balance_pts": -6.0
   }
  },
+ "Yonex Percept 100D Racquet": {
+  "code": "PERC1D",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.5oz / 326g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "318",
+   "stiffness": "66",
+   "beam": "23mm / 23mm / 23mm",
+   "composition": "NAMD-2G/H.M.Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.5,
+   "weight_g": 326.0,
+   "swingweight": 318.0,
+   "stiffness": 66.0,
+   "balance_pts": -6.0
+  }
+ },
  "Yonex Percept 97 Racquet": {
   "code": "PERC97",
   "specs": {
