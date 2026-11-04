@@ -3008,6 +3008,32 @@
    "balance_pts": -6.0
   }
  },
+ "Wilson Blade 104 v8 Racquet": {
+  "code": "104BV8",
+  "specs": {
+   "head": "104 in² / 670.97 cm²",
+   "length": "27.5in / 69.85cm",
+   "weight": "10.8oz / 306g",
+   "balance": "12.99in / 32.99cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "60",
+   "beam": "22.5mm / 22.5mm / 22.5mm",
+   "composition": "Basalt/Braided Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 104.0,
+   "weight_oz": 10.8,
+   "weight_g": 306.0,
+   "swingweight": 317.0,
+   "stiffness": 60.0,
+   "balance_pts": -6.0
+  }
+ },
  "Wilson Blade 104 v9 Racquet": {
   "code": "WB104",
   "specs": {
@@ -4820,6 +4846,32 @@
    "weight_g": 323.0,
    "swingweight": 321.0,
    "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Yonex VCORE 98 Racquet": {
+  "code": "YVC98",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.4oz / 323g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "318",
+   "stiffness": "62",
+   "beam": "23mm / 23mm / 21mm",
+   "composition": "2G-Namd FlexForce/H.M. Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Yonex Synthetic",
+   "tension": "45-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.4,
+   "weight_g": 323.0,
+   "swingweight": 318.0,
+   "stiffness": 62.0,
    "balance_pts": -6.0
   }
  },
