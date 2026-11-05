@@ -986,6 +986,58 @@
    "balance_pts": -3.0
   }
  },
+ "Head Graphene XT Radical MP Racquet": {
+  "code": "HGXTRPM",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11oz / 312g",
+   "balance": "12.79in / 32.49cm / 6 pts HL",
+   "swingweight": "317",
+   "stiffness": "63",
+   "beam": "20mm / 23mm / 21mm",
+   "composition": "Graphene XT/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Head Hydrosorb Pro",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.0,
+   "weight_g": 312.0,
+   "swingweight": 317.0,
+   "stiffness": 63.0,
+   "balance_pts": -6.0
+  }
+ },
+ "Head Graphene XT Speed MP Racquet": {
+  "code": "GXSMPR",
+  "specs": {
+   "head": "100 in² / 645.16 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.1oz / 315g",
+   "balance": "13in / 33.02cm / 4 pts HL",
+   "swingweight": "320",
+   "stiffness": "67",
+   "beam": "22mm / 22mm / 22mm",
+   "composition": "Graphene XT/Graphite",
+   "power": "Low-Medium",
+   "stroke": "Full",
+   "swing": "Fast",
+   "griptype": "Head Hydrosorb Comfort",
+   "tension": "48-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 100.0,
+   "weight_oz": 11.1,
+   "weight_g": 315.0,
+   "swingweight": 320.0,
+   "stiffness": 67.0,
+   "balance_pts": -4.0
+  }
+ },
  "Head Gravity MP 2025 Racquet": {
   "code": "HGMPG",
   "specs": {
@@ -1970,6 +2022,11 @@
    "stiffness": 66.0,
    "balance_pts": -7.0
   }
+ },
+ "Prince Ripstick 100 300g Racquet 2025": {
+  "code": "25RIPH",
+  "specs": {},
+  "nspec": {}
  },
  "Prince Tour 100 290g 2026 Racquet": {
   "code": "PTR629",
