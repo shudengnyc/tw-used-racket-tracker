@@ -3741,6 +3741,32 @@
    "balance_pts": -7.0
   }
  },
+ "Wilson Pro Staff 97L v14 Racquet": {
+  "code": "97V14L",
+  "specs": {
+   "head": "97 in² / 625.81 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "10.8oz / 306g",
+   "balance": "13.12in / 33.32cm / 3 pts HL",
+   "swingweight": "313",
+   "stiffness": "68",
+   "beam": "23.5mm / 23.5mm / 23.5mm",
+   "composition": "Graphite",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "50-60 pounds"
+  },
+  "nspec": {
+   "head_in2": 97.0,
+   "weight_oz": 10.8,
+   "weight_g": 306.0,
+   "swingweight": 313.0,
+   "stiffness": 68.0,
+   "balance_pts": -3.0
+  }
+ },
  "Wilson Pro Staff Six.One 100 v14 Racquet": {
   "code": "WPS614",
   "specs": {
