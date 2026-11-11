@@ -3949,6 +3949,32 @@
    "balance_pts": -4.0
   }
  },
+ "Wilson RF 01 Hall of Fame Racquet": {
+  "code": "WRFHOF",
+  "specs": {
+   "head": "98 in² / 632.26 cm²",
+   "length": "27in / 68.58cm",
+   "weight": "11.2oz / 318g",
+   "balance": "12.85in / 32.64cm / 5 pts HL",
+   "swingweight": "319",
+   "stiffness": "64",
+   "beam": "23.2mm / 23mm / 22mm",
+   "composition": "Carbon +Carbon Braid",
+   "power": "Low-Medium",
+   "stroke": "Medium-Full",
+   "swing": "Medium-Fast",
+   "griptype": "Wilson Pro Performance",
+   "tension": "47-57 pounds"
+  },
+  "nspec": {
+   "head_in2": 98.0,
+   "weight_oz": 11.2,
+   "weight_g": 318.0,
+   "swingweight": 319.0,
+   "stiffness": 64.0,
+   "balance_pts": -5.0
+  }
+ },
  "Wilson RF 01 Laver Cup 2026 Racquet": {
   "code": "WRF26LC",
   "specs": {
