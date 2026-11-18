@@ -2302,7 +2302,8 @@
    "power": "Low-Medium",
    "stroke": "Medium-Full",
    "swing": "Medium-Fast",
-   "griptype": "Solinco Synthetic"
+   "griptype": "Solinco Synthetic",
+   "tension": "45-55 pounds"
   },
   "nspec": {
    "head_in2": 98.0,
