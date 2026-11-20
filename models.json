@@ -1144,29 +1144,8 @@
  },
  "Head Radical MP 2023 Racquet": {
   "code": "HMPR",
-  "specs": {
-   "head": "98 in² / 632.26 cm²",
-   "length": "27in / 68.58cm",
-   "weight": "11.2oz / 318g",
-   "balance": "13in / 33.02cm / 4 pts HL",
-   "swingweight": "323",
-   "stiffness": "65",
-   "beam": "20mm / 23mm / 21mm",
-   "composition": "Graphene 360+/Graphite",
-   "power": "Low-Medium",
-   "stroke": "Medium-Full",
-   "swing": "Medium-Fast",
-   "griptype": "Head Hydrosorb Pro",
-   "tension": "48-57 pounds"
-  },
-  "nspec": {
-   "head_in2": 98.0,
-   "weight_oz": 11.2,
-   "weight_g": 318.0,
-   "swingweight": 323.0,
-   "stiffness": 65.0,
-   "balance_pts": -4.0
-  }
+  "specs": {},
+  "nspec": {}
  },
  "Head Radical MP 2025 Racquet": {
   "code": "HRMP",
@@ -2361,29 +2340,8 @@
  },
  "Wilson Blade 98 18x20 v9 Racquet": {
   "code": "WB18V",
-  "specs": {
-   "head": "98 in² / 632.26 cm²",
-   "length": "27in / 68.58cm",
-   "weight": "11.4oz / 323g",
-   "balance": "13in / 33.02cm / 4 pts HL",
-   "swingweight": "330",
-   "stiffness": "60",
-   "beam": "21mm / 21mm / 21mm",
-   "composition": "Basalt/Braided Graphite",
-   "power": "Low",
-   "stroke": "Full",
-   "swing": "Fast",
-   "griptype": "Wilson Pro Performance",
-   "tension": "50-60 pounds"
-  },
-  "nspec": {
-   "head_in2": 98.0,
-   "weight_oz": 11.4,
-   "weight_g": 323.0,
-   "swingweight": 330.0,
-   "stiffness": 60.0,
-   "balance_pts": -4.0
-  }
+  "specs": {},
+  "nspec": {}
  },
  "Wilson Blade 98S v9 Racquet": {
   "code": "WB98SV",
@@ -3192,6 +3150,11 @@
    "stiffness": 67.0,
    "balance_pts": -3.0
   }
+ },
+ "Yonex EZONE 110 Racquet": {
+  "code": "EZ110",
+  "specs": {},
+  "nspec": {}
  },
  "Yonex EZONE 115 (2025) Racquet": {
   "code": "EZ115B",
